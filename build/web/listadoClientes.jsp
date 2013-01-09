@@ -1,0 +1,91 @@
+<%-- 
+    SiluSoft
+    Copyright (C) 2012  Hugo Langa Roy
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+--%>
+<%@page import="es.pfc.model.Cliente"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.List"%>
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+ <%
+    List Clientes = (List) request.getAttribute("listado"); 
+    session.removeAttribute("cliente");
+ %>
+<!DOCTYPE html>
+<html:html>
+    <head>        
+        <!—[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]—>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body { margin-left: 30px; margin-right: 30px;}
+        </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/nuevosestilos.css" rel="stylesheet">
+    <body>
+        <%-- include header --%>
+     <tiles:insert page="plantillas/barranav.jsp" flush="true"/>
+     <div class="container mifondo">
+     
+     <tiles:insert page="plantillas/logo.jsp" flush="true"/>
+     <logic:present name="usuario">
+     <div class="containter">   
+    <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
+    <div class="mi-hero-unit">
+        <div class="span11 nombreusuario"><bean:message key="general.sesion"/><strong><bean:write scope="session" name="usuario" property="nombre" /></strong>&nbsp;</div>
+            <div class="row">             
+             <div class="span11"><h3><bean:message key="listadoclientes.titulo"/> </h3></div>        
+             <div><p><a href="principal.jsp" class="btn btn-success"><em class="icon-home icon-white"></em> Volver al menú</a></p></div>   
+             <table class="table table-condensed table-striped">
+        	<thead>                
+                    <th><strong><bean:message key="formulario.nombre" /></strong></th>
+                    <th><strong><bean:message key="formulario.apellido1"/></strong></th>  
+                    <th><strong><bean:message key="formulario.apellido2"/></strong></th>  
+                    <th></th>          
+                    <th></th>
+                    <th colspan="2"></th>
+                </thead>
+                <tbody>
+                 <logic:iterate id="cliente" name="listado" scope="request" type="es.pfc.model.Cliente">                    
+                  <tr>                   
+                  <td id="Nombre"><bean:write name="cliente" property="nombre"/></td>
+                  <td><bean:write name="cliente" property="apellidos"/></td>  
+                  <td><bean:write name="cliente" property="apellido2"/></td> 
+                  <td><a class="btn btn-success btn-small" href="DameDatosCliente.do?dni=<bean:write name='cliente' property='dni'/>&op=3"><em class="icon-user icon-white"></em> Ver Ficha</a></td>                            
+                  <td><a class="btn btn-warning btn-small" href="DameDatosCliente.do?dni=<bean:write name='cliente' property='dni'/>&op=8"><em class="icon-edit icon-white"></em> Editar</a> </td>
+                  <td><a class="btn btn-inverse btn-small" href="DameDatosCliente.do?dni=<bean:write name='cliente' property='dni'/>&op=7"><em class="icon-ok-sign icon-white"></em> Asistencia</td>
+                </tr>
+         </logic:iterate>
+            </tbody>
+    </table>
+            </div>
+        <div><a href="principal.jsp" class="btn btn-success"><em class="icon-home icon-white"></em> Volver al menú</a></div>
+	</div>
+	</div>	
+     </logic:present>
+     <logic:notPresent name="usuario" scope="session">
+     <center><bean:message key="general.noidentificado"/></center><br /><html:link href="./Registro.do"><bean:message key="general.identificarse"/></html:link>
+</logic:notPresent>
+    <%-- include header --%>
+    <tiles:insert page="plantillas/pie.jsp" flush="true"/><p></p>
+     </div>
+    </body>
+</html:html>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context antiJARLocking="true" path="/SiluSoft">
+<Resource name="jdbc/SiluBd" auth="Container"
+	type="javax.sql.DataSource" driverClassName="com.mysql.jdbc.Driver" 
+	url="jdbc:mysql://localhost:3306/SiluBd"
+	username="root" password="523360" maxActive="20" maxIdle="4"/>
+</Context>

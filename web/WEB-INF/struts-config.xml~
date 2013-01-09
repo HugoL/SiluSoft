@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+
+
+
+<struts-config>
+    
+<!--<data-sources>
+  <data-source type="org.apache.commons.dbcp.BasicDataSource">
+     <set-property property="driverClassName" value="com.mysql.jdbc.Driver" />
+     <set-property property="url" value="jdbc:mysql://localhost:3306/SiluBd" />
+     <set-property property="username" value="root" />
+     <set-property property="password" value="" />
+     <set-property property="maxActive" value="10" />
+     <set-property property="maxWait" value="5000" />
+     <set-property property="defaultAutoCommit" value="true" />
+     <set-property property="defaultReadOnly" value="false" />
+     <set-property property="validationQuery" value="SELECT COUNT(*) FROM SiluBd" />
+  </data-source>
+</data-sources>-->
+
+<!-- ========== Definiciones de Form Bean =================== -->
+    <form-beans>
+        <form-bean name="InsertarSalaForm" type="es.pfc.forms.InsertarSalaForm"/>
+        <form-bean name="InsertarUsuarioForm" type="es.pfc.forms.InsertarUsuarioForm"/>
+        <form-bean name="InsertarEventoAgendaForm" type="es.pfc.forms.InsertarEventoAgendaForm"/>
+        <form-bean name="AgendaForm" type="es.pfc.forms.AgendaForm"/>
+        <form-bean name="AsistenciaForm" type="es.pfc.forms.AsistenciaForm"/>
+        <form-bean name="InsertarObservacionForm" type="es.pfc.forms.InsertarObservacionForm"/>             
+        <form-bean name="ActualizarCentroF" type="es.pfc.forms.ActualizarCentroForm"/>
+        <form-bean name="InsertarTratamientoF" type="es.pfc.forms.InsertarTratamientoForm"/>        
+        <form-bean name="BuscarClientesForm" type="es.pfc.forms.BuscarClientesForm"/>  
+        <form-bean name="ActualizarClienteForm" type="es.pfc.forms.ActualizarClienteForm"/>
+        <form-bean name="loginForm" type="es.pfc.forms.LoginForm"/>
+        <form-bean name="InsertarCliente" type="es.pfc.forms.InsertarClienteForm"/>  
+        <form-bean name="BuscarC" type="es.pfc.forms.BuscarClientesForm"/>
+        <form-bean name="ModificarC" type="es.pfc.forms.ActualizarClienteForm" />   
+        <form-bean name="InsertarMedidasDinamicoForm" type="org.apache.struts.validator.DynaValidatorActionForm">
+            <form-property name="idCliente" type="java.lang.Integer" />
+            <form-property name="campos" type="java.lang.Float[]" />
+            <form-property name="idZona" type="java.lang.Integer[]" />
+        </form-bean>
+        <form-bean name="InsertarTestDinamicoForm" type="org.apache.struts.action.DynaActionForm">
+            <form-property name="idCliente" type="java.lang.Integer" />
+            <form-property name="morfologia" type="java.lang.String" />
+            <form-property name="campos" type="java.lang.Integer[]" />
+            <form-property name="numPregunta" type="java.lang.Integer[]" />
+        </form-bean>
+         <form-bean name="InsertarUsuarioDinamicoForm" type="org.apache.struts.action.DynaActionForm">
+            <form-property name="dni" type="java.lang.String" />
+            <form-property name="nombre" type="java.lang.String" />
+            <form-property name="apellido1" type="java.lang.String" />
+            <form-property name="apellido2" type="java.lang.String" />
+            <form-property name="telefono" type="java.lang.String" />
+            <form-property name="email" type="java.lang.String" />
+            <form-property name="password" type="java.lang.String" />
+            <form-property name="password2" type="java.lang.String"/>
+            <form-property name="permiso" type="java.lang.String[]"/>
+            <form-property name="activado" type="java.lang.Boolean[]" />
+            <form-property name="idPermiso" type="java.lang.Integer[]" />
+            <form-property name="rol" type="java.lang.Integer" />
+            <form-property name="activadotxt" type="java.lang.String[]" />
+        </form-bean>
+        <form-bean name="InsertarTratamientoCentroForm" type="es.pfc.forms.InsertarTratamientoCentroForm"/>
+        
+        <form-bean name="InsertarSesionesClienteForm" type="es.pfc.forms.InsertarSesionesClienteForm"/>
+        <form-bean name="InsertarImcClienteForm" type="es.pfc.forms.InsertarImcClienteForm"/>
+    </form-beans>
+<!-- ==========Excepciones  Globales ============================== -->
+    <global-exceptions>
+    
+    </global-exceptions>
+
+<!-- ========== Forward's  Globales =============================== -->
+    <global-forwards>
+        <forward name="welcome" path="/Welcome.do"/>
+        <forward name="login" path="/Login.do"/>
+        <forward name="registro" path="/Registro.do"/>
+        <forward name="conexion" path="/Conexion.do"/>
+        <forward name="insertar" path="/Insertar.do"/>
+        <forward name="logoff" path="/Logoff.do"/>
+        <forward name="listaclientes" path="/ListaClientes.do"/>
+        <forward name="actualiza" path="/ActualizarCliente.do"/>
+        <forward name="modificar" path="/Modificar.do"/>
+        <forward name="eliminar" path="/EliminarCliente.do"/>
+        <forward name="listatratamientos" path="/ListaTratamientosCliente.do"/>
+    </global-forwards>
+    
+<!-- ========== Mapeo de Acciones ============================== -->
+    <action-mappings>
+        <action name="loginForm" path="/Login" scope="session" type="es.pfc.actions.LoginAction" validate="true" input="/registro.jsp">
+            <forward name="correcto" path="/principal.jsp"/>
+            <forward name="paneladmin" path="/superAdmin.jsp" />
+            <forward name="incorrecto" path="/registro.jsp"/>
+        </action>
+        
+        <action path="/Welcome" forward="/welcomeStruts.jsp"/>
+        <action path="/Registro" forward="/registro.jsp"/>
+        
+        <action path="/Logoff" type="es.pfc.actions.LogoffAction">
+            <forward name="correcto" path="/welcomeStruts.jsp"/>
+            <forward name="incorrecto" path="/incorrecto.jsp"/>
+        </action>
+        
+        <action name="InsertarCliente" path="/Insertar" scope="session" type="es.pfc.actions.InsertarClientesAction" validate="true" input="/insertarCliente.jsp">
+            <forward name="correcto" path="/clienteInsertado.jsp"/>
+            <forward name="incorrecto" path="/insertarCliente.jsp" />
+        </action>
+        <action path="/ListaClientes" type="es.pfc.actions.ListarClientesAction">
+            <forward name="correcto" path="/listadoClientes.jsp"/>
+            <forward name="incorrecto" path="/incorrecto.jsp" />
+        </action>
+        <action path="/EliminarCliente" scope="request" type="es.pfc.actions.EliminarClientesAction" input="/incorrecto.jsp" >
+            <forward name="correcto" path="/correcto.jsp" />
+            <forward name="incorrecto" path="/incorrecto.jsp" />
+            <forward name="permisos" path="/plantillas/permisos.jsp" />
+        </action>
+        <action path="/ActualizarCliente" type="es.pfc.actions.ActualizarClienteAction" scope="request">
+            <forward name="correcto" path="/actualizarCliente.jsp" />
+            <forward name="incorrecto" path="/incorrecto.jsp" />
+        </action>
+        <action name="BuscarC" path="/BuscarCliente" scope="session" type="es.pfc.actions.BuscarClientesAction" validate="true" input="/buscarCliente.jsp">
+            <forward name="correcto" path="/resultadoCliente.jsp" />
+            <forward name="incorrecto" path="/buscarCliente.jsp" />
+        </action>
+        <action name="ModificarC" path="/Modificar" type="es.pfc.actions.ModificarClienteAction" scope="session" validate="true" input="/actualizarCliente.jsp">
+            <forward name="correcto" path="/correcto.jsp" />
+            <forward name="incorrecto" path="/actualizarCliente.jsp" />  
+            <forward name="pesoasignado" path="/listadoClientes.jsp" />
+        </action>
+        <action path="/verFichaDatos" type="es.pfc.actions.FichaDatosClienteAction">
+            <forward name="correcto" path="/fichaCliente.jsp" />
+            <forward name="incorrecto" path="/incorrecto.jsp" /> 
+        </action>
+        
+        <action name="InsertarTratamientoF" path="/InsertarTratamiento" type="es.pfc.actions.InsertarTratamientoAction" input="/incorrecto.jsp" validate="true">
+            <forward name="correcto" path="/correcto.jsp" />
+            <forward name="incorrecto" path="/incorrecto.jsp" /> 
+        </action>
+        <action path="/FichaCentro" type="es.pfc.actions.FichaCentroAction">
+            <forward name="correcto" path="/fichaCentro.jsp" />
+            <forward name="incorrecto" path="/incorrecto.jsp" /> 
+        </action>
+        <action path="/ActualizarCentro" type="es.pfc.actions.ActualizarCentroAction" scope="request">
+            <forward name="correcto" path="/actualizarCentro.jsp" />
+            <forward name="incorrecto" path="/incorrecto.jsp" /> 
+        </action>
+        <action input="/actualizarCentro.jsp" name="ActualizarCentroF" path="/ModificarCentro" scope="session" type="es.pfc.actions.ModificarCentroAction" validate="true">
+            <forward name="correcto" path="/correcto.jsp" />
+            <forward name="incorrecto" path="/actualizarCentro.jsp" /> 
+        </action>
+        <action path="/VerGraficaPeso" type="es.pfc.actions.GraficaPesoAction" >
+             <forward name="correcto" path="/grafica.jsp" />
+        </action>
+        <action path="/DameDatosCliente" type="es.pfc.actions.DatosClienteAction">
+            <forward name="insertarTratamiento" path="/listaTratamientosCentro.do" />  
+            <forward name="listaTratamientos" path="/listadoTratamientosCliente.jsp" /> 
+            <forward name="ficha" path="/fichaCliente.jsp" />
+            <forward name="test" path="/testCliente.jsp" />
+            <forward name="vertest" path="/VerTest.do" />
+            <forward name="sesiones" path="/insertarMedidasCliente.jsp" />
+            <forward name="observacion" path="/ListaObservacion.do" />
+            <forward name="asistencia" path="/asistencia.jsp" /> 
+            <forward name="actualiza" path="/actualizarCliente.jsp" />   
+            <forward name="incorrecto" path="/incorrecto.jsp" /> 
+        </action>
+        
+        <action input="/incorrecto.jsp" name="InsertarMedidasDinamicoForm" path="/insertaSesion" scope="session" type="es.pfc.actions.InsertaMedidasClienteDinamicoAction">
+             <forward name="correcto" path="/medidasInsertadas.jsp" />
+             <forward name="incorrecto" path="/incorrecto.jsp" />
+        </action>
+        <action path="/listaMedidas" type="es.pfc.actions.ListarMedidasClienteAction" input="/incorrecto.jsp">
+             <forward name="correcto" path="/listarMedidasCliente.jsp" />
+             <forward name="incorrecto" path="/incorrecto.jsp" />
+        </action>
+        <action path="/CalculaSesiones" type="es.pfc.actions.CalcularSesionesCliente" input="/incorrecto.jsp">
+            <forward name="correcto" path="/sesionesCalculadas.jsp" />
+            <forward name="incorrecto" path="/incorrecto.jsp" />
+        </action>
+        <action name="InsertarObservacionForm" path="/InsertaObservacion" scope="session" type="es.pfc.actions.InsertarObservacionClienteAction" validate="true" input="/fichaObservacion.jsp">
+            <forward name="correcto" path="/ListaObservacion.do" />
+            <forward name="incorrecto" path="/fichaObservacion.jsp" />
+        </action>
+        <action path="/ListaObservacion" type="es.pfc.actions.ListarObservacionClienteAction">
+            <forward name="correcto" path="/listaObservacion.jsp" />
+            <forward name="insertar" path="/fichaObservacion.jsp" />
+        </action>
+        <action input="/incorrecto.jsp" name="AsistenciaForm" path="/Asistencia" scope="session" type="es.pfc.actions.AsistenciaClienteAction">
+            <forward name="correcto" path="/sesionesRestantes.jsp" />
+            <forward name="incorrecto" path="/incorrecto.jsp" />
+        </action>
+        <action path="/ConsultaSesionesRestantes" type="es.pfc.actions.ConsultarSesionesRestantesAction">
+            <forward name="correcto" path="/sesionesRestantes.jsp" />
+            <forward name="incorrecto" path="/incorrecto.jsp" />
+        </action>
+        <action path="/dameAgenda" type="es.pfc.actions.AgendaAction">
+            <forward name="correcto" path="/agenda.jsp" />
+            <forward name="incorrecto" path="/incorrecto.jsp" />
+        </action>
+        <action input="/incorrecto.jsp" name="InsertarEventoAgendaForm" path="/InsertaEvento" scope="session" type="es.pfc.actions.InsertarEventoAction" >
+            <forward name="correcto" path="/correcto.jsp" />
+            <forward name="incorrecto" path="/incorrecto.jsp" />
+        </action>
+        <action input="/InsertarUsuario.jsp" name="InsertarUsuarioDinamicoForm" path="/InsertaUsuario" scope="session" type="es.pfc.actions.InsertarUsuarioAction" validate="true">
+            <forward name="correcto" path="/correcto.jsp" />
+            <forward name="incorrecto" path="/InsertarUsuario.jsp" />
+            <forward name="formulario" path="/InsertarUsuario.jsp" />
+        </action>
+        <action input="/incorrecto.jsp" name="ActualizarCentroF" path="/InsertaCentro" scope="request" type="es.pfc.actions.InsertarCentroAction">
+            <forward name="correcto" path="/insertarAdminCentro.jsp"/>
+            <forward name="incorrecto" path="/incorrecto.jsp" />
+        </action>
+        <action path="/AsistenciaQr" type="es.pfc.actions.AsistenciaQrAction">
+            <forward name="correcto" path="/sesionesRestantesQr.jsp" />
+            <forward name="incorrecto" path="/incorrecto.jsp" />
+        </action>
+        <action path="/ListaCentros" type="es.pfc.actions.ListarCentrosAction" input="/incorrecto.jsp">
+            <forward name="correcto" path="/listadoCentros.jsp" />
+            <forward name="incorrecto" path="/incorrecto.jsp" />          
+        </action>
+        <action path="/dameAgenda2" type="es.pfc.actions.Agenda2Action">
+            <forward name="correcto" path="/agenda2.jsp" />
+            <forward name="incorrecto" path="/incorrecto.jsp" />
+        </action>
+        <action path="/miAgenda" type="es.pfc.actions.MiAgendaAction">
+            <forward name="correcto" path="/agenda2.jsp" />
+            <forward name="incorrecto" path="/incorrecto.jsp" />
+        </action>
+        <action path="/leePeso" type="es.pfc.actions.LeePesoClienteAction">
+            <forward name="correcto" path="/listarPesos.jsp" />
+            <forward name="incorrecto" path="/incorrecto.jsp" />
+        </action>
+        <action path="/VerTest" type="es.pfc.actions.VerTestClienteAction" input="/incorrecto.jsp">
+            <forward name="correcto" path="/verTestCliente.jsp" />
+        </action>        
+        
+        <action input="/incorrecto.jsp" name="InsertarTestDinamicoForm" path="/InsertaTestDinamico" scope="session" type="es.pfc.actions.InsertaTesClienteDinamicoAction" >
+            <forward name="correcto" path="/correcto.jsp" />
+            <forward name="incorrecto" path="/desconocido.jsp" />
+        </action>        
+        <action input="/insertarSala.jsp" name="InsertarSalaForm" path="/InsertaSala" scope="session" type="es.pfc.actions.InsertarSalaAction" validate="true">
+            <forward name="correcto" path="/correcto.jsp" />
+            <forward name="incorrecto" path="/insertarSala.jsp" />
+        </action>         
+        <action path="/mainAction" type="es.pfc.actions.MainAction"/>
+        <action input="/incorrecto.jsp" name="InsertarTratamientoF" path="/ActualizarTratamiento" scope="session" type="es.pfc.actions.ActualizarTratamientoAction"/>
+        <action path="/Logoff" type="es.pfc.actions.LogoffAction" input="principal.jsp">
+            <forward name="correcto" path="/welcomeStruts.jsp" />
+            <forward name="incorrecto" path="/principal.jsp" />
+        </action>
+        <action path="/listaTratamientosCentro" type="es.pfc.actions.ListarTratamientosCentro">
+            <forward name="correcto" path="/listadoTratamientosCentro.jsp"/>
+            <forward name="cliente" path="/insertarTratamiento.jsp"/>
+            <forward name="incorrecto" path="/incorrecto.jsp"/>
+        </action>
+        <action path="/eliminarTratamientoCentro" type="es.pfc.actions.EliminarTratamientoCentro">
+            <forward name="correcto" path="correcto.jsp"/>
+            <forward name="incorrecto" path="incorrecto.jsp"/>
+            <forward name="invalido" path="/listaTratamientosCentro.do"/>
+        </action>
+        <action input="/insertarTratamientoCentro.jsp" name="InsertarTratamientoCentroForm" path="/insertaTratamientoCentro" scope="request" type="es.pfc.actions.InsertarTratamientoCentroAction" validate="true">
+            <forward name="correcto" path="/correcto.jsp"/>
+            <forward name="incorrecto" path="/insertarTratamientoCentro.jsp" />
+        </action>
+        <action path="/listaRoles" type="es.pfc.actions.ListarRoles" >
+            <forward name="correcto" path="/InsertarUsuario.jsp"/>
+        </action>
+        <action input="/incorrecto.jsp" name="InsertarImcClienteForm" path="/InsertaImc" scope="session" type="es.pfc.actions.InsertarImcClienteAction">
+            <forward name="correcto" path="/confirmarNumeroSesiones.jsp" />
+            <forward name="incorrecto" path="/incorrecto.jsp" />
+        </action>
+        <action input="/incorrecto.jsp" name="InsertarSesionesClienteForm" path="/InsertaSesiones" scope="session" type="es.pfc.actions.InsertarSesionesClienteAction">
+            <forward name="correcto" path="/correcto.jsp" />
+            <forward name="incorrecto" path="/incorrecto.jsp" />
+        </action>
+        <action input="/incorrecto.jsp" name="InsertarUsuarioForm" path="/InsertaUsuarioAdmin" scope="session" type="es.pfc.actions.InsertarUsuarioAdminAction">
+            <forward name="correcto" path="/superAdmin.jsp"/>
+            
+        </action>    
+    </action-mappings>
+   
+<!-- ========== Controller Configuration ======================== -->
+    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+
+    <message-resources parameter="com/myapp/struts/ApplicationResource" null="false"/>    
+    
+    <message-resources
+
+parameter="/WEB-INF/tiles-defs.xml"
+
+key="errores">
+    </message-resources>
+    
+    <!-- ========================= Tiles plugin ===============================-->
+    <!--
+    This plugin initialize Tiles definition factory. This later can takes some
+    parameters explained here after. The plugin first read parameters from
+    web.xml, thenoverload them with parameters defined here. All parameters
+    are optional.
+    The plugin should be declared in each struts-config file.
+    - definitions-config: (optional)
+    Specify configuration file names. There can be several comma
+    separated file names (default: ?? )
+    - moduleAware: (optional - struts1.1)
+    Specify if the Tiles definition factory is module aware. If true
+    (default), there will be one factory for each Struts module.
+    If false, there will be one common factory for all module. In this
+    later case, it is still needed to declare one plugin per module.
+    The factory will be initialized with parameters found in the first
+    initialized plugin (generally the one associated with the default
+    module).
+    true : One factory per module. (default)
+    false : one single shared factory for all modules
+    - definitions-parser-validate: (optional)
+    Specify if xml parser should validate the Tiles configuration file.
+    true : validate. DTD should be specified in file header (default)
+    false : no validation
+
+    Paths found in Tiles definitions are relative to the main context.
+    -->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />      
+        <set-property property="moduleAware" value="true" />
+    </plug-in>
+    
+    <!-- ========================= Validator plugin ================================= -->
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+            property="pathnames"
+            value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+  
+
+</struts-config>

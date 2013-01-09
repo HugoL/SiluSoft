@@ -1,0 +1,196 @@
+.reg{
+	background-image:url(imagenes/reflejocristal.png);
+}
+
+body{
+    background-color: #ff4931;
+}
+
+li ul{
+    list-style-type: none;
+}
+
+.centro{
+	float:left;
+	width:auto;
+}
+.admincentro{
+    border: 1px #999999;
+    background-color: #CBF6BC;
+}
+.clientes{
+	float:left;
+	width:auto;
+}
+
+.admin{
+	float:left;
+	width:auto;
+	margin-bottom:0px;
+}
+.cuerpo{
+	background-color:#CCCCCC;
+	width:80%;
+}
+
+.cuerpoblanco{        
+	background-color:#FFFFFF;
+	width:80%;
+        margin-top: 0px;
+}
+
+.preguntas{
+	background-color:#FFFFFF;
+        font-style: oblique;
+}
+
+.menu{
+    background-color:#ffffff;    
+}
+
+.datos{
+	background-color:#CBF6BC;
+	
+}
+
+.medidas{
+	background-color:#6666CC;
+	color:#FFFFFF;
+}
+
+table{
+	margin-left:10 px;
+}
+
+.tabla{
+    background-color: #FFFFFF;
+}
+
+.tabladedatos{
+	color:#333333;
+    background-color: #CCCCCC;
+}
+
+.separacion{
+	border-top:solid;
+	border-top-color:#999999;
+}
+
+.tablamenu{
+    width:80%;
+    border: none;
+    cellspacing:0;
+    cellpadding:0;
+	padding:0;
+        float: none;
+}
+
+.divgeneral{
+	width:80%;
+	text-align:center;
+}
+
+.tituloform{
+	font-size:14px;
+	text-decoration:underline;
+	font-family:Geneva, Arial, Helvetica, sans-serif;
+	text-align:center;
+	font-weight:bold;
+}
+.textoform{
+	font-size:12px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	color:#333333;
+        vertical-align:top;
+}
+.texto2form{
+	font-weight:bold;
+	font-size:12px;
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	color:#333333;
+       
+}
+.agenda{
+    border: 1px #999999;
+	float:left;
+    
+}
+.agendafit{
+    background-color:lightsalmon;
+	font-family:Geneva, Arial, Helvetica, sans-serif;
+	font-size:13px;
+}
+
+.agendaconfort{
+    background-color:plum; 
+    
+}
+
+.agendacabina{
+    background-color:gold;
+    
+}
+
+.agendaotra{
+    background-color:cornflowerblue;
+}
+
+.hora2{
+    background-color:#CBF6BC;
+}
+
+.hora1{
+    background-color:lightgreen;
+}
+
+.destacado{
+    background-color:#CCCCCC;
+}
+.calendario{
+	float:right;
+	vertical-align:middle;
+        margin-right: 5px;
+}
+.evento{
+	text-align:right;
+	float:right;
+}
+.destacado{ 
+    background-color: #fe3333;
+}
+
+.qr{
+	text-decoration:blink;
+	font-style:oblique;
+}
+
+.resaltado{
+	font-family:Arial, Helvetica, sans-serif;
+	font-style:italic;
+	font-weight:bold;
+}
+.permisos{
+	background-color:#CBBDFF;
+
+}
+
+#tratamientos{
+    width: 80%;
+}
+.elemento{
+background-image:url(imagenes/point.png);
+background-repeat:no-repeat;
+background-position:right;
+}
+
+.listausuarios{
+    background-color:#CCCCCC;
+    width: 60%;
+}
+
+.pie{
+    bottom: 0px;
+    position:relative; 
+    text-align: center;
+    float: none;
+}
