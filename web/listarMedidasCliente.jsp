@@ -62,33 +62,23 @@
     </div> <!-- menu ficha -->    
     <div class="clearfix"></div>  
     <div class="span11 cuerpoficha">
-         <p class="tituloform"><bean:message key="medidas.sesiones"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></p>         
-         <table>
-             <tr>
+        <div class="span11"><bean:message key="medidas.sesiones"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></div>         
+        <div class="span11">
          <logic:iterate id="zonamedida" name="listadoMedidas" scope="request" type="es.pfc.model.Medidas">
-             <td><bean:write name="zonamedida" property="zona" /></td>
+             <span><bean:write name="zonamedida" property="zona" /></span>
          </logic:iterate>
-             </tr>
-              <tr>
+          </div>
+        <div class="span11">
          <logic:iterate id="medida" name="listadoMedidas" scope="request" type="es.pfc.model.Medidas">
-             <td><bean:write name="medida" property="medida" /></td>
+             <span><bean:write name="medida" property="medida" /></span>
          </logic:iterate>
-             </tr>
-         </table>
-    </div>                   
-             <div class="cuerpo"><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=5">Insertar nuevas medidas</a></div>                                      
-     <table class="cuerpoblanco">
-        <tr>
-            <td align="right">
-                <html:link href="principal.jsp"><img src="imagenes/home.png"></html:link>
-                
-            </td>
-            <td>
-                <a href="ListaClientes.do"><img src="imagenes/User_female_.png" /> </a>   
-            </td>
-        </tr>
-    </table>      
+        </div>                           
+             <div class="span11" align="center"><a class="btn btn-success" href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=5">Insertar nuevas medidas</a></div>                                      
+     <div class="span11" align="center"><p><br/><a class="btn btn-success" href="principal.jsp"><em class="icon-home icon-white"></em> Volver al menú</a>
+         <a class="btn btn-warning" href="ListaClientes.do"><em class="icon-list icon-white"></em> Listado de clientes </a><br/><br/></p>
+    </div>     
                 </logic:equal>
+        </div>
      <logic:notEqual name="ConsultaClientes" property="activado" value="true">
          <table width="80%" border="0" cellspacing="0" cellpadding="0" class="tabla" >   
     		<tr>
@@ -101,5 +91,8 @@
      </logic:notPresent>
      <%-- include header --%>
     <tiles:insert page="plantillas/pie.jsp" flush="true"/>
+    </div>
+     </div>
+     </div>
     </body>
 </html>
