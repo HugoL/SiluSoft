@@ -70,47 +70,21 @@
     <div class="span11 nombreusuario"><bean:message key="general.sesion"/><strong><bean:write scope="session" name="usuario" property="nombre" /></strong>&nbsp;</div>
     <logic:equal name="ConsultaClientes" property="activado" value="true">
     <div class="row">     
-    <div class="span11" align="right"><bean:message key="general.sesion"/><strong><bean:write scope="session" name="usuario" property="nombre" /></strong>&nbsp;</div>
-    <div class="span11"><h3 align="center"><bean:message key="insertarusuario.titulo"/></h3>                 
-    <div class="clearfix">
+    <div class="span11"><h3 align="center"><bean:message key="insertarusuario.titulo"/></h3></div>                 
+    <div class="clearfix"></div>
     <div class="span11 cuerpoficha">                                              
         <html:form action="/InsertaUsuario" >
-            <logic:present name="nuevousuario">
-                <div class="span11"><bean:message key="usuario.passno"/> </div>
-                <div class="span11"><h5>Contraseñas incorrectas&nbsp;<html:hidden  name="usuario" property="idCentro"/></h5></div>
-                <div class="span5"><bean:message key="formulario.dni"/>: </div>
-                <div class="span5">* <html:text name="nuevousuario" property="dni" /></div>              
-                <div class="span5"><bean:message key="formulario.nombre"/>:</div>
-                <div class="span5">* <html:text name="nuevousuario" property="nombre"/></div>                  
-                <div class="span5"><bean:message key="formulario.apellido1"/>:</div>
-                <div class="span5">* <html:text name="nuevousuario" property="apellido1"/></div>                  
-                <div class="span5"><bean:message key="formulario.telefono"/>:</div>
-                <div class="span5"><html:text name="nuevousuario" property="telefono"/></div>                  
-                <div class="span5"><bean:message key="formulario.email"/>:</div>
-                <div class="span5"><html:text name="nuevousuario" property="email"/></div>                  
-                <div class="span11"><strong><bean:message key="insertarusuario.permisos"/>: </strong></div>               
-                <div class="span5"><bean:message key="formulario.password"/>:</div>
-                <div class="span5"><html:password property="password"/></div>                  
-                <div class="span5"><bean:message key="formulario.password2"/>:</div>
-                <div class="span5"><html:password property="password2" value="" /></div>                  
-                <div class="span11"><input type="submit" class="btn btn-primary btn-danger" value="Insertar" /></div>                
-                 </logic:present>
-                
-                <!---  AL PRINCIPIO APARECE LO SIGUIENTE: --------------------------------->
-                 <logic:notPresent name="nuevousuario">
+                <logic:notPresent name="nuevousuario">
                 <html:hidden name="usuario" property="idCentro"/>
-                <div class="span5"><bean:message key="formulario.dni"/>: </div>
-                <div class="span5">* <html:text property="dni"/></div>                  
-                <div class="span5"><bean:message key="formulario.nombre"/>:</div>
-                <div class="span5">* <html:text property="nombre"/></div>                  
-                <div class="span5"><bean:message key="formulario.apellido1"/>:</div>
-                <div class="span5">* <html:text property="apellido1" /></div>                  
-                <div class="span5"><bean:message key="formulario.telefono"/>:</div>
-                <div class="span5"><html:text property="telefono" /></div>                  
-                <div class="span5"><bean:message key="formulario.email"/>:</div>
-                <div class="span5"><html:text property="email" /></div>                  
+                <div class="span2"><label><bean:message key="formulario.dni"/>: * </label><html:text property="dni"/></div><div class="clearfix"></div>                                 
+                <div class="span3"><label><bean:message key="formulario.nombre"/>:* </label><html:text property="nombre"/></div>                                  
+                <div class="span3"><label><bean:message key="formulario.apellido1"/>: * </label><html:text property="apellido1" /></div>
+                <div class="clearfix"></div>                  
+                <div class="span3"><bean:message key="formulario.telefono"/>: </label><html:text property="telefono" /></div>                                
+                <div class="span3"><label><bean:message key="formulario.email"/>: </label><html:text property="email" /></div>
+                <div class="clearfix"></div>                 
                 <div class="span11">
-                    <logic:iterate name="listaPermisos" id="permisodef" type="es.pfc.model.Permiso"  >                                                                            
+                <logic:iterate name="listaPermisos" id="permisodef" type="es.pfc.model.Permiso"  >                                                                            
                                 <div id="<%=i%>" style="display:block" class="permisos">   
                                     <html:hidden name="permisodef" property="idPermiso"/>&nbsp;
                                     <html:text name="permisodef" property="permiso" readonly="true"/>&nbsp;
@@ -120,36 +94,36 @@
                                     <br/>                     
                                 </div> 
                                 <% i++; %>
-                    </logic:iterate>    
+                </logic:iterate>    
                 </div>                
                 <div class="span11"><strong>i: <%=i%></strong></div>
-                <div class="span5"><bean:message key="formulario.rol"/>:</div>
-                <div class="span5">
-                        <select name="rol" onchange="javascript:mostrar(this,<%=tam%>,<%=i%>)" >                            
+                <div class="span3"><label><bean:message key="formulario.rol"/>: </label>
+                
+                    <select name="rol" onchange="javascript:mostrar(this,<%=tam%>,<%=i%>)" >                            
                         <logic:iterate name="lista" id="rol" type="es.pfc.model.Permiso">                                                       
                             <option value="${rol.idRol}"><bean:write name="rol" property="rol"/></option>
                         </logic:iterate>
                             <option selected="selected"></option>
                     </select>
                 </div>
+                <div class="clearfix"></div> 
                 
-                
-                <div class="span5"><bean:message key="formulario.password"/>:</div>
-                <div class="span5">*<html:password property="password" /></div>                  
-                <div class="span5"><bean:message key="formulario.password2"/>:</div>
-                <div class="span5">*<html:password property="password2" value="" /></div>                  
+                <div class="span3"><label><bean:message key="formulario.password"/>: *</label><html:password property="password" /></div>
+                <div class="clearfix"></div>                
+                <div class="span3"><label><bean:message key="formulario.password2"/>: *</label><html:password property="password2" value="" /></div>
+                <div class="clearfix"></div>                 
                 <div class="span11" align="center"><input type="submit" class="btn btn-primary btn-danger" value="Insertar" /></div>
                 <div class="span11" align="center"><html:errors /></div>               
                 
                  </logic:notPresent>                
         </html:form>
-        </div>
-    <div class="alert alert-info"><bean:message key="formulario.camposobligatorios"/></div>
-        </div>
-    </div>
-        </logic:equal>
-    </div>
-     </div>
+                <div class="clearfix"></div>
+                <div class="alert alert-info"><bean:message key="formulario.camposobligatorios"/></div>
+        </div><!-- cuerpoficha -->  
+        <div class="span11"><a class="btn btn-success" href="principal3.jsp"><em class="icon-home icon-white"></em> Volver al menú</a>
+    </div> <!-- row -->    
+    </logic:equal>
+    </div> <!-- mi hero unit -->
         <logic:notEqual name="ManipulaClientes" property="activado" value="true">
          <table width="80%" border="0" cellspacing="0" cellpadding="0" class="tabla" >   
     		<tr>
@@ -157,15 +131,14 @@
     		</tr>   
      	</table>    
         </logic:notEqual>
-        </div>
+        
      </logic:present>
-    </div>
     <logic:notPresent name="usuario" scope="session">
         <center><bean:message key="general.noidentificado"/></center><br /><html:link href="./Registro.do"><bean:message key="general.identificarse"/></html:link>
     </logic:notPresent>
 <%-- include header --%>    
     <tiles:insert page="plantillas/pie.jsp" flush="true"/>
-    </div>
-     </div>
+     </div><!-- container -->
+    </div><!-- mifondo -->
     </body>
 </html:html>
