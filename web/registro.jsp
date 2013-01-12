@@ -47,16 +47,19 @@
     <div class="row-fluid">
         
         <div class="span10" align="center">
-            <html:form action="Login">
-				<div class="control-group">
-                	<div class="span3" align="right"><label><bean:message key="registro.usuario" />:</label><html:text property="nombre"/></div> 
-				</div>
-				<div class="control-group">
-                        <div class="span3" align="right"><label><bean:message key="registro.password" />:</label><html:password property="password"/></div> 
-				</div>
-				<div class="control-group">
-                	<div class="span10"><input type="submit" value="Acceder" class="btn btn-danger btn-large" /></div>
-				</div>
+            <html:form action="Login" styleClass="form-horizontal">
+			<div class="control-group" align="center">
+                            <label><bean:message key="registro.usuario" />:</label>
+                            <div class="controls"><html:text property="nombre" styleId="nombre" /></div> 
+			</div>
+                        <div class="clearfix"></div>
+			<div class="control-group">
+                            <label><bean:message key="registro.password" />:</label>
+                            <div class="controls"><html:password property="password"/></div> 
+			</div>
+			<div class="control-group">
+                            <div class="controls"><html:submit value="Acceder" styleClass="btn btn-danger btn-large" /></div>
+			</div>
             <html:errors/>
             </html:form>
         </div>
