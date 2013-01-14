@@ -44,13 +44,12 @@
      <logic:present name="usuario">
      <div class="containter">   
     <tiles:insert page="plantillas/PestanasGenerales3.jsp" flush="true"/>
-    <div class="mi-hero-unit">
-    <div class="span11 nombreusuario"><bean:message key="general.sesion"/><strong><bean:write scope="session" name="usuario" property="nombre" /></strong>&nbsp;</div>
-         <logic:equal name="Administracion" property="activado" value="true">
+    <div class="mi-hero-unit">    
+    <logic:equal name="Administracion" property="activado" value="true">
     <div class="row">     
     <div class="span11"><h3 align="center"><bean:message key="insertarusuario.titulo"/></h3></div>
     <div class="clearfix"></div>
-    <div class="span11 cuerpoficha">          
+    <div class="span11 cuerpoficha" align="center">          
         <html:form action="/InsertaSala">
             <html:hidden  name="usuario" property="idCentro"  />
             <div span="3"><label><bean:message key="sala.nombre"/>:</label><html:text property="nombre" /></div>

@@ -20,22 +20,6 @@
 <!DOCTYPE html>
 <!-- redes sociales -->
 	<div class="row-fluid">
-            <div class="span2"><img src="imagenes/silusoft_logo.png"/><br /><br /></div>
-            <div class="span1">
-                
-            </div>
-	<div class="span5">
-           		
-  		
-	</div>
-		<div class="span1">  
-		<p><a href="https://twitter.com/Siludermis" target="_blank" ><img src="img/roto-twitter.png" width="80" height="80" alt="Twitter logo" /></a></p>   
-		</div>   
-		<div class="span1">  
-		<p><a href="http://www.facebook.com/pages/Siludermis-est%C3%A9tica-especializada/214906055260590" target="_blank" ><img src="img/roto-facebook.png" width="80" height="80" alt="Facebook logo" /></a></p>   
-		</div> 
-                <div class="span1">  
-		<p><a href="http://www.youtube.com/user/SiludermisEstetica" target="_blank" ><img src="img/roto-youtube.png" width="80" height="80" alt="Facebook logo" /></a></p>   
-		</div> 
+            <div class="span12" align="center"><img src="img/cabecera.png"/></div>           		        
 	</div>  
 	<!-- -------------- -->    
