@@ -71,7 +71,7 @@
         </logic:present>
             
         <logic:notPresent name="sesiones">
-            <div class="span10"><bean:message key="general.cliente"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong> <bean:message key="sesiones.no"/></div>                    
+            <div class="alert"><bean:message key="general.cliente"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong> <bean:message key="sesiones.no"/></div>                    
         </logic:notPresent>
         
         </logic:equal>

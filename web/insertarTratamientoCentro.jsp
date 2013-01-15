@@ -25,46 +25,46 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!—[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]—>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body { margin-left: 30px; margin-right: 30px;}
+        </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/nuevosestilos.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><bean:message key="tratamiento.titulo"/></title>
-        <LINK href="estilo.css" rel="stylesheet" type="text/css" />
-    </head>
-    <body>
-           <%-- include header --%>
+<tiles:insert page="plantillas/barranav.jsp" flush="true"/>
+     <div class="container mifondo">
+     
      <tiles:insert page="plantillas/logo.jsp" flush="true"/>
      <logic:present name="usuario">
-	 <center>
-	 <tiles:insert page="plantillas/PestanasGenerales2.jsp" flush="true"/><br/><br/>	      
-                        <logic:equal name="ManipulaCentro" property="activado" value="true">
-                        <div class="cuerpoblanco">
+     <div class="containter">   
+    <tiles:insert page="plantillas/PestanasGenerales2.jsp" flush="true"/>
+    <div class="mi-hero-unit">
+    <logic:equal name="ManipulaCentro" property="activado" value="true">
+    <div class="row"> 
+      
+    <div class="clearfix"></div>  
+    <div class="span10 cuerpoficha">        
                             <html:form action="/insertaTratamientoCentro">
                                 <html:hidden name="usuario" property="idCentro" />
-                            <table align="center" width="100%" cellspacing="5">             
-                                <tr>
-                                    <td colspan="2"><center><h3><bean:message key="tratamiento.nuevocentro"/></h3></center></td>                                    
-                                </tr>
-                 
-                                <tr>  
-                                    <td><strong><bean:message key="tratamiento.tipo"/>: </strong><html:text property="tipo" /> </td>
-                                    <td><strong><bean:message key="tratamiento.descripcion"/>: </strong><html:text property="descripcion" /></td>                   
-                                </tr>
-                                <tr>            
-                                    <td><strong><bean:message key="tratamiento.precio"/>: </strong><html:text property="precio" /></td>                               
-                                    <td></td>
-                                </tr>
-                                
-                                <tr>
-                                    <td align="right"><html:submit value="Insertar"/></td>
-                                    <td><html:link href="principal2.jsp"><img src="imagenes/home.png"></html:link></td>
-                                </tr>
-                                <tr>            
-                                    <td colspan="2"><html:errors/></td>
-                                </tr>
-                            </table>  
-                            </html:form>
-                        </div>
-                        </logic:equal>
-                        
+                                <div class="span10"><center><h4><bean:message key="tratamiento.nuevocentro"/></h4></center></div>                                    
+                                <div class="span10"><label><bean:message key="tratamiento.tipo"/>: </label><html:text property="tipo" /> </div>
+                                <div class="span10"><label><bean:message key="tratamiento.descripcion"/>: </label><html:text property="descripcion" /></div>                   
+                                <div class="span10"><label><bean:message key="tratamiento.precio"/>: </label><html:text property="precio" /></div>                               
+                                <div class="span10"><html:submit value="Insertar" styleClass="btn btn-danger"/></div>
+                                     <div><html:errors/></div>                                 
+                            </html:form>    
+    </div>
+    <div class="span11" align="center"><a class="btn btn-success" href="principal.jsp"><em class="icon-home icon-white"></em> Volver al menú</a>
+        <a class="btn btn-warning" href="ListaClientes.do"><em class="icon-list icon-white"></em> Listado de clientes </a>
+    </div>
+    </logic:equal>
+    </div>
+    </div>
                         <logic:notEqual name="ManipulaCentro" property="activado" value="true">
          <table width="80%" border="0" cellspacing="0" cellpadding="0" class="tabla" >   
     		<tr>
@@ -74,6 +74,9 @@
         </logic:notEqual>
         </logic:present>
     <%-- include header --%>
-    <tiles:insert page="plantillas/pie.jsp" flush="true"/>  
+    <tiles:insert page="plantillas/pie.jsp" flush="true"/>
+        <br/>
+   
+     </div>
     </body>
 </html>

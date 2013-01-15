@@ -44,8 +44,7 @@
             
         </script>
     </head>
-    <body>
-         <%-- include header --%>
+    <body>         
        <%-- include header --%>
      <tiles:insert page="plantillas/barranav.jsp" flush="true"/>
      <div class="container mifondo">
@@ -67,54 +66,39 @@
     </ul>
     </div> <!-- menu ficha -->    
     <div class="clearfix"></div>  
-    <div class="span11 cuerpoficha">
-            <div class="span3"><bean:message key="tratamiento.de"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></div>
+    <div class="span10 cuerpoficha">
+            <div class="span11"><bean:message key="tratamiento.de"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></div>
             <div class="clearfix"></div>
             
             <logic:equal name="listadotrat" value="[]">
-                <div class="span4"><center><bean:message key="tratamiento.nohay"/></center></div>
+                <div class="alert"><center><bean:message key="tratamiento.nohay"/></center></div>
                 <div class="clearfix"></div>
             </logic:equal>
         <logic:iterate id="tratamiento" name="listadotrat" scope="request" type="es.pfc.model.Tratamiento">
             <html:form action="/InsertarTratamiento">	 
-                <tr >
-                    <td align="right"><div align="right"><bean:message key="tratamiento.tipo"/>:</div></td>
-			<td align="left"><strong><bean:write name="tratamiento" property="tipo" /></strong></td>
-		</tr>
-		<tr>
-                    <td align="right"><strong><bean:message key="formulario.fechaInicio"/>: </strong><bean:write name="tratamiento" property="fechaInicio" />,&nbsp; </td>
-                    <td><strong><bean:message key="formulario.fechaFin"/>: </strong><bean:write name="tratamiento" property="fechaFin" /></td>
-		</tr>
-		<tr>
-                    <td align="right"><strong><bean:message key="tratamiento.intervalos"/>: </strong><bean:write name="tratamiento" property="intervalos" />,&nbsp; </td>
-                    <td><strong><bean:message key="tratamiento.mantenimiento"/>: </strong><bean:write name="tratamiento" property="mantenimiento" /></td>
-		</tr>
-		<tr>
-                    <td align="right"><strong><bean:message key="tratamiento.observaciones"/>: </strong><bean:write name="tratamiento" property="observaciones" />,&nbsp; </td>
-                    <td><strong><bean:message key="tratamiento.resultados"/>: </strong><bean:write name="tratamiento" property="resultados" /></td>
-		</tr> 
-                <tr>
-                    <td colspan="2" align="center"><html:submit value="Modificar" /></td>
-		</tr>
-		<tr>
-			<td colspan="2" class="separacion">&nbsp;</td>
-		</tr>
+                <div class="span3"><bean:message key="tratamiento.tipo"/>:</div>
+                <div class="span3"><strong><bean:write name="tratamiento" property="tipo" /></strong></div>
+                <div class="clearfix"></div>
+                <div class="span3"><strong><bean:message key="formulario.fechaInicio"/>: </strong><bean:write name="tratamiento" property="fechaInicio" />,&nbsp; </div>
+                <div class="span3"><strong><bean:message key="formulario.fechaFin"/>: </strong><bean:write name="tratamiento" property="fechaFin" /></div>
+                <div class="clearfix"></div>
+                <div class="span3"><strong><bean:message key="tratamiento.intervalos"/>: </strong><bean:write name="tratamiento" property="intervalos" />,&nbsp; </div>
+                <div class="span3"><strong><bean:message key="tratamiento.mantenimiento"/>: </strong><bean:write name="tratamiento" property="mantenimiento" /></div>
+                <div class="clearfix"></div>
+                <div class="span3"><strong><bean:message key="tratamiento.observaciones"/>: </strong><bean:write name="tratamiento" property="observaciones" />,&nbsp; </div>
+                <div class="span3"><strong><bean:message key="tratamiento.resultados"/>: </strong><bean:write name="tratamiento" property="resultados" /></div>
+                <div class="clearfix"></div>
+                <div class="span3" align="center"><html:submit value="Modificar" styleClass="btn btn-danger" /></div>
+                <div class="clearfix"></div>			
             </html:form>
          </logic:iterate>
-	</table>	 
-		 	 
-    <table bgcolor="#FFFFFF" width="80%">
-        <tr>
-            <td align="right">
-                <html:link href="principal.jsp"><img src="imagenes/home.png"></html:link>
-            </td>
-            <td>
-                <a href="ListaClientes.do"><img src="imagenes/User_female_.png" /> </a>   
-            </td>
-        </tr>
-    </table>
-	</center>
+	</div>	 
+        </div>	 	 
+    <div class="span11" align="center"><a class="btn btn-success" href="principal.jsp"><em class="icon-home icon-white"></em> Volver al menú</a>
+         <a class="btn btn-warning" href="ListaClientes.do"><em class="icon-list icon-white"></em> Listado de clientes </a>
+    </div> 	
     </logic:equal>
+        </div>
      <logic:notEqual name="ConsultaClientes" property="activado" value="true">
          <table width="80%" border="0" cellspacing="0" cellpadding="0" class="tabla" >   
     		<tr>
@@ -129,5 +113,7 @@
 </logic:notPresent>
 	 <%-- include header --%>
     <tiles:insert page="plantillas/pie.jsp" flush="true"/>
+        </div>
+    </div>
     </body>
 </html>
