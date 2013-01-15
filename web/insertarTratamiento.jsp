@@ -65,42 +65,54 @@
         <logic:present name="cliente">
             <div class="span11" alignt="center"><center><h4><bean:message key="tratamiento.nuevo"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></h4></center></div>
         <logic:equal name="ManipulaClientes" property="activado" value="true">
-             <html:form action="/InsertarTratamiento">                                    
+            <html:form action="/InsertarTratamiento" styleClass="form-horizontal">                                    
              <html:hidden name="cliente" property="idCliente"/>
                 <div class="span10" align="right"><a class="btn btn-success" href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=2">Ver tratamientos</a></div>
                 
-                <div class="span10" align="center"><label><bean:message key="tratamiento.tipo"/>:</label>
+                <div class="control-group">
+                    <label class="control-label"><bean:message key="tratamiento.tipo"/>:</label>
+                    <div class="control">
                     <select name="tipo" >
                         <option value="0"><bean:message key="tratamiento.select" /></option>
                         <logic:iterate id="tratamiento" name="lista" scope="request" type="es.pfc.model.Tratamiento" >
                             <option value="<bean:write name="tratamiento" property="tipo" />"><bean:write name="tratamiento" property="tipo" /></option>					
                         </logic:iterate>
-                    </select></div>                 
+                    </select>
+                    </div>
+                </div>                 
     
-                <div class="span10" align="center"><label><bean:message key="formulario.fechaInicio"/>:</label>
-                   <input type="text" name="fechaInicio" class="tcal"/>               
+                <div class="control-group">
+                            
+                        <label class="control-label"><bean:message key="formulario.fechaInicio"/>:</label>
+                        <div class="controls">
+                        <input type="text" name="fechaInicio" class="tcal"/>  
+                        </div>
                 </div>
-                <div class="span10" align="center">    
-                    <label><bean:message key="formulario.fechaFin"/>:</label>
-                    <input type="text" name="fechaFin" class="tcal"/>                  
+                <div class="control-group">    
+                    <label class="control-label"><bean:message key="formulario.fechaFin"/>:</label>
+                    <div class="controls">
+                    <input type="text" name="fechaFin" class="tcal"/>   
+                    </div>
                 </div>
-		<div class="span10" align="center">    
-                    <label><bean:message key="tratamiento.intervalos"/>:</label>
-                    <html:text property="intervalos" />  
+		<div class="control-group">   
+                    <label class="control-label"><bean:message key="tratamiento.intervalos"/>:</label>
+                    <div class="controls">
+                    <html:text property="intervalos" />
+                    </div>
                 </div>
-		<div class="span10" align="center">    
-                    <label><bean:message key="tratamiento.resultados"/>:</label>
-                    <html:text property="resultados" />
+		<div class="control-group">   
+                    <label class="control-label"><bean:message key="tratamiento.resultados"/>:</label>
+                    <div class="controls"><html:text property="resultados" /></div>
                 </div>
-                <div class="span10" align="center">    
-                    <label><bean:message key="tratamiento.observaciones"/>:</label>
-                    <html:text property="observaciones" />
+                <div class="control-group">    
+                    <label class="control-label"><bean:message key="tratamiento.observaciones"/>:</label>
+                    <div class="controls"><html:text property="observaciones" /></div>
                 </div>
-                <div class="span10" align="center"><center><input type="submit" class="btn btn-large btn-danger" value="Insertar" /></center></div>
-                
+                <div class="control-group">
+                    <div class="controls"><input type="submit" class="btn btn-large btn-danger" value="Insertar" /></div>
+                </div>
                 <div class="span10" align="center"><center><html:errors/></center></div>     
-          </div>				                          
-            
+          </div>				                                      
         </html:form> 
 	</div>
 	 <div class="span11" align="center"><p><br/><a class="btn btn-success" href="principal.jsp"><em class="icon-home icon-white"></em> Volver al menú</a>
@@ -108,8 +120,7 @@
          </div>                
             </logic:equal>
         </div>	
-    <logic:notEqual name="ManipulaClientes" property="activado" value="true">
-           
+    <logic:notEqual name="ManipulaClientes" property="activado" value="true">           
                     <div class="cuerpoblanco" align="center"><p><bean:message key="general.noprivilegios"/></p><br /><a href="javascript:history.back()"> Volver</a></div>         
     </logic:notEqual>
      </logic:present>

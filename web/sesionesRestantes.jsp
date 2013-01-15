@@ -26,75 +26,73 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!—[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]—>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body { margin-left: 30px; margin-right: 30px;}
+        </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/nuevosestilos.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><bean:message key="sesiones.restantes"/></title>
-        <LINK href="estilo.css" rel="stylesheet" type="text/css" />
+        <title><bean:message key="sesiones.restantes"/></title>        
     </head>
     <body>
-           <%-- include header --%>
-    <tiles:insert page="plantillas/logo.jsp" flush="true"/>
-    <logic:present name="usuario">       
-        <center>
-        <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
-    	<logic:equal name="ConsultaClientes" property="activado" value="true">
-	<table width="80%" border="0" cellspacing="0" cellpadding="0" class="tabla" >   
-    		<tr>
-      			<td class="pestanaclientes"><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=3"><img src="imagenes/PestanaDatos.png" width="90" height="38" align="left"  /></a></td> 
-			<td><a a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=1"><img src="imagenes/PestanaTratam.png" width="90" height="38" align="left"  /></a></td>
-      			<td width="auto"><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=6"><img src="imagenes/PestanaObserv.png" align="left" /></a></td>   
-	  		<td><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=4"><img src="imagenes/PestanaTest.png" align="left" /></a></td>
-	  		<td><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=5"><img src="imagenes/PestanaSesiones_.png" width="90" height="38" align="left" /></a></td>
-			<td width="*">&nbsp;</td>
-    		</tr>   
-     	</table>   
-        <div class="cuerpoblanco">
-            <br />
-	<table width="80%" cellspacing="5" class="cuerpo">
-            <tr>
-                <td></td>
-            </tr>
+       <%-- include header --%>
+     <tiles:insert page="plantillas/barranav.jsp" flush="true"/>
+     <div class="container mifondo">
+     
+     <tiles:insert page="plantillas/logo.jsp" flush="true"/>
+     <logic:present name="usuario">
+     <div class="containter">   
+    <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
+    <div class="mi-hero-unit">
+    <logic:equal name="ConsultaClientes" property="activado" value="true">
+        <div class="row"> 
+    <div class="span11">
+    <ul class="nav nav-tabs">  
+        <li class="active"><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=3">Datos</a></li> 
+	<li><a a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=1">Tratamiento</a></li>
+      	<li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=6">Observación</a></li>   
+	<li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=4">Test</a></li>
+        <li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=5">Medidas</a></li>			    		
+    </ul>
+    </div> <!-- menu ficha -->    
+    <div class="clearfix"></div>  
+    <div class="span11 cuerpoficha">
             <logic:present name="sesiones">
-            <tr>
-                <td colspan="2"><bean:message key="sesiones.restantes"/>: <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></td>
-            </tr>
-            <tr>
-                <td><bean:message key="sesiones.fit"/>: <bean:write name="sesiones" property="resFit" /></td>
-                <td><bean:message key="sesiones.comfort"/>: <bean:write name="sesiones" property="resConfort" /></td>
-            </tr>
-            <tr>
-                <td colspan="2"><center><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=3"><bean:message key="sesiones.ficha"/></a></center></td>
-            </tr>
+                <div class="span4"><bean:message key="sesiones.restantes"/>: <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></div>
+           <div class="clearfix"></div>
+           <div class="span3"><bean:message key="sesiones.fit"/>: <bean:write name="sesiones" property="resFit" /></div>
+           <div class="span3"><bean:message key="sesiones.comfort"/>: <bean:write name="sesiones" property="resConfort" /></div>
+           <div class="clearfix"></div>
+           <div class="span3"><center><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=3"><bean:message key="sesiones.ficha"/></a></center></div>            
         </logic:present>
+            
         <logic:notPresent name="sesiones">
-            <tr>
-                <td colspan="2"><bean:message key="general.cliente"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong> <bean:message key="sesiones.no"/></td>
-            </tr>         
+            <div class="span10"><bean:message key="general.cliente"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong> <bean:message key="sesiones.no"/></div>                    
         </logic:notPresent>
-        </table>
+        
         </logic:equal>
         <logic:notEqual name="ConsultaClientes" property="activado" value="true">
-         <table width="80%" border="0" cellspacing="0" cellpadding="0" class="tabla" >   
-    		<tr>
-                    <td><div class="cuerpoblanco" align="center"><p><bean:message key="general.noprivilegios"/></p><br /><a href="javascript:history.back()"> Volver</a></div></td>
-    		</tr>   
-     	</table>     
+            <div class="span10" align="center"><p><bean:message key="general.noprivilegios"/></p><br /><a class="btn btn-danger" href="javascript:history.back()"> Volver</a></div></div>    		
         </logic:notEqual>
-        </logic:present>	
-        <table bgcolor="#FFFFFF" width="80%">
-        <tr>
-            <td align="right">
-                <html:link href="principal.jsp"><img src="imagenes/home.png"></html:link>
-            </td>
-            <td>
-                <a href="ListaClientes.do"><img src="imagenes/User_female_.png" /> </a>   
-            </td>
-        </tr>
-    </table></center>  
+    </div>
+        </logic:present>
+        <div class="clearfix">&nbsp;</div>
+        <div class="span11">
+            <a class="btn btn-inverse" href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=3"><em class="icon-user icon-white"></em> Volver a la ficha</a>
+            <a class="btn btn-success" href="principal.jsp"><em class="icon-home icon-white"></em> Volver al menú</a>
+                <a class="btn btn-warning" href="ListaClientes.do"><em class="icon-list icon-white"></em> Listado de clientes </a></div>
+        </div><!-- row -->   
     </div>
     <logic:notPresent name="usuario" scope="session">
     <center><bean:message key="general.noidentificado"/></center><br /><html:link href="./Registro.do"><bean:message key="general.identificarse"/></html:link>
 </logic:notPresent>
      <%-- include header --%>
-    <tiles:insert page="plantillas/pie.jsp" flush="true"/>    
+    <tiles:insert page="plantillas/pie.jsp" flush="true"/>  
+    </div>
+     </div>
     </body>
 </html>
