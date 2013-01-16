@@ -63,7 +63,6 @@
      <div class="containter">   
     <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
     <div class="mi-hero-unit">
-        <div class="span11 nombreusuario"><bean:message key="general.sesion"/><strong><bean:write scope="session" name="usuario" property="nombre" /></strong>&nbsp;</div>
     <logic:equal name="ConsultaClientes" property="activado" value="true">
         <div class="row"> 
     <div class="span11">
@@ -118,12 +117,10 @@
                                         <div class="span5"><div class="alert alert-success"><bean:message key="ficha.qrcomfort"/>: </strong><span class="qr">http://localhost:8084/SiluSoft/AsistenciaQr.do?url=<bean:write name="cliente" property="url" />&maq=confort</span></div></div>
                                         <p></p>
         </div> <!-- cuerpo ficha -->  
-        </logic:present>
-    
-        
-                                        <div class="span11"><a class="btn btn-success" href="principal.jsp"><em class="icon-home icon-white"></em> Volver al menú</a>
-                                            <a class="btn btn-warning" href="ListaClientes.do"><em class="icon-list icon-white"></em> Listado de clientes </a></div>
-        </div><!-- row -->
+        </logic:present>           
+        <div class="span11" align="center"><a class="btn btn-success" href="principal.jsp"><em class="icon-home icon-white"></em> Volver al menú</a>
+                <a class="btn btn-warning" href="ListaClientes.do"><em class="icon-list icon-white"></em> Listado de clientes </a></div>
+            </div><!-- row -->
         </logic:equal>
                                     
     </div>
