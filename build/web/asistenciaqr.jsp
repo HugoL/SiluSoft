@@ -27,32 +27,48 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!—[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]—>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body { margin-left: 30px; margin-right: 30px;}
+        </style>
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="css/nuevosestilos.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><bean:message key="asistencia.titulo"/></title>
-        <LINK href="estilo.css" rel="stylesheet" type="text/css" />
     </head>
-    <body>
-                  <%-- include header --%>
-    <tiles:insert page="plantillas/logo.jsp" flush="true"/>
-    <logic:present name="usuario">
-	<center>
-        <div class="cuerpoblanco" align="center">
-		<table class="tabla">
-            <html:form action="/Asistencia" >   
-                <tr>
-                    <td colspan="2"><center><bean:message key="asistencia.de"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></center></strong></td>
-                </tr>
-                <tr>
-                    <td align="center"><bean:message key="asistencia.fit"/>:<html:radio property="maquina" value="fit" /></td>
-                    <td align="center"><bean:message key="asistencia.comfort"/><html:radio property="maquina" value="confort" /></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><html:hidden name="cliente" property="idCliente" /><center><html:submit value="Enviar" /></center></td>
-                </tr>
+       <%-- include header --%>
+     <tiles:insert page="plantillas/barranav.jsp" flush="true"/>
+     <div class="container mifondo">
+     
+     <tiles:insert page="plantillas/logo.jsp" flush="true"/>
+     <logic:present name="usuario">
+     <div class="containter">   
+    <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
+    <div class="mi-hero-unit">
+    <logic:equal name="ConsultaClientes" property="activado" value="true">
+        <div class="row"> 
+            <div class="span11 cuerpoficha">
+                <html:form action="/Asistencia" styleClass="form-inline" >   
+                    <div class="span10" align="center"><h4><center><bean:message key="asistencia.de"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></center></strong></h4></td>
+                    <label><bean:message key="asistencia.fit"/>:<html:radio property="maquina" value="fit" /></label>
+                    <label><bean:message key="asistencia.comfort"/>:<html:radio property="maquina" value="confort" /></label>
+                    <html:hidden name="cliente" property="idCliente" /><html:submit value="Enviar" styleClass="btn btn-danger" />                
                 </html:form> 
-			</table>
-        </div>
-		</center>
+    </logic:equal>
+                <logic:notEqual name="ConsultaClientes" property="activado" value="true">
+                    <div class="alert alert-error"><bean:message key="general.noprivilegios"/></div>
+                </logic:notEqual>
     </logic:present>
+            </div>
+            </div>
+        </div>        
+    </div>
+         <%-- include header --%>
+    <tiles:insert page="plantillas/pie.jsp" flush="true"/><br/>
+    </div>
+     </div>
     </body>
 </html>
