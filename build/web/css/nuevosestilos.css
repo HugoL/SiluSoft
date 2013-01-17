@@ -273,3 +273,7 @@ body{
   border-color: #ddd #ddd #ddd transparent;
   *border-left-color: #ffffff;
 }
+
+.sesiondiv{
+    margin-top: 10px;
+}

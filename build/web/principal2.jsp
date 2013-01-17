@@ -49,11 +49,10 @@
 <div class="containter">   
     <tiles:insert page="plantillas/PestanasGenerales2.jsp" flush="true"/>
     <div class="mi-hero-unit">
-    <div class="row">
-        <div class="span11 nombreusuario"><bean:message key="general.sesion"/><strong><bean:write scope="session" name="usuario" property="nombre" /></strong>&nbsp;</div>        
-        <div class="span2"><logic:equal name="ConsultaCentro" property="activado" value="true"><html:link href="listaTratamientosCentro.do?di=1"><img src="imagenes/tratamiento.png" /></html:link></logic:equal></div>
-	<div class="span2"><logic:equal name="ConsultaCentro" property="activado" value="true"><a href="FichaCentro.do?Id=<bean:write name="usuario" property="idCentro"/>"><img src="imagenes/admin.png" /></a></logic:equal></div>
-	<div class="span2"><logic:equal name="ConsultaAgenda" property="activado" value="true"><a href="miAgenda.do?var=0"><img src="imagenes/agenda.png" width="130" height="94" /></a></logic:equal></div>
+    <div class="row">        
+        <div class="span3"><logic:equal name="ConsultaCentro" property="activado" value="true"><html:link href="listaTratamientosCentro.do?di=1"><img src="imagenes/tratamiento.png" /></html:link></logic:equal></div>
+	<div class="span3"><logic:equal name="ConsultaCentro" property="activado" value="true"><a href="FichaCentro.do?Id=<bean:write name="usuario" property="idCentro"/>"><img src="imagenes/admin.png" /></a></logic:equal></div>
+	<div class="span3"><logic:equal name="ConsultaAgenda" property="activado" value="true"><a href="miAgenda.do?var=0"><img src="imagenes/agenda.png" width="130" height="94" /></a></logic:equal></div>
     </div>
     </div>
     <tiles:insert page="plantillas/pie.jsp" flush="true"/>

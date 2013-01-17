@@ -31,20 +31,28 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!—[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]—>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body { margin-left: 30px; margin-right: 30px;}
+        </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/nuevosestilos.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><bean:message key="cliente.insertapeso"/></title>
-                <LINK href="estilo.css" rel="stylesheet" type="text/css" />
-
+        <title><bean:message key="cliente.insertapeso"/></title>              
     </head>
     <body>
          <div>
-             <center><bean:message key="cliente.insertapeso"/></center>
-                                <logic:iterate id="lista" name="listadop" scope="request" type="es.pfc.model.Peso">
-                                
-                                    <p class="medidas"><bean:message key="formulario.peso"/>: <bean:write name="lista" property="peso" /> &nbsp;&nbsp;
-                                <bean:message key="cliente.fechapeso"/>: <bean:write name="lista" property="fecha" /></p>  
-                            
+             <h3><bean:message key="cliente.insertapeso"/></h3>
+             <div  class="cuerpoficha">
+                                <logic:iterate id="lista" name="listadop" scope="request" type="es.pfc.model.Peso">                                
+                                    <div class="span2"><bean:message key="formulario.peso"/>: <bean:write name="lista" property="peso" /></div>
+                                <div class="span3"><bean:message key="cliente.fechapeso"/>: <bean:write name="lista" property="fecha" /></div>  
+                                <div class="clearfix"></div>
                                 </logic:iterate>   
-         </div>
+             </div>
+        </div>
     </body>
 </html>

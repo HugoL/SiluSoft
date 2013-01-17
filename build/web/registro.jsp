@@ -38,7 +38,6 @@
             body { padding-top: 60px; margin-left: 10px; margin-right: 10px;}
         </style>
     <link href="css/bootstrap-responsive.css" rel="stylesheet"
-        <LINK href="estilo.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
        
@@ -48,14 +47,19 @@
     <div class="row-fluid">
         
         <div class="span10" align="center">
-            <html:form action="Login">
-                <div class="span5" align="right"><bean:message key="registro.usuario" />:
-                </div><div class="span5" align="left"><html:text property="nombre"/></div> 
-                        <div class="clear">&nbsp;</div>
-                        <div class="span5" align="right"><bean:message key="registro.password" />:
-                        </div><div class="span5" align="left"><html:password property="password"/></div> 
-                <div class="clear"><p></p></div>
-                <div class="span10"><input type="submit" value="Acceder" class="btn btn-danger btn-large" /></div>
+            <html:form action="Login" styleClass="form-horizontal">
+			<div class="control-group" align="center">
+                            <label><bean:message key="registro.usuario" />:</label>
+                            <div class="controls"><html:text property="nombre" styleId="nombre" /></div> 
+			</div>
+                        <div class="clearfix"></div>
+			<div class="control-group">
+                            <label><bean:message key="registro.password" />:</label>
+                            <div class="controls"><html:password property="password"/></div> 
+			</div>
+			<div class="control-group">
+                            <div class="controls"><html:submit value="Acceder" styleClass="btn btn-danger btn-large" /></div>
+			</div>
             <html:errors/>
             </html:form>
         </div>

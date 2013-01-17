@@ -23,37 +23,45 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
+    <head>       
+    <!—[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]—>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body { margin-left: 30px; margin-right: 30px;}
+        </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/nuevosestilos.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><bean:message key="sala.titulo"/></title>
-         <LINK href="estilo.css" rel="stylesheet" type="text/css" />
     <body>
-             <%-- include header --%>
+         <%-- include header --%>
+     <tiles:insert page="plantillas/barranav.jsp" flush="true"/>
+     <div class="container mifondo">
+     
      <tiles:insert page="plantillas/logo.jsp" flush="true"/>
      <logic:present name="usuario">
-         <logic:equal name="Administracion" property="activado" value="true">
-	 <center>    
-        <tiles:insert page="plantillas/PestanasGenerales3.jsp" flush="true"/>	
-     <center>
-	 <table class="cuerpoblanco">
-	 <tr><td>
-	 <p align="right"><bean:message key="general.sesion"/><strong><bean:write scope="session" name="usuario" property="nombre" /></strong>&nbsp;</p>
-	 <h3 align="center"><bean:message key="sala.titulo"/></h3>
-             </td></tr>
+     <div class="containter">   
+    <tiles:insert page="plantillas/PestanasGenerales3.jsp" flush="true"/>
+    <div class="mi-hero-unit">    
+    <logic:equal name="Administracion" property="activado" value="true">
+    <div class="row">     
+    <div class="span11"><h3 align="center"><bean:message key="insertarusuario.titulo"/></h3></div>
+    <div class="clearfix"></div>
+    <div class="span11 cuerpoficha" align="center">          
         <html:form action="/InsertaSala">
             <html:hidden  name="usuario" property="idCentro"  />
-        <tr>
-            <td align="center"><bean:message key="sala.nombre"/>: <html:text property="nombre" /></td>
-        </tr>
-        <tr>
-            <td align="center"><html:submit value="Enviar" /></td>
-        </tr>
+            <div span="3"><label><bean:message key="sala.nombre"/>:</label><html:text property="nombre" /></div>
+            <div class="clearfix"></div>
+            <div span="3" align="center"><html:submit value="Enviar" styleClass="btn btn-danger" /></div>        
         </html:form>
-        <tr>
-            <td><center><html:errors/></center></td>
-        </tr>        
-         </table></center>    
+    </div><!-- cuerpo ficha -->
+    <div><html:errors/></div>              
+        <div class="span11"><a class="btn btn-success" href="principal3.jsp"><em class="icon-home icon-white"></em> Volver al menú</a></div>
+        </div> <!-- row -->  
          </logic:equal>
+    </div> <!-- mi hero unit -->
         <logic:notEqual name="Administracion" property="activado" value="true">
             <table width="80%" border="0" cellspacing="0" cellpadding="0" class="tabla" >   
     		<tr>
@@ -67,5 +75,7 @@
     </logic:notPresent>
 <%-- include header --%>
     <tiles:insert page="plantillas/pie.jsp" flush="true"/>
+    </div><!-- container -->
+    </div><!-- mifondo -->
     </body>
 </html>

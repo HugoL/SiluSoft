@@ -87,5 +87,6 @@
 <%-- include header --%>
     <tiles:insert page="plantillas/pie.jsp" flush="true"/>
      </div>
+     </div>
     </body>
 </html>
