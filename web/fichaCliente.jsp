@@ -118,7 +118,7 @@
                                         <p></p>
         </div> <!-- cuerpo ficha -->  
         </logic:present>           
-            <div class="span11"><a class="btn btn-success" href="principal.jsp"><em class="icon-home icon-white"></em> Volver al menú</a>
+        <div class="span11" align="center"><a class="btn btn-success" href="principal.jsp"><em class="icon-home icon-white"></em> Volver al menú</a>
                 <a class="btn btn-warning" href="ListaClientes.do"><em class="icon-list icon-white"></em> Listado de clientes </a></div>
             </div><!-- row -->
         </logic:equal>

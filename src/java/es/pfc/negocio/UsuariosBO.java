@@ -17,6 +17,11 @@
  */
 package es.pfc.negocio;
 
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.MessagingException;
+import javax.mail.Transport;
+import java.util.Properties;
 import es.pfc.dao.UsuarioDAOImpl;
 import es.pfc.model.Usuario;
 import java.util.ArrayList;
@@ -112,4 +117,10 @@ public class UsuariosBO {
         }    
         return lista;
     }        
+    
+    private static boolean enviarMail(){
+        Properties prop = new Properties();
+        prop.put("mail.smtp.com","smtp.gmail.com");
+        return true;
+    }
 }

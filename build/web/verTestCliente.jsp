@@ -25,64 +25,63 @@
 <!DOCTYPE html>
 <html>
     <head>
+	<!—[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]—>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body { margin-left: 30px; margin-right: 30px;}
+        </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/nuevosestilos.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Ver Test Cliente</title>
-        <LINK href="estilo.css" rel="stylesheet" type="text/css" />
-        
+        <title>Ver Test Cliente</title>        
     </head>
     <body>
            <%-- include header --%>
+     <tiles:insert page="plantillas/barranav.jsp" flush="true"/>
+     <div class="container mifondo">
+     
      <tiles:insert page="plantillas/logo.jsp" flush="true"/>
      <logic:present name="usuario">
-<%--<bean:write name="cabecera" filter="false"/>--%>
-<center>
-<tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
-
-<table width="80%" border="0" cellspacing="0" cellpadding="0" class="tabla" > 
-                <tr>
-      			<td class="pestanaclientes"><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=3"><img src="imagenes/PestanaDatos.png" width="90" height="38" align="left"  /></a></td> 
-			<td><a a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=1"><img src="imagenes/PestanaTratam.png" width="90" height="38" align="left"  /></a></td>
-      			<td width="auto"><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=6"><img src="imagenes/PestanaObserv.png" width="90" height="38" align="left" /></a></td>   
-	  		<td><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=4"><img src="imagenes/PestanaTest_.png" align="left" /></a></td>
-	  		<td><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=5"><img src="imagenes/PestanaSesiones.png" align="left" /></a></td>
-			<td width="*">&nbsp;</td>
-    		</tr>   
-     	</table> 
-                        <logic:equal name="ConsultaClientes" property="activado" value="true">
-                        
-                        <div>
-                            <div class="cuerpo" with="80%">
-                                <br />
-                                <bean:message key="test.de"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong>:<br/>
+     <div class="containter">   
+    <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
+    <div class="mi-hero-unit">
+    <logic:equal name="ConsultaClientes" property="activado" value="true">
+     <div class="row">                                               
+     <div class="clearfix"></div>  
+    <div class="span11 cuerpoficha">
+    <logic:present name="cliente">
+     <div class="span10"><bean:message key="test.de"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong>:</div>
                                 <logic:iterate id="pregunta" name="listaPreguntas" scope="request" type="es.pfc.model.PreguntaTest">
-                                    <bean:write name="pregunta" property="texto" />: <bean:write name="pregunta" property="respelegidatexto" /><br/>
+                                    <div class="span10"><bean:write name="pregunta" property="texto" />: <bean:write name="pregunta" property="respelegidatexto" /></div>
                                 </logic:iterate>
-                                <br />
-                                <bean:message key="test.resultado"/>: <strong><bean:write name="test" property="resultado" /></strong><br />
-                                <bean:message key="ficha.fecha"/>: <bean:write name="test" property="fecha" />
-                                <br /><br />
+                                <div class="clearfix"></div>
+                                <div class="span10"><bean:message key="test.resultado"/>: <span class="badge badge-warning"><bean:write name="test" property="resultado" /></span></div>
+                                <div class="span10"><bean:message key="ficha.fecha"/>: <bean:write name="test" property="fecha" /></div>
                             </div>
-                            <div class="cuerpoblanco">
-                                <html:link href="principal.jsp"><img src="imagenes/home.png"></html:link>
-                                <a href="ListaClientes.do"><img src="imagenes/User_female_.png" /> </a>   
-                            </div>
-                        </div>
-                        </logic:equal> 
-                        <logic:notEqual name="ConsultaClientes" property="activado" value="true">
+			</div><!-- cuerpo ficha -->
+                            <div class="span11"><a class="btn btn-success" href="principal.jsp"><em class="icon-home icon-white"></em> Volver al menú</a>                <a class="btn btn-warning" href="ListaClientes.do"><em class="icon-list icon-white"></em> Listado de clientes </a></div>
+      </div><!-- row -->
+      </div><!-- mihero-unit -->
+      </logic:present>
+       </logic:equal>      
+       <logic:notEqual name="ConsultaClientes" property="activado" value="true">
          <table width="80%" border="0" cellspacing="0" cellpadding="0" class="tabla" >   
     		<tr>
                     <td><div class="cuerpoblanco" align="center"><p><bean:message key="general.noprivilegios"/></p><br /><a href="javascript:history.back()"> Volver</a></div></td>
     		</tr>   
      	</table>     
-        </logic:notEqual>
-    </logic:present>
+        </logic:notEqual>        
     <logic:notPresent name="sesiones">
             <tr>
                 <td colspan="2"><bean:message key="general.cliente"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong> <bean:message key="sesiones.no"/></td>
             </tr>         
         </logic:notPresent>
-    <p></p>
+     </logic:present>
 <%-- include header --%>
     <tiles:insert page="plantillas/pie.jsp" flush="true"/>
+	</div>
+	</div>
 </body>
 </html>

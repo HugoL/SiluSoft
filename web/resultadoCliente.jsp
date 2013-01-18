@@ -27,54 +27,62 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <head>
+    <!—[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]—>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body { margin-left: 30px; margin-right: 30px;}
+        </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/nuevosestilos.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><bean:message key="buscarcliente.titulo"/></title>
-        <LINK href="estilo.css" rel="stylesheet" type="text/css" />
+        <title><bean:message key="buscarcliente.titulo"/></title>        
     </head>
     <body>
          <%-- include header --%>
+        <%-- include header --%>
+     <tiles:insert page="plantillas/barranav.jsp" flush="true"/>
+     <div class="container mifondo">
+     
      <tiles:insert page="plantillas/logo.jsp" flush="true"/>
      <logic:present name="usuario">
-     	<center><div class="cuerpoblanco">
-                <p align="right"><bean:message key="general.sesion"/>: <strong><bean:write scope="session" name="usuario" property="nombre" /></strong>&nbsp;</p>
-                <h3><bean:message key="buscarcliente.resultado"/></h3>
+     <div class="containter">   
+    <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
+    <div class="mi-hero-unit">    
+        <div class="row"> 
+            <div class="span10"><h4><bean:message key="buscarcliente.resultado"/></h4></div>
         <logic:present name="cliente">
-        <table width="80%" >
-		<tr>
-                    <td><strong><bean:message key="formulario.dni"/></strong></td>
-                    <td><strong><bean:message key="formulario.nombre"/></strong></td>
-                    <td><strong><bean:message key="formulario.apellido1"/></strong></td>  
-                    <td><strong><bean:message key="formulario.apellido2"/></strong></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-        <logic:iterate id="cliente" name="cliente" scope="request" type="es.pfc.model.Cliente">             
-            <tr class="datos">
-                <td><bean:write name="cliente" property="dni" /></td>
-                <td id="Nombre"><bean:write name="cliente" property="nombre" /></td>          
-                <td><bean:write name="cliente" property="apellidos" /></td>
-                <td><bean:write name="cliente" property="apellido2" /></td>
-		<td><a href="DameDatosCliente.do?dni=<bean:write name='cliente' property='dni'/>&op=8">Editar</a> </td>
-                <td><a href="DameDatosCliente.do?dni=<bean:write name='cliente' property='dni'/>&op=3">Ver Ficha</a></td>
-                <td><a href="EliminarCliente.do?Id=<bean:write name="cliente" property="idCliente" />">Eliminar</a> </td>
-            </tr> 
-        </table>
+            <div class="span2"><strong><bean:message key="formulario.dni"/></strong></div>
+            <div class="span2"><strong><bean:message key="formulario.nombre"/></strong></div>
+            <div class="span2"><strong><bean:message key="formulario.apellido1"/></strong></div>  
+            <div class="span2"><strong><bean:message key="formulario.apellido2"/></strong></div>
+            
+        <logic:iterate id="cliente" name="cliente" scope="request" type="es.pfc.model.Cliente">                         
+                <div class="span2"><bean:write name="cliente" property="dni" /></div>
+                <div class="span2"><bean:write name="cliente" property="nombre" /></div>          
+                <div class="span2"><bean:write name="cliente" property="apellidos" /></div>
+                <div class="span2"><bean:write name="cliente" property="apellido2" /></div>
+                <div class="span1"><a href="DameDatosCliente.do?dni=<bean:write name='cliente' property='dni'/>&op=8" class="btn btn-warning">Editar</a></div>
+                <div class="span1"><a href="DameDatosCliente.do?dni=<bean:write name='cliente' property='dni'/>&op=3" class="btn btn-inverse">Ficha</a></div>
+                <div class="span1"><a href="EliminarCliente.do?Id=<bean:write name="cliente" property="idCliente" />" class="btn btn-danger">Eliminar</a></div>            
         </logic:iterate>
         </logic:present>
         <logic:notPresent name="cliente">
-            <center><bean:message key="buscarcliente.noresultado"/></center>
+            <div><center><bean:message key="buscarcliente.noresultado"/></center></div>
     </logic:notPresent>
-		<p></p>
-		 <html:link href="principal.jsp"><img src="imagenes/home.png"></html:link>
-                 <html:link href="/SiluSoft/buscarCliente.jsp"><img src="imagenes/buscar.png" /></html:link>
-        <p></p>
-		</div></center>
+		<div class="span11" align="center"><a class="btn btn-success" href="principal.jsp"><em class="icon-home icon-white"></em> Volver al menú</a>
+                <a class="btn btn-warning" href="ListaClientes.do"><em class="icon-list icon-white"></em> Listado de clientes </a></div>
+		</div><!-- row -->
      </logic:present>
+    </div><!-- hero-unit -->
      <logic:notPresent name="usuario" scope="session">
-        <center><bean:message key="general.noidentificado"/></center><br /><html:link href="./Registro.do"><bean:message key="general.identificarse"/></html:link>
+         <div><center><bean:message key="general.noidentificado"/></center><br /><html:link href="./Registro.do"><bean:message key="general.identificarse"/></html:link></div>
 </logic:notPresent>
 <%-- include header --%>
     <tiles:insert page="plantillas/pie.jsp" flush="true"/>
+    </div>
+     </div>
     </body>
 </html>

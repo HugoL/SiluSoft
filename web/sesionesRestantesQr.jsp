@@ -27,43 +27,44 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!—[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]—>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body { margin-left: 30px; margin-right: 30px;}
+        </style>
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="css/nuevosestilos.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><bean:message key="sesiones.restantes"/></title>
-        <LINK href="estilo.css" rel="stylesheet" type="text/css" />
+        <title><bean:message key="sesiones.restantes"/></title>       
     </head>
     <body>
-           <%-- include header --%>
-    <tiles:insert page="plantillas/logo.jsp" flush="true"/>
-    <logic:present name="usuario">       
+      <%-- include header --%>
+     <tiles:insert page="plantillas/barranav.jsp" flush="true"/>
+     <div class="container mifondo">
+     
+     <tiles:insert page="plantillas/logo.jsp" flush="true"/>
+     <logic:present name="usuario">
+     <div class="containter">   
+    <div class="mi-hero-unit">
+    <div class="row">
+        <div class="span10"><bean:message key="sesiones.restantes"/>: <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></div>
         
-    <center>	
-	  
-        <div class="cuerpoblanco">
-            <br />
-	<table width="80%" cellspacing="5">
-            <tr>
-                <td></td>
-            </tr>
-            <tr>
-                <td colspan="2"><bean:message key="sesiones.restantes"/>: <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></td>
-            </tr>
-            <tr>
-                <td><span class="agendafit"><bean:message key="sesiones.fit"/>:</span> 
-              <strong><bean:write name="sesiones" property="fit" /></strong></td>
-                <td><span class="agendaconfort"><bean:message key="sesiones.comfort"/>:</span> 
-              <strong><bean:write name="sesiones" property="confort" /></strong></td>
-            </tr>
-            <tr>
-                <td colspan="2"><center><a href="verFichaDatos.do?Dni=<bean:write name="cliente" prperty="dni"/>"><bean:message key="sesiones.ficha"/></a></center></td>
-            </tr>
-        </table>
-        </logic:present>	
-        </center>  
+        <div class="span10"><bean:message key="sesiones.fit"/>:
+              <span class="badge badge-important"><bean:write name="sesiones" property="fit" /></span></div>
+        <div class="span10"><bean:message key="sesiones.comfort"/>:
+              <span class="badge badge-info"><bean:write name="sesiones" property="confort" /></span></div>
+              <div class="span10" align="center"><a href="verFichaDatos.do?Dni=<bean:write name="cliente" property="dni"/>" class="btn btn-success"><em class="icon-user icon-white"></em><bean:message key="sesiones.ficha"/></a></div>       
+        </logic:present>	 
+    </div>
     </div>
     <logic:notPresent name="usuario" scope="session">
     <center><bean:message key="general.noidentificado"/></center><br /><html:link href="./Registro.do"><bean:message key="general.identificarse"/></html:link>
 </logic:notPresent>
      <%-- include header --%>
-    <tiles:insert page="plantillas/pie.jsp" flush="true"/>    
+    <tiles:insert page="plantillas/pie.jsp" flush="true"/>   
+     </div>
+     </div>
     </body>
 </html>

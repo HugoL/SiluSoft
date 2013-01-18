@@ -28,88 +28,70 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!—[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]—>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body { margin-left: 30px; margin-right: 30px;}
+        </style>
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="css/nuevosestilos.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><bean:message key="cliente.actualizar"/></title>
-         <LINK href="estilo.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-         <%-- include header --%>
+     <%-- include header --%>
+     <tiles:insert page="plantillas/barranav.jsp" flush="true"/>
+     <div class="container mifondo">
+     
      <tiles:insert page="plantillas/logo.jsp" flush="true"/>
-      <logic:present name="usuario">
-          
-	  <center>
-	   <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
-     <logic:equal name="ManipulaClientes" property="activado" value="true">
-	 <table width="80%" border="0" cellspacing="0" cellpadding="0" class="tabla" >   
-    		<tr>
-      			<td class="pestanaclientes"><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=3"><img src="imagenes/PestanaDatos_.png" width="90" height="38" align="left"  /></a></td> 
-			<td><a a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=1"><img src="imagenes/PestanaTratam.png" width="90" height="38" align="left"  /></a></td>
-      			<td width="auto"><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=6"><img src="imagenes/PestanaObserv.png" width="90" height="38" align="left" /></a></td>   
-	  		<td><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=4"><img src="imagenes/PestanaTest.png" align="left" /></a></td>
-	  		<td><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=5"><img src="imagenes/PestanaSesiones.png" align="left" /></a></td>
-			<td width="*">&nbsp;</td>
-    		</tr>   
-     	</table>
-	 <div>
+     <logic:present name="usuario">
+     <div class="containter">   
+    <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
+    <div class="mi-hero-unit">
+    <logic:equal name="ManipulaClientes" property="activado" value="true">
+    <div class="row"> 
+    <div class="span11">
+    <ul class="nav nav-tabs">  
+        <li class="active"><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=3">Datos</a></li> 
+	<li><a a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=1">Tratamiento</a></li>
+      	<li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=6">Observación</a></li>   
+	<li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=4">Test</a></li>
+        <li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=5">Medidas</a></li>			    		
+    </ul>
+    </div> <!-- menu ficha -->    
+    <div class="clearfix"></div>  
+    <div class="span11 cuerpoficha">
+    <logic:present name="cliente">
          <html:form action="/Modificar">
-            <table align="center" width="80%" cellspacing="5" class="cuerpo">             
-                <tr>
-                    <th colspan="3"><bean:message key="cliente.actualizar"/></th>
-                </tr>
-                 
-                <tr>                    
-                    <td><strong><bean:message key="formulario.dni"/>: </strong><html:text name="cliente" property="dni" /></td>
-                    <td><html:hidden name="cliente" property="idCliente" /></td>
-                    <td>&nbsp;</td>
-                </tr>
-                <tr>            
-                    <td><strong><bean:message key="formulario.nombre"/>:</strong><html:text name="cliente" property="nombre" /></td>                  
-              
-                    <td><strong><bean:message key="formulario.apellido1"/>: </strong><html:text name="cliente" property="apellidos"/></td> 
-                     <td><strong><bean:message key="formulario.apellido2"/>: </strong><html:text name="cliente" property="apellido2" /></td>
-                    <td class="medidas"><strong><bean:message key="formulario.altura"/>: </strong><html:text name="cliente" property="altura" /></td>
-                <tr>                
-                    <td><strong><bean:message key="formulario.edad"/>: </strong><html:text name="cliente" property="edad" /></td>                  
-              
-                    <td><strong><bean:message key="formulario.telefono"/>: </strong>
-                    <html:text name="cliente" property="telefono" /></td>
-                    <td></td>
-                </tr>
-                <tr>               
-                    <td><strong><bean:message key="formulario.direccion"/>: </strong><html:text name="cliente" property="direccion"  /></td>                               
-                    <td><strong><bean:message key="formulario.email"/>: </strong>
-                    <html:text name="cliente" property="email"  /></td>  
-                  <td class="medidas"><strong><bean:message key="formulario.peso"/>: </strong>
-                 <html:text property="peso"/></td>
-                </tr>
-                <tr>
-                    <td colspan="2"><strong><bean:message key="ficha.observaciones"/>: </strong>
-                    <html:text name="cliente" property="observaciones"/></td>                  
-               
-                    <td class="medidas"><span class="medidas"><strong><bean:message key="cliente.fechapeso"/>: </strong>
-                        <html:text property="fechapeso" value="" /> (<bean:message key="cliente.dejablanco"/>)
-                    </span></td>
-                </tr>
-               
-			   	<tr>
-					<td colspan="3"><p><center><html:submit value="Modificar"/></center></p></td>
-				</tr>
-                <tr>
-                  <td colspan="3" align="right" ><center>
-                     
-                    <html:link href="ListaClientes.do"><img src="imagenes/User_female_.png" /></html:link>                  <html:link href="principal.jsp">
-                    <img src="imagenes/home.png"></center>
-                  </html:link> </td>
-				</tr>
-                                <tr>
-					<td colspan="3"><p><center><html:errors/></center></p></td>
-				</tr>
-            </table>
-                
+             <fieldset>
+            <legend><bean:message key="cliente.actualizar"/></legend>
+            <label><bean:message key="formulario.dni"/>: </label><html:text name="cliente" property="dni" />
+            <html:hidden name="cliente" property="idCliente" />
+            <div class="span3"><label><bean:message key="formulario.nombre"/>:</label><html:text name="cliente" property="nombre" /></div>                 
+            <div class="span3"><label><bean:message key="formulario.apellido1"/>: </label><html:text name="cliente" property="apellidos"/></div> 
+            <div class="span3"><label><bean:message key="formulario.apellido2"/>: </label><html:text name="cliente" property="apellido2" /></div>            
+            <label><bean:message key="formulario.edad"/>: </label><html:text name="cliente" property="edad" />                  
+            <label><bean:message key="formulario.telefono"/>: </label><html:text name="cliente" property="telefono" />
+            <label><bean:message key="formulario.direccion"/>: </legal><html:text name="cliente" property="direccion"  />                               
+            <label><bean:message key="formulario.email"/>: </label><html:text name="cliente" property="email"  />  
+            <label><bean:message key="ficha.observaciones"/>: </label><html:text name="cliente" property="observaciones"/>
+            <div class="control-group info">
+            <label><bean:message key="formulario.altura"/>: </label><html:text name="cliente" property="altura" styleClass="input-small" /><span class="add-on">.m</span>
+            <label><bean:message key="formulario.peso"/>: </label><html:text property="peso" styleClass="input-small"/><span class="add-on">.Kg</span>                                             
+            <label><bean:message key="cliente.fechapeso"/>: </label><html:text property="fechapeso" value=""  styleClass="input-medium"/><span class="help-inline">(<bean:message key="cliente.dejablanco"/></span>)
+            </div>
+            <html:errors/>
+            </fieldset>       
         </html:form>
-             <br />
-             </div></center>
-           </logic:equal>
+            </div>
+    </logic:present>
+    <div class="span11" align="center"><a class="btn btn-success" href="principal.jsp"><em class="icon-home icon-white"></em> Volver al menú</a>
+                <a class="btn btn-warning" href="ListaClientes.do"><em class="icon-list icon-white"></em> Listado de clientes </a></div>
+    </div><!-- row -->					
+    </div>      
+        </logic:equal>
         <logic:notEqual name="ManipulaClientes" property="activado" value="true">
          <table width="80%" border="0" cellspacing="0" cellpadding="0" class="tabla" >   
     		<tr>
@@ -123,5 +105,7 @@
         </logic:notPresent>
     <%-- include header --%>
     <tiles:insert page="plantillas/pie.jsp" flush="true"/>
+    </div>
+     </div>
     </body>
 </html>

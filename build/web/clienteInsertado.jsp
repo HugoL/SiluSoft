@@ -28,31 +28,46 @@
 <!DOCTYPE html>
 <html:html>
     <head>
+        <!—[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]—>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body { margin-left: 30px; margin-right: 30px;}
+        </style>
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="css/nuevosestilos.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><bean:message key="clientein.titulo"/></title>
-        <LINK href="estilo.css" rel="stylesheet" type="text/css" />
+        <title><bean:message key="clientein.titulo"/></title>        
     </head>
     <body>
-         <%-- include header --%>
+        <%-- include header --%>
+     <tiles:insert page="plantillas/barranav.jsp" flush="true"/>
+     <div class="container mifondo">
+     
      <tiles:insert page="plantillas/logo.jsp" flush="true"/>
-     <center><tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
-         <table class="cuerpoblanco">
-         <tr>
-             <td>		 
-         <center><div class="cuerpo" align="center">
-             <p align="right"><bean:message key="general.sesion"/>: <strong>
-	 <bean:write scope="session" name="usuario" property="nombre" /></strong>&nbsp;</p>
-        <h3><bean:message key="clientein.titulo"/></h3>
-        
-        <table bgcolor="#FFFFFF" width="80%">     
-        <tr class="datos">            
-            <td align="center"><a href="ActualizarCliente.do?Id=<bean:write name="cliente" property="idCliente"/>"><img src="imagenes/botonRellenarFicha.png"/></a> </td> 
-            <td align="center"><html:link href="principal.jsp"><img src="imagenes/home.png"></html:link> </td>   
-        </tr>
-        </table>
-             &nbsp;</div></td><tr></table>
-    </div></center>
-    <%-- include header --%>
-    <tiles:insert page="plantillas/pie.jsp" flush="true"/>
+     <logic:present name="usuario">
+     <div class="containter">   
+    <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
+    <div class="mi-hero-unit">
+    <div class="row"> 
+    <div class="clearfix"></div>  
+    <div class="span11 cuerpoficha">
+    <logic:present name="cliente">             
+        <div class="alert alert-success"><h4><bean:message key="clientein.titulo"/></h4></div>                         
+        <div class="span5" align="center"><a class="btn btn-danger" href="ActualizarCliente.do?Id=<bean:write name="cliente" property="idCliente"/>"><em class="icon-user icon-white"></em><bean:message key="clientein.rellenaficha"/></a></div> 
+        <div class="span5" align="center"><html:link styleClass="btn btn-success" href="principal.jsp"><em class="icon-home icon-white"></em> <bean:message key="general.volvermenu"/></html:link></div>   
+    </logic:present>
+    </logic:present><!-- usuario -->
+    </div>
+    <logic:notPresent name="usuario" scope="session">
+    <center><bean:message key="general.noidentificado"/></center><br /><html:link href="./Registro.do"><bean:message key="general.identificarse"/></html:link>
+    </logic:notPresent>
+    </div>
+    </div>
+        <%-- include header --%>
+    <tiles:insert page="plantillas/pie.jsp" flush="true"/><br/>
+     </div>
+     </div>
     </body>
 </html:html>
