@@ -25,64 +25,53 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!—[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]—>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body { margin-left: 30px; margin-right: 30px;}
+        </style>
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="css/nuevosestilos.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><bean:message key="centro.actualizar"/></title>
-         <LINK href="estilo.css" rel="stylesheet" type="text/css" />
+        <title><bean:message key="centro.actualizar"/></title>        
     </head>
     <body>
-           <%-- include header --%>
-    <tiles:insert page="plantillas/logo.jsp" flush="true"/>
-    <logic:present name="usuario">       
-        <center>
-        <tiles:insert page="plantillas/PestanasGenerales2.jsp" flush="true"/>
-        <logic:equal name="ManipulaCentro" property="activado" value="true">
-        <table class="cuerpoblanco">
-            <tr><td>&nbsp;</td></tr>
-        </table>
-        <div class="cuerpo">
+    <%-- include header --%>
+     <tiles:insert page="plantillas/barranav.jsp" flush="true"/>
+     <div class="container mifondo">     
+     <tiles:insert page="plantillas/logo.jsp" flush="true"/>
+     <logic:present name="usuario">
+     <div class="containter">   
+    <tiles:insert page="plantillas/PestanasGenerales2.jsp" flush="true"/>
+    <div class="mi-hero-unit">
+    <logic:equal name="ManipulaCentro" property="activado" value="true">
+    <div class="row"> 
          <html:form action="/ModificarCentro">
-            <table align="center" width="100%" cellspacing="5">             
-                <tr>
-                     <td><bean:message key="centro.actualizar"/></td>
-                     <td><html:hidden name="centro" property="idCentro" /></td>
-                </tr>
-                 
-                <tr>  
-               
-                    <td><strong><bean:message key="centro.nombre"/>: </strong><html:text name="centro" property="nombre" /> </td>
-                    <td><strong><bean:message key="formulario.direccion"/>: </strong><html:text name="centro" property="direccion" /></td>                   
-                
-                </tr>
-                <tr>            
-                    <td><strong><bean:message key="formulario.telefono"/>: </strong><html:text name="centro" property="telefono" /></td>                               
-                    <td></td>
-                </tr>
-           
-                <tr>
-                    <td colspan="2" align="center"><html:submit value="Modificar"/></td>
-              
-                </tr>
-                <tr>            
-                    <td colspan="2"><html:errors/></td>
-                </tr>
-            </table>          
+             <lenged><bean:message key="centro.actualizar"/></legend>
+             <html:hidden name="centro" property="idCentro" />
+             <label><bean:message key="centro.nombre"/>: </label><html:text name="centro" property="nombre" />
+             <label><bean:message key="formulario.direccion"/>: </label><html:text name="centro" property="direccion" />                   
+             <label><bean:message key="formulario.telefono"/>: </label><html:text name="centro" property="telefono" />                              
+             <html:submit value="Modificar" styleClass="btn btn-danger"/>                  
+             <html:errors/>                 
         </html:form>
-             <br />
-             </div>
-			 <table class="cuerpoblanco">
-            <tr><td>&nbsp;</td></tr>
-        </table></center>
-        </logic:equal>
-        <logic:notEqual name="ManipulaCentro" property="activado" value="true">
+    </logic:equal>
+    <logic:notEqual name="ManipulaCentro" property="activado" value="true">
          <table width="80%" border="0" cellspacing="0" cellpadding="0" class="tabla" >   
     		<tr>
                     <td><div class="cuerpoblanco" align="center"><p> <bean:message key="general.noprivilegios"/></p><br /><a href="javascript:history.back()"> Volver</a></div></td>
     		</tr>   
      	</table>    
-        </logic:notEqual>
+     </logic:notEqual>
+    <div class="span11" align="center"><a class="btn btn-success" href="principal2.jsp"><em class="icon-home icon-white"></em> Volver al menú</a></div>
+    </div><!-- row -->
+    </div><!-- mihero-unit -->
       </logic:present>
     <%-- include header --%>
     <tiles:insert page="plantillas/pie.jsp" flush="true"/>    
-        
+    </div>
+    </div>
     </body>
 </html>
