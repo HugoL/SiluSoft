@@ -51,14 +51,22 @@ public class ListarClientesAction extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        List lista = new ArrayList();
+            List lista = new ArrayList();
         try{
             HttpSession session = request.getSession(false);
             System.out.println("Listar clientes action");
             Usuario usuario=(Usuario) session.getAttribute("usuario");    
-            if(usuario==null)
-                return mapping.findForward(FAILURE); //sustituir por una jsp con el mensaje (sesión finalizada) ################################
-            lista = ClientesBO.esListado(usuario.getIdCentro());
+            if(usuario==null) {
+                return mapping.findForward(FAILURE);
+            } //sustituir por una jsp con el mensaje (sesión finalizada) ################################
+            //SIN PAGINACION:
+            //lista = ClientesBO.esListado(usuario.getIdCentro());
+            
+            //CON PAGINACION:    
+            int pag;
+            pag = Integer.parseInt(request.getParameter("pag"));
+            lista = ClientesBO.esListadoPag(usuario.getIdCentro(), pag);
+            
             System.out.println("Lista de clientes recogida");
            if( lista != null){                
                request.setAttribute("listado", lista);                               

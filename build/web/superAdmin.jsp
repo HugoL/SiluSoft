@@ -24,41 +24,50 @@
 <!DOCTYPE html>
 <html:html>
     <head>
+        <!—[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]—>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body { margin-left: 30px; margin-right: 30px;}
+        </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/nuevosestilos.css" rel="stylesheet">
         <title><bean:message key="admin.titulo"/></title>
-        <LINK href="estilo.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
      <%-- include header --%>
-     <center>
-	 <tiles:insert page="plantillas/logo.jsp" flush="true"/>
+        <%-- include header --%>
+     <tiles:insert page="plantillas/barranav.jsp" flush="true"/>
+     <div class="container mifondo">
+     
+     <tiles:insert page="plantillas/logo.jsp" flush="true"/>
      <logic:present name="usuario">
-	 
+     <div class="containter">   
+    <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
+    <div class="mi-hero-unit">    
+        <div class="row"> 	 
 	 <logic:equal name="usuario" property="rol" value="1" scope="session" >
-         <div class="cuerpoblanco"> 
-		 <center><img src="imagenes/Lock.png" width="64" height="64">
-		 </center>
-           
-		 <p class="medidas"><strong><bean:message key="admin.titulo"/></strong></p>
-           <p><span><html:link href="insertarCentro.jsp"><img src="imagenes/centro.png" width="130" height="94"></html:link></span>
-            &nbsp;&nbsp;&nbsp;<span><a href="ListaCentros.do"><img src="imagenes/centros.png" width="130" height="94"></a>
-            </span>
-           &nbsp;&nbsp;&nbsp;<html:link forward="logoff"><img src="imagenes/Out.png" /></html:link></p>
-           <br />
-         </div>
-	 </logic:equal>
+             <div clas="span11" align="center"><img class="media-object" src="imagenes/Lock.png" width="64" height="64"></div>		 
+             <div><h4><bean:message key="admin.titulo"/></h4></div>
+             <html:link href="insertarCentro.jsp" styleClass="btn btn-success"><bean:message key="admin.centro"/></html:link>
+             <a class="btn btn-warning" href="ListaCentros.do"><bean:message key="admin.listacentros"/></a>                   
+	 </logic:equal>             
 	 <logic:notEqual name="usuario" property="rol" value="1" scope="session">
 	 	<div class="cuerpoblanco"> 
 	 	  <p class="texto2form"><bean:message key="general.noadmin"/></p>
                   <p><html:link forward="./index.jsp"><bean:message key="general.acceder"/></html:link></p>
 	 	</div>
 	 </logic:notEqual>	 
-   </logic:present>
-<logic:notPresent name="usuario" scope="session">
-    <center><bean:message key="general.noidentificado"/><br /><html:link href="./Registro.do"><bean:message key="general.identificarse"/></html:link></center>
-</logic:notPresent>
-</center>
-<p></p>
+        </div><!--row-->
+    </div><!--mi-hero-unit-->
+    </logic:present>
+    <logic:notPresent name="usuario" scope="session">
+        <center><bean:message key="general.noidentificado"/><br /><html:link href="./Registro.do"><bean:message key="general.identificarse"/></html:link></center>
+    </logic:notPresent>    
 <%-- include header --%>
     <tiles:insert page="plantillas/pie.jsp" flush="true"/>
+    </div>
+    </div>    
 </body>
 </html:html>

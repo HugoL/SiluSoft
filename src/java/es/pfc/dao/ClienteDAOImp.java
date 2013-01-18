@@ -208,13 +208,101 @@ public class ClienteDAOImp implements ClienteDAO {
 		} catch(SQLException sqle) {
 			throw new Exception(sqle);
 		} finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
+    }
+    
+     @Override
+    public List listpag(int idCentro, int numpag, int numregpag) throws Exception {
+       
+        Connection conn = null;
+        Context ctx = new InitialContext();
+        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
+        conn = ds.getConnection();
+        
+       
+        ResultSet result = null;
+        Statement st = null;  
+        st=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+        st.setFetchSize(numregpag);
+        
+        ArrayList alResultado = new ArrayList();
+        
+        String sql = "SELECT DISTINCT `Clientes`.`IdCliente`,`Clientes`.`Dni`,`Clientes`.`Nombre`, `Clientes`.`Apellidos`, `Clientes`.`Apellido2` FROM `Clientes`, `Clientes-Centros`, `Usuarios`WHERE `Clientes-Centros`.`IdCliente`=`Clientes`.`IdCliente` AND `Clientes-Centros`.`IdCentro`="+idCentro+" ORDER BY Apellidos;";
+        
+        try{
+        result= st.executeQuery(null);
+        
+        int fila = numregpag * (numpag - 1) + 1;
+        int cont = 1;
+        
+        ResultSetMetaData md = result.getMetaData();
+        int numeroColumnas = md.getColumnCount();
+        ArrayList alRegistro = new ArrayList(numeroColumnas);
+
+    
+        for (int i = 1; i <= numeroColumnas; i++) {
+            String nomCol = md.getColumnName(i);
+            alRegistro.add(nomCol);
+        } 
+
+        alResultado.add(alRegistro);
+
+        if (result.absolute(fila) && numregpag > 0) {
+            do {
+                alRegistro = new ArrayList();
+                for (int i = 1; i <= numeroColumnas; i++) {
+                    alRegistro.add(result.getString(i));
+                }
+
+                alResultado.add(alRegistro);
+                cont++;
+                
+            } 
+            while (result.next() && (cont <= numregpag));
+        } 
+        // Se incluye el primer elemento del ArrayList con un objeto Integer
+        // con el Numero de Tuplas TOTAL de la query paginada
+        // Se mueve el cursor a ultima tupla
+        Integer numTuplasTotal = new Integer(0);
+        if (result.last()) { // Existen tuplas y el cursor esta en la ultima,
+                            // basta con consultar el numero de esa tupla
+            numTuplasTotal = new Integer(result.getRow());
+        } 
+        alResultado.add(0, numTuplasTotal);        
+    } catch (Exception e) {
+    } finally {
+        if(st!=null) {
+            try {
+                st.close();
+            } catch (SQLException e) {            
+            }
+        }
+        if(result!=null) {                
+            try {
+                result.close();
+            } catch (SQLException e) {            
+            }
+        }
+        if(conn!=null) {
+            try {
+                conn.close();
+            } catch (SQLException e) {                
+            }
+            
+        }
+    }
+
+    return (alResultado);
+        
     }
 
     @Override
@@ -1063,6 +1151,8 @@ public class ClienteDAOImp implements ClienteDAO {
 				try { conn.close(); } catch(SQLException ignored) { }
 		}
     }
+
+   
     
    
 

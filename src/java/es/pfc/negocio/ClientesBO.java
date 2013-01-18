@@ -70,6 +70,27 @@ public class ClientesBO {
             }           
       }
      
+     public static List esListadoPag (int IdCentro, int pag) throws Exception{
+         //numero de registros por página
+         int numreg = 10;
+         List lista = new ArrayList();
+            ClienteDAOImp ClienteListado = new ClienteDAOImp();
+            boolean esInsertado = false;
+
+            try {
+                  lista = ClienteListado.listpag(IdCentro,pag,numreg);
+                  if (lista != null ){
+                        return lista;
+                  }else{
+                      System.out.println("La lista es nula");
+                      return null;
+                  }
+              
+            }catch (Exception e){
+                  throw e;
+            }
+     }
+     
       public static List esListadoNoCentro () throws Exception {
             
             List lista = new ArrayList();

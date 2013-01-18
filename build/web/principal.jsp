@@ -45,12 +45,11 @@
 <div class="containter">   
     <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
     <div class="mi-hero-unit">
-    <div class="row">
-        <div class="span11 nombreusuario"><bean:message key="general.sesion"/><strong><bean:write scope="session" name="usuario" property="nombre" /></strong>&nbsp;</div>        
-        <div class="span2"><logic:equal name="ManipulaClientes" property="activado" value="true"><html:link href="/SiluSoft/insertarCliente.jsp"><img src="imagenes/Pencil.png" /></html:link></logic:equal></div>
-	<div class="span2"><html:link forward="listaclientes"><img src="imagenes/User_female.png" /></html:link></p></div>
-	<div class="span2"><html:link href="/SiluSoft/buscarCliente.jsp"><img src="imagenes/Search.png" /></html:link></div>
-	<div class="span2"><html:link forward="logoff"><img src="imagenes/Out.png" /></html:link></p></div>
+    <div class="row">        
+        <div class="span3"><logic:equal name="ManipulaClientes" property="activado" value="true"><html:link href="/SiluSoft/insertarCliente.jsp"><img src="imagenes/Pencil.png" /></html:link></logic:equal></div>
+        <div class="span3"><a href="ListaClientes.do?pag=1" class="btn btn-success btn-primary">Listado clientes</a></p></div>
+        <div class="span3"><html:link forward="listaclientes"><img src="imagenes/User_female.png" /></html:link></p></div>
+	<div class="span3"><html:link href="/SiluSoft/buscarCliente.jsp"><img src="imagenes/Search.png" /></html:link></div>	
     </div>
     </div>
     <tiles:insert page="plantillas/pie.jsp" flush="true"/>
