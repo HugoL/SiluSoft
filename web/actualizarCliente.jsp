@@ -65,23 +65,26 @@
     <div class="span11 cuerpoficha">
     <logic:present name="cliente">
          <html:form action="/Modificar">
-             <fieldset>
+            <fieldset>
             <legend><bean:message key="cliente.actualizar"/></legend>
-            <label><bean:message key="formulario.dni"/>: </label><html:text name="cliente" property="dni" />
+            <div class="span11"><label><bean:message key="formulario.dni"/>:</label> <html:text name="cliente" property="dni" styleClass="input-small" /></div>
             <html:hidden name="cliente" property="idCliente" />
             <div class="span3"><label><bean:message key="formulario.nombre"/>:</label><html:text name="cliente" property="nombre" /></div>                 
             <div class="span3"><label><bean:message key="formulario.apellido1"/>: </label><html:text name="cliente" property="apellidos"/></div> 
             <div class="span3"><label><bean:message key="formulario.apellido2"/>: </label><html:text name="cliente" property="apellido2" /></div>            
-            <label><bean:message key="formulario.edad"/>: </label><html:text name="cliente" property="edad" />                  
-            <label><bean:message key="formulario.telefono"/>: </label><html:text name="cliente" property="telefono" />
-            <label><bean:message key="formulario.direccion"/>: </legal><html:text name="cliente" property="direccion"  />                               
-            <label><bean:message key="formulario.email"/>: </label><html:text name="cliente" property="email"  />  
-            <label><bean:message key="ficha.observaciones"/>: </label><html:text name="cliente" property="observaciones"/>
-            <div class="control-group info">
+            <div class="span3"><label><bean:message key="formulario.direccion"/>: </label><html:text name="cliente" property="direccion"  /></div>                               
+            <div class="span3"><label><bean:message key="formulario.telefono"/>: </label><html:text name="cliente" property="telefono" styleClass="input-small" /></div> 
+            <div class="clearfix"></div>
+            <div class="span3"><label><bean:message key="formulario.edad"/>: </label><html:text name="cliente" property="edad" /></div>                                                      
+            <div class="span3"><label><bean:message key="formulario.email"/>: </label><html:text name="cliente" property="email" styleClass="input-medium" /></div>  
+            <div class="span3"><label><bean:message key="ficha.observaciones"/>: </label><html:text name="cliente" property="observaciones"/></div>
+            <div class="clearfix"></div>
+            <div class="control-group info input-prepend well span10">
             <label><bean:message key="formulario.altura"/>: </label><html:text name="cliente" property="altura" styleClass="input-small" /><span class="add-on">.m</span>
             <label><bean:message key="formulario.peso"/>: </label><html:text property="peso" styleClass="input-small"/><span class="add-on">.Kg</span>                                             
-            <label><bean:message key="cliente.fechapeso"/>: </label><html:text property="fechapeso" value=""  styleClass="input-medium"/><span class="help-inline">(<bean:message key="cliente.dejablanco"/></span>)
+            <label><bean:message key="cliente.fechapeso"/>: </label><html:text property="fechapeso" value=""  styleClass="input-medium"/><span class="help-inline">(<bean:message key="cliente.dejablanco"/>)</span>
             </div>
+            <div class="span11" align="center"><html:submit styleClass="btn btn-danger">Actualizar</html:submit></div>
             <html:errors/>
             </fieldset>       
         </html:form>
