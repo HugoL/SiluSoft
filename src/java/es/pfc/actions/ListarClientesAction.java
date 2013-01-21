@@ -63,9 +63,14 @@ public class ListarClientesAction extends org.apache.struts.action.Action {
             //lista = ClientesBO.esListado(usuario.getIdCentro());
             
             //CON PAGINACION:    
-            int pag;
-            pag = Integer.parseInt(request.getParameter("pag"));
-            lista = ClientesBO.esListadoPag(usuario.getIdCentro(), pag);
+            //int pag;
+            //pag = Integer.parseInt(request.getParameter("pag"));
+            //lista = ClientesBO.esListadoPag(usuario.getIdCentro(), pag);
+            
+            //POR LETRA DEL APELLIDO
+            String pag;
+            pag = request.getParameter("pag");
+            lista = ClientesBO.esListadoAlf(usuario.getIdCentro(), pag);
             
             System.out.println("Lista de clientes recogida");
            if( lista != null){                
@@ -76,8 +81,6 @@ public class ListarClientesAction extends org.apache.struts.action.Action {
           }        
        }catch(Exception e){
            throw new RuntimeException("Excepción en ListarClientesAction:"+e);
-       }
-        
-      
+       }              
     }
 }

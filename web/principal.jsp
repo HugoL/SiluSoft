@@ -48,6 +48,7 @@
     <div class="row">        
         <div class="span3"><logic:equal name="ManipulaClientes" property="activado" value="true"><html:link href="/SiluSoft/insertarCliente.jsp"><img src="imagenes/Pencil.png" /></html:link></logic:equal></div>
         <!-- <div class="span3"><a href="ListaClientes.do?pag=1" class="btn btn-success btn-primary">Listado clientes</a></p></div> -->
+        <!-- TENGO QUE PASAR UN PARÁMETRO A LISTAR CLIENTES QUE INDIQUE LA LETRA. PARÁMETRO: pag= -->
         <div class="span3"><html:link forward="listaclientes"><img src="imagenes/User_female.png" /></html:link></p></div>
 	<div class="span3"><html:link href="/SiluSoft/buscarCliente.jsp"><img src="imagenes/Search.png" /></html:link></div>	
     </div>

@@ -91,6 +91,26 @@ public class ClientesBO {
             }
      }
      
+     public static List esListadoAlf (int IdCentro,String letra) throws Exception {
+            
+            List lista = new ArrayList();
+            ClienteDAOImp ClienteListado = new ClienteDAOImp();
+            boolean esInsertado = false;
+
+            try {
+                  lista = ClienteListado.listalf(IdCentro, letra);
+                  if (lista != null ){
+                        return lista;
+                  }else{
+                      System.out.println("La lista es nula");
+                      return null;
+                  }
+              
+            }catch (Exception e){
+                  throw e;
+            }           
+      }
+     
       public static List esListadoNoCentro () throws Exception {
             
             List lista = new ArrayList();

@@ -50,8 +50,39 @@
      <div class="containter">   
     <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
     <div class="mi-hero-unit">
-        <div class="span11 nombreusuario"><bean:message key="general.sesion"/><strong><bean:write scope="session" name="usuario" property="nombre" /></strong>&nbsp;</div>
-            <div class="row">             
+        <div class="span11" align="right"><html:link href="/SiluSoft/buscarCliente.jsp" styleClass="btn ">Buscar cliente</html:link></div>
+    <div class="pagination pagination-small">
+        <ul>
+        <li class="enabled"><a href="#">A</a></li>
+        <li class="disabled"><a href="#">B</a></li>    
+        <li class="disabled"><a href="#">C</a></li>  
+        <li class="disabled"><a href="#">D</a></li>  
+        <li class="disabled"><a href="#">E</a></li>  
+        <li class="disabled"><a href="#">F</a></li>  
+        <li class="disabled"><a href="#">G</a></li>  
+        <li class="disabled"><a href="#">H</a></li>  
+        <li class="disabled"><a href="#">I</a></li> 
+        <li class="disabled"><a href="#">J</a></li>  
+        <li class="disabled"><a href="#">K</a></li>  
+        <li class="disabled"><a href="#">L</a></li>  
+        <li class="disabled"><a href="#">M</a></li>  
+        <li class="disabled"><a href="#">N</a></li>  
+        <li class="disabled"><a href="#">Ñ</a></li>  
+        <li class="disabled"><a href="#">O</a></li>  
+        <li class="disabled"><a href="#">P</a></li>  
+        <li class="disabled"><a href="#">Q</a></li>  
+        <li class="disabled"><a href="#">R</a></li>
+        <li class="disabled"><a href="#">S</a></li>
+        <li class="disabled"><a href="#">T</a></li>
+        <li class="disabled"><a href="#">U</a></li>
+        <li class="disabled"><a href="#">V</a></li>
+        <li class="disabled"><a href="#">W</a></li>
+        <li class="disabled"><a href="#">X</a></li>
+        <li class="disabled"><a href="#">Y</a></li>
+        <li class="disabled"><a href="#">Z</a></li>
+        </ul>
+    </div> 
+    <div class="row">             
              <div class="span11"><h3><bean:message key="listadoclientes.titulo"/> </h3></div>        
              <div><p><a href="principal.jsp" class="btn btn-success"><em class="icon-home icon-white"></em> Volver al menú</a></p></div>   
              <table class="table table-condensed table-striped">
@@ -72,11 +103,42 @@
                   <td><a class="btn btn-success btn-small" href="DameDatosCliente.do?dni=<bean:write name='cliente' property='dni'/>&op=3"><em class="icon-user icon-white"></em> Ver Ficha</a></td>                            
                   <td><a class="btn btn-warning btn-small" href="DameDatosCliente.do?dni=<bean:write name='cliente' property='dni'/>&op=8"><em class="icon-edit icon-white"></em> Editar</a> </td>
                   <td><a class="btn btn-inverse btn-small" href="DameDatosCliente.do?dni=<bean:write name='cliente' property='dni'/>&op=7"><em class="icon-ok-sign icon-white"></em> Asistencia</td>
-                </tr>
-         </logic:iterate>
-            </tbody>
-    </table>
-            </div>
+                  </tr>
+                 </logic:iterate>
+                </tbody>
+            </table>
+            </div>                    
+            <div class="pagination pagination-small">
+        <ul>
+        <li class="enabled"><a href="#">A</a></li>
+        <li class="disabled"><a href="#">B</a></li>    
+        <li class="disabled"><a href="#">C</a></li>  
+        <li class="disabled"><a href="#">D</a></li>  
+        <li class="disabled"><a href="#">E</a></li>  
+        <li class="disabled"><a href="#">F</a></li>  
+        <li class="disabled"><a href="#">G</a></li>  
+        <li class="disabled"><a href="#">H</a></li>  
+        <li class="disabled"><a href="#">I</a></li> 
+        <li class="disabled"><a href="#">J</a></li>  
+        <li class="disabled"><a href="#">K</a></li>  
+        <li class="disabled"><a href="#">L</a></li>  
+        <li class="disabled"><a href="#">M</a></li>  
+        <li class="disabled"><a href="#">N</a></li>  
+        <li class="disabled"><a href="#">Ñ</a></li>  
+        <li class="disabled"><a href="#">O</a></li>  
+        <li class="disabled"><a href="#">P</a></li>  
+        <li class="disabled"><a href="#">Q</a></li>  
+        <li class="disabled"><a href="#">R</a></li>
+        <li class="disabled"><a href="#">S</a></li>
+        <li class="disabled"><a href="#">T</a></li>
+        <li class="disabled"><a href="#">U</a></li>
+        <li class="disabled"><a href="#">V</a></li>
+        <li class="disabled"><a href="#">W</a></li>
+        <li class="disabled"><a href="#">X</a></li>
+        <li class="disabled"><a href="#">Y</a></li>
+        <li class="disabled"><a href="#">Z</a></li>
+        </ul>
+    </div>
         <div><a href="principal.jsp" class="btn btn-success"><em class="icon-home icon-white"></em> Volver al menú</a></div>
 	</div>
 	</div>	
