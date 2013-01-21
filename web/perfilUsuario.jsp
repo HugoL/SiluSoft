@@ -39,15 +39,15 @@
             <html:form action="/Modificar">
             <fieldset>
             <legend><bean:message key="cliente.actualizar"/></legend>
-            <div class="span11"><label><bean:message key="formulario.dni"/>:</label> <html:text name="cliente" property="dni" styleClass="input-small" /></div>
+            <div class="span11"><label><bean:message key="formulario.dni"/>:</label> <html:text name="usuario" property="dni" styleClass="input-small" /></div>
             <html:hidden name="usuario" property="idUsuario" />
-            <div class="span3"><label><bean:message key="formulario.nombre"/>:</label><html:text name="cliente" property="nombre" /></div>                 
-            <div class="span3"><label><bean:message key="formulario.apellido1"/>: </label><html:text name="cliente" property="apellidos"/></div> 
-            <div class="span3"><label><bean:message key="formulario.direccion"/>: </label><html:text name="cliente" property="direccion"  /></div>                               
-            <div class="span3"><label><bean:message key="formulario.telefono"/>: </label><html:text name="cliente" property="telefono" styleClass="input-small" /></div> 
+            <div class="span3"><label><bean:message key="formulario.nombre"/>:</label><html:text name="usuario" property="nombre" /></div>                 
+            <div class="span3"><label><bean:message key="formulario.apellido1"/>: </label><html:text name="usuario" property="apellidos"/></div> 
+            <div class="span3"><label><bean:message key="formulario.direccion"/>: </label><html:text name="usuario" property="direccion"  /></div>                               
+            <div class="span3"><label><bean:message key="formulario.telefono"/>: </label><html:text name="usuario" property="telefono" styleClass="input-small" /></div> 
             <div class="clearfix"></div>
-            <div class="span3"><label><bean:message key="formulario.email"/>: </label><html:text name="cliente" property="email" styleClass="input-medium" /></div>  
-            <div class="span3"><label><bean:message key="ficha.observaciones"/>: </label><html:text name="cliente" property="observaciones"/></div>
+            <div class="span3"><label><bean:message key="formulario.email"/>: </label><html:text name="usuario" property="email" styleClass="input-medium" /></div>  
+            <div class="span3"><label><bean:message key="ficha.observaciones"/>: </label><html:text name="usuario" property="observaciones"/></div>
             <div class="clearfix"></div>            
             <div class="span11" align="center"><html:submit styleClass="btn btn-danger"><bean:message key="perfil.actualiza"/></html:submit></div>
             <html:errors/>
