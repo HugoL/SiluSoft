@@ -144,4 +144,14 @@ public class UsuariosBO {
         }
         return true;
     }
+    
+    public static boolean actualizaUsuario(Usuario usuario){
+        UsuarioDAOImpl actualizaUsuario = new UsuarioDAOImpl();
+        try{            
+            return actualizaUsuario.modificarPerfil(usuario);
+        }catch(Exception ex){
+            Logger.getLogger(UsuariosBO.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+        return false;
+    }      
 }

@@ -35,5 +35,6 @@ public interface UsuarioDAO {
      public int consultarCentro (Usuario usuario) throws Exception;
      public List consultaPermisosNuevo(int idUsuario) throws Exception;
      public List consultarRoles() throws Exception;
+     public boolean modificarPerfil(Usuario usuario) throws Exception;
     
 }
