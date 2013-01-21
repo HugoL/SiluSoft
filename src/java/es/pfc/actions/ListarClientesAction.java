@@ -60,12 +60,12 @@ public class ListarClientesAction extends org.apache.struts.action.Action {
                 return mapping.findForward(FAILURE);
             } //sustituir por una jsp con el mensaje (sesión finalizada) ################################
             //SIN PAGINACION:
-            //lista = ClientesBO.esListado(usuario.getIdCentro());
+            lista = ClientesBO.esListado(usuario.getIdCentro());
             
             //CON PAGINACION:    
-            int pag;
-            pag = Integer.parseInt(request.getParameter("pag"));
-            lista = ClientesBO.esListadoPag(usuario.getIdCentro(), pag);
+            //int pag=1;
+            //pag = Integer.parseInt(request.getParameter("pag"));
+            //lista = ClientesBO.esListadoPag(usuario.getIdCentro(), pag);
             
             System.out.println("Lista de clientes recogida");
            if( lista != null){                

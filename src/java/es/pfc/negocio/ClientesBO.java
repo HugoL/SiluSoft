@@ -74,21 +74,21 @@ public class ClientesBO {
          //numero de registros por página
          int numreg = 10;
          List lista = new ArrayList();
-            ClienteDAOImp ClienteListado = new ClienteDAOImp();
-            boolean esInsertado = false;
+         ClienteDAOImp ClienteListado = new ClienteDAOImp();
+         boolean esInsertado = false;
 
-            try {
+         try {
+                System.out.println("listapag("+IdCentro+","+pag+","+numreg+");");
                   lista = ClienteListado.listpag(IdCentro,pag,numreg);
                   if (lista != null ){
                         return lista;
                   }else{
                       System.out.println("La lista es nula");
                       return null;
-                  }
-              
-            }catch (Exception e){
+                  }              
+         }catch (Exception e){
                   throw e;
-            }
+         }
      }
      
       public static List esListadoNoCentro () throws Exception {

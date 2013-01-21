@@ -234,10 +234,10 @@ public class ClienteDAOImp implements ClienteDAO {
         st=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
         st.setFetchSize(numregpag);
         
-        ArrayList alResultado = new ArrayList();
+        ArrayList list = new ArrayList();
         
         String sql = "SELECT DISTINCT `Clientes`.`IdCliente`,`Clientes`.`Dni`,`Clientes`.`Nombre`, `Clientes`.`Apellidos`, `Clientes`.`Apellido2` FROM `Clientes`, `Clientes-Centros`, `Usuarios`WHERE `Clientes-Centros`.`IdCliente`=`Clientes`.`IdCliente` AND `Clientes-Centros`.`IdCentro`="+idCentro+" ORDER BY Apellidos;";
-        
+        System.out.println(sql);
         try{
         result= st.executeQuery(null);
         
@@ -254,7 +254,7 @@ public class ClienteDAOImp implements ClienteDAO {
             alRegistro.add(nomCol);
         } 
 
-        alResultado.add(alRegistro);
+        list.add(alRegistro);
 
         if (result.absolute(fila) && numregpag > 0) {
             do {
@@ -263,7 +263,7 @@ public class ClienteDAOImp implements ClienteDAO {
                     alRegistro.add(result.getString(i));
                 }
 
-                alResultado.add(alRegistro);
+                list.add(alRegistro);
                 cont++;
                 
             } 
@@ -277,7 +277,7 @@ public class ClienteDAOImp implements ClienteDAO {
                             // basta con consultar el numero de esa tupla
             numTuplasTotal = new Integer(result.getRow());
         } 
-        alResultado.add(0, numTuplasTotal);        
+        list.add(0, numTuplasTotal);        
     } catch (Exception e) {
     } finally {
         if(st!=null) {
@@ -301,7 +301,7 @@ public class ClienteDAOImp implements ClienteDAO {
         }
     }
 
-    return (alResultado);
+    return (list);
         
     }
 
