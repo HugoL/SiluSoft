@@ -49,20 +49,17 @@
         <div class="container">  
    <tiles:insert page="plantillas/logo.jsp" flush="true"/>    
     <div class="hero-unit">
-        <div class="row">
-        <div class="span4">
-           		  		
-	</div>
-             <div class="span4">
-            <h2><bean:message key="welcome.cabecera"/></h2>
-            <p><bean:message key="welcome.textoinicio"/></p>
+        <div class="row-fluid">        
+             <div class="span11" align="center">
+                 <h2><bean:message key="welcome.cabecera"/></h2>
+                 <p><bean:message key="welcome.textoinicio"/></p>
         </div>
     </div>
     </div>
    
     <logic:present name="usuario">
         <div class="row-fluid">
-        <div class="span12">    
+        <div class="span11" align="center">    
             <h1><bean:message key="welcome.bienvenido"/> <bean:write name="usuario" property="nombre"/>!</h1>
             <a href="principal.jsp" class="btn btn-success btn-large">Acceder al menu</a>
         </div>
