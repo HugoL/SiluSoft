@@ -53,7 +53,8 @@
              <html:hidden name="centro" property="idCentro" />
              <label><bean:message key="centro.nombre"/>: </label><html:text name="centro" property="nombre" />
              <label><bean:message key="formulario.direccion"/>: </label><html:text name="centro" property="direccion" />                   
-             <label><bean:message key="formulario.telefono"/>: </label><html:text name="centro" property="telefono" />                              
+             <label><bean:message key="formulario.telefono"/>: </label><html:text name="centro" property="telefono" />                                           
+             <br/>
              <html:submit value="Modificar" styleClass="btn btn-danger"/>                  
              <html:errors/>                 
         </html:form>

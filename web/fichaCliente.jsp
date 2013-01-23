@@ -81,11 +81,11 @@
         <div class="span4"><bean:message key="formulario.dni"/>: <div class="well well-small">
                 <bean:write name="cliente" property="dni" /> </div></div>
                       <div class="clearfix"></div>        
-          <div class="span4"><bean:message key="formulario.nombre"/>: <div class="well well-small">
-          <bean:write name="cliente" property="nombre" /></div></div>
+                      <div class="span4"><bean:message key="formulario.nombre"/>: <div class="well well-small">
+                              <strong><bean:write name="cliente" property="nombre" /></strong></div></div>
           
-          <div class="span6"><bean:message key="formulario.apellido1"/>: <div class="well well-small"><bean:write name="cliente" property="apellidos" />
-           <bean:write name="cliente" property="apellido2" /></div></div>                                     
+                              <div class="span6"><bean:message key="formulario.apellido1"/>: <div class="well well-small"><strong><bean:write name="cliente" property="apellidos" />
+                                          <bean:write name="cliente" property="apellido2" /></strong></div></div>                                     
         
            <div class="span6"><bean:message key="formulario.direccion"/>: <div class="well well-small"><bean:write name="cliente" property="direccion" /></div></div>
            <div class="span3"><bean:message key="formulario.telefono"/>: <div class="well well-small"><bean:write name="cliente" property="telefono" /></div></div>       

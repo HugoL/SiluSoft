@@ -44,6 +44,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     private static org.apache.log4j.Logger registro;
     
                         
+    @Override
     public Usuario consultarUsuario (String Nombre, String Password) throws Exception {            
                 try {
                         
@@ -81,6 +82,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                 usuario.setNombre(result.getString("Nombre")); 
                 usuario.setApellidos(result.getString("Apellidos"));
                 usuario.setTelefono(result.getString("Telefono"));
+                usuario.setDireccion(result.getString("Direccion"));
+                usuario.setEmail(result.getString("Email"));
                 usuario.setIdCentro(result.getInt("IdCentro"));
                 usuario.setRol(result.getInt("Rol"));
       
@@ -97,6 +100,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     
     }
     
+    @Override
     public boolean comprobarDatosUsuario (String nombre, String password) throws Exception {
         
         //Pido conexion 
@@ -139,6 +143,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     
     }
     
+    @Override
     public int consultarCentro (Usuario usuario) throws Exception {
        
        int idCentro = usuario.getIdCentro(); 
