@@ -63,8 +63,6 @@ public class LoginAction extends org.apache.struts.action.Action {
        
        String Nombre=logon_form.getNombre();
        String Password=logon_form.getPassword();
-       System.out.println(Nombre);
-       System.out.println(Password);
        //UsuarioDAOImpl usuariodao = new UsuarioDAOImpl ();
         
        
@@ -72,20 +70,22 @@ public class LoginAction extends org.apache.struts.action.Action {
        //Si me lo permite es que los datos son correctos y creo la variable sesión
        try{
            miusuario=IdentificarBO.esUsuarioAutorizado(Nombre,Password);
-           //creo la lista de permisos del usuario (quitar la llamada a consultarPermisos de IdentificarBO.esUsuarioAutorizado)
-           listaPermisosUsuario = IdentificarBO.damePermisosdeUsuario(miusuario.getIdUsuario());
-           if( miusuario!=null){ 
+                      
+           if( miusuario!=null || miusuario.getIdUsuario()!=0){ 
+               HttpSession session = request.getSession(true);
+               
                int idCentro = IdentificarBO.dameCentro(miusuario);
                miusuario.setIdCentro(idCentro);
-               HttpSession session = request.getSession(true);
                int rol=miusuario.getRol();
+               
+               listaPermisosUsuario = IdentificarBO.damePermisosdeUsuario(miusuario.getIdUsuario());                                                           
               
                session.setAttribute("usuario", miusuario);
                Iterator iter = listaPermisosUsuario.iterator();
                while(iter.hasNext()){
                     permiso = new Permiso();
                     permiso = (Permiso)iter.next();                    
-                    session.setAttribute(permiso.getPermiso(), permiso);
+                    session.setAttribute(permiso.getPermiso(), permiso.getActivado());
                     System.out.println("Atributos en sesión: "+permiso.getPermiso()+", "+permiso.getActivado());
                }
                if(rol==1){

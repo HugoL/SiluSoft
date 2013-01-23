@@ -409,6 +409,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
             //preparacion de la consulta
             String consulta="select IdPermiso, Permiso, Activado from Permisos where IdUsuario="+idUsuario+";";
+            System.out.println(consulta);
             statement = conn.prepareStatement(consulta); //, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY
             
             result = statement.executeQuery(consulta);
