@@ -60,7 +60,7 @@
 			<div class="control-group">
                             <div class="controls"><html:submit value="Acceder" styleClass="btn btn-danger btn-large" /></div>
 			</div>
-            <html:errors/>
+                            <div class="alert alert-error"><html:errors/></div>
             </html:form>
         </div>
     </div>

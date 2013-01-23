@@ -4,5 +4,5 @@
 <Resource name="jdbc/SiluBd" auth="Container"
 	type="javax.sql.DataSource" driverClassName="com.mysql.jdbc.Driver" 
 	url="jdbc:mysql://localhost:3306/SiluBd"
-	username="root" password="523360" maxActive="20" maxIdle="4"/>
+	username="hugo" password="523360" maxActive="20" maxIdle="4"/>
 </Context>

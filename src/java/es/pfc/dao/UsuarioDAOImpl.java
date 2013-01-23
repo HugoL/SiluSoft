@@ -49,12 +49,12 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                 try {
                         
                         URL url = Loader.getResource("log4j.properties");
-                        PropertyConfigurator.configure(url);
-                        registro = Logger.getLogger(UsuarioDAOImpl.class);
+                        //PropertyConfigurator.configure(url);
+                        //registro = Logger.getLogger(UsuarioDAOImpl.class);
  System.out.println ("[" + url.toString() + "] Logger inicializado.");
                 } catch (Exception e) {
                         BasicConfigurator.configure();
-                        registro = Logger.getLogger(UsuarioDAOImpl.class);
+                        //registro = Logger.getLogger(UsuarioDAOImpl.class);
                         System.out.println ("Excepción al inicializar el log: " + e.toString());
                 }
         
@@ -71,6 +71,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             Usuario usuario = new Usuario();
             //preparacion de la consulta
             String consulta="select * from SiluBd.Usuarios where Nombre='"+Nombre+"' && Password='"+Password+"';";
+            System.out.println(consulta);
             statement = conn.prepareStatement(consulta); //, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY
             result = statement.executeQuery(consulta);
             /////////////////////////////////////////////////////
@@ -228,6 +229,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         try {                         
 			 //, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY
                         String consulta= "INSERT INTO `SiluBd`.`Usuarios` (`Dni`, `Nombre`, `Apellidos`,`Telefono`, `Email`, `Password`, `IdCentro`, `Rol`) VALUES ('"+usuario.getDni()+"', '"+usuario.getNombre()+"', '"+usuario.getApellidos()+"', '"+usuario.getTelefono()+"', '"+usuario.getEmail()+"', '"+usuario.getPassword()+"', "+usuario.getIdCentro()+", "+usuario.getRol()+");";
+                        System.out.println(consulta);
                         statement = conn.prepareStatement(consulta);
                         //System.out.println(consulta);
                         insertado=statement.execute(consulta);

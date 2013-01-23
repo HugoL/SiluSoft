@@ -59,11 +59,12 @@ public class LoginAction extends org.apache.struts.action.Action {
        Usuario miusuario = new Usuario();
        List listaPermisosUsuario = new ArrayList();
        Permiso permiso;
-       if(logon_form == null){        
-           return mapping.findForward(FAILURE);
-       }
+       
+       
        String Nombre=logon_form.getNombre();
        String Password=logon_form.getPassword();
+       System.out.println(Nombre);
+       System.out.println(Password);
        //UsuarioDAOImpl usuariodao = new UsuarioDAOImpl ();
         
        

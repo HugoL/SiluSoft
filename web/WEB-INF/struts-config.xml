@@ -57,13 +57,13 @@
             <form-property name="apellido2" type="java.lang.String" />
             <form-property name="telefono" type="java.lang.String" />
             <form-property name="email" type="java.lang.String" />
-            <form-property name="password" type="java.lang.String" />
-            <form-property name="password2" type="java.lang.String"/>
+            <form-property name="password" type="java.lang.String" />            
             <form-property name="permiso" type="java.lang.String[]"/>
             <form-property name="activado" type="java.lang.Boolean[]" />
             <form-property name="idPermiso" type="java.lang.Integer[]" />
             <form-property name="rol" type="java.lang.Integer" />
             <form-property name="activadotxt" type="java.lang.String[]" />
+            <form-property name="idCentro" type="java.lang.Integer" />
         </form-bean>
         <form-bean name="InsertarTratamientoCentroForm" type="es.pfc.forms.InsertarTratamientoCentroForm"/>
         

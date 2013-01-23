@@ -70,9 +70,9 @@ public class InsertarUsuarioAction extends org.apache.struts.action.Action {
         usuario.setTelefono((String)((DynaActionForm)form).get("telefono"));
         usuario.setEmail((String)((DynaActionForm)form).get("email"));
         usuario.setPassword((String)((DynaActionForm)form).get("password"));        
-        String password2=(String)((DynaActionForm)form).get("password2");
+        //String password2=(String)((DynaActionForm)form).get("password2");
         usuario.setRol((Integer)((DynaActionForm)form).get("rol"));
-        
+        usuario.setIdCentro((Integer)((DynaActionForm)form).get("idCentro"));
         
         /*usuario.setConsultaClientes(usuarioform.getConsultaClientes());
         usuario.setManipulaClientes(usuarioform.getManipulaClientes());
@@ -97,7 +97,6 @@ public class InsertarUsuarioAction extends org.apache.struts.action.Action {
        miusuario=UsuariosBO.insertaUsuarioCentro(usuario);
        System.out.println("miusuario.idusuario: "+miusuario.getIdUsuario());
         if(usuario!=null){
-            if(usuario.getPassword().equals(password2)){                  
                 for(int i=pos;i<pos+7;i++){                         
                         permisoObj = new Permiso();
                         permisoObj.setIdUsuario(miusuario.getIdUsuario());
@@ -117,11 +116,7 @@ public class InsertarUsuarioAction extends org.apache.struts.action.Action {
                 else {
                     System.out.println("Fallo en el envío de email");
                 }
-                return mapping.findForward(SUCCESS);
-            }else{
-                request.setAttribute("nuevousuario", usuario);
-                return mapping.findForward("formulario");
-            }      
+                return mapping.findForward(SUCCESS);                 
         }else{
             return mapping.findForward(FAILURE);
         }

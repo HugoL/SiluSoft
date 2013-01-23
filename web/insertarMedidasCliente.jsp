@@ -48,7 +48,6 @@
      <div class="containter">   
     <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
     <div class="mi-hero-unit">
-        <div class="span11 nombreusuario"><bean:message key="general.sesion"/><strong><bean:write scope="session" name="usuario" property="nombre" /></strong>&nbsp;</div>
     <logic:equal name="ManipulaClientes" property="activado" value="true">
         <div class="row"> 
     <div class="span11">
@@ -62,12 +61,12 @@
     </div> <!-- menu ficha -->    
     <div class="clearfix"></div>  
     <div class="span11 cuerpoficha">
-                <div class="span11"><bean:message key="medidas.para"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></div>
+                <legend><bean:message key="medidas.para"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></legend>
                 <div class="span11" align="center"><a class="btn btn-success" href="listaMedidas.do?Id=<bean:write name="cliente" property="idCliente"/>&Dni=<bean:write name="cliente" property="dni"/>">Ver medidas</a></div>		                
                     <html:form action="/insertaSesion">                        		
                         <logic:iterate id="medida" name="listaZonas" scope="request" type="es.pfc.model.Medidas">
                             <div class="span5" align="right"><bean:write name="medida" property="zona" /></div>
-                            <div class="span5"><html:text property="campos" size="5" value="" /> mm.</div>
+                            <div class="span2"><html:text property="campos" size="5" value="" /> mm.</div>
                             <input type="hidden" name="idZona" value="<bean:write name="medida" property="idZona"/>"/>                         
                         </logic:iterate>
                               		               

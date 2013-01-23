@@ -126,10 +126,14 @@ public class UsuariosBO {
             System.out.println("contacto vacío");
             return false;
         }
-        Properties prop = new Properties();
-        prop.put("mail.smtp.host","smtp.gmail.com");
-        prop.put("mail.from", "admin@silusoft.com");
-        Session session = Session.getInstance(prop, null);
+        Properties props = new Properties();
+        props.put("mail.smtp.host","smtp.gmail.com");
+        props.put("mail.from", "admin@silusoft.com");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.debug", "true");
+        props.put("mail.smtp.port","465");
+
+        Session session = Session.getInstance(props, null);
         try {
         MimeMessage msg = new MimeMessage(session);
         msg.setFrom();
@@ -140,7 +144,7 @@ public class UsuariosBO {
         msg.setText("Hola, le da la bienvenida el equipo de Siludermis!\n. Sus datos de acceso son:\nusuario: "+usuario+"\ncontraseña: "+password);
         Transport.send(msg);
         } catch (MessagingException mex) {
-            System.out.println("send failed, exception: " + mex);
+            System.out.println("Fallo en el envío, excepción: " + mex);
         }
         return true;
     }

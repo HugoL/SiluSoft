@@ -50,7 +50,7 @@
      <div class="containter">   
     <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
     <div class="mi-hero-unit">
-        <div class="span11"><h3><bean:message key="listadoclientes.titulo"/> </h3></div>        
+        <legend><bean:message key="listadoclientes.titulo"/></legend>        
         <div class="span11" align="right"><html:link href="/SiluSoft/buscarCliente.jsp" styleClass="btn "><em class="icon icon-search"></em> Buscar cliente</html:link></div>
         <div class="pagination pagination-small"><a name="anclacli"></a>
         <ul>
