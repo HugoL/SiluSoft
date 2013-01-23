@@ -25,9 +25,12 @@ import java.util.Properties;
 import es.pfc.dao.UsuarioDAOImpl;
 import es.pfc.model.Usuario;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.Session;
+import javax.mail.internet.MimeMessage;
 
 /**
  *
@@ -85,9 +88,9 @@ public class UsuariosBO {
             insertado=usuarioinsertado.insertarUsuario(usuario);
             System.out.println("Usuario insertado: "+insertado);
             miusuario = usuarioinsertado.consultarUsuario(usuario.getNombre(), usuario.getPassword());
-            usuario.setIdUsuario(miusuario.getIdUsuario());
+            usuario.setIdUsuario(miusuario.getIdUsuario());            
             if(insertado)
-            return true;
+                return true;
         }catch(Exception ex){
              Logger.getLogger(UsuariosBO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -118,9 +121,37 @@ public class UsuariosBO {
         return lista;
     }        
     
-    private static boolean enviarMail(){
+    public static boolean enviarMail(String email, String usuario, String password){
+        if("".equals(email)){
+            System.out.println("contacto vacío");
+            return false;
+        }
         Properties prop = new Properties();
-        prop.put("mail.smtp.com","smtp.gmail.com");
+        prop.put("mail.smtp.host","smtp.gmail.com");
+        prop.put("mail.from", "admin@silusoft.com");
+        Session session = Session.getInstance(prop, null);
+        try {
+        MimeMessage msg = new MimeMessage(session);
+        msg.setFrom();
+        msg.setRecipients(Message.RecipientType.TO,
+                          email);
+        msg.setSubject("Siludermis SiluSoft");
+        msg.setSentDate(new Date());
+        msg.setText("Hola, le da la bienvenida el equipo de Siludermis!\n. Sus datos de acceso son:\nusuario: "+usuario+"\ncontraseña: "+password);
+        Transport.send(msg);
+        } catch (MessagingException mex) {
+            System.out.println("send failed, exception: " + mex);
+        }
         return true;
     }
+    
+    public static boolean actualizaUsuario(Usuario usuario){
+        UsuarioDAOImpl actualizaUsuario = new UsuarioDAOImpl();
+        try{            
+            return actualizaUsuario.modificarPerfil(usuario);
+        }catch(Exception ex){
+            Logger.getLogger(UsuariosBO.class.getName()).log(Level.SEVERE, null, ex);
+        }    
+        return false;
+    }      
 }

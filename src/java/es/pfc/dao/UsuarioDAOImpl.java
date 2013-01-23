@@ -429,4 +429,43 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 				try { conn.close(); } catch(SQLException ignored) { }
 		}    
     }
+
+    @Override
+    public boolean modificarPerfil(Usuario usuario) throws Exception {
+        //variables para la conexion
+            Connection conn = null;
+            Context ctx = new InitialContext();
+            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
+            conn = ds.getConnection();       
+       
+            ResultSet result = null;
+            PreparedStatement statement = null; 
+            
+            String sql;
+            sql = "UPDATE Usuarios SET Dni = '"+usuario.getDni()+"',Nombre = '"+usuario.getNombre()+"' , Apellidos = '"+usuario.getApellidos()+"', Direccion = '"+usuario.getDireccion()+"', Telefono = '"+usuario.getTelefono()+"', Email = '"+usuario.getEmail()+"'  WHERE IdUsuario = "+usuario.getIdUsuario();
+            try{
+                statement = conn.prepareStatement(sql);
+                 int actualizado=statement.executeUpdate(sql);
+                 result=statement.getResultSet();                      
+		 if(actualizado!=0) {                          
+                            return true;
+		}else{
+                            System.out.println("No se ha actualizado el usuario");                        
+                            return false;                      
+                }                
+            } catch(SQLException sqle) {
+            throw new Exception("Excepción en UsuarioDAOImpl.consultaPermisosNuevo: "+sqle);
+            }
+        finally {
+			if(result != null) {
+                try { result.close(); } catch(SQLException ignored) { }
+            }
+			if(statement != null) {
+                try { statement.close(); } catch(SQLException ignored) { }
+            }
+			if(conn != null) {
+                try { conn.close(); } catch(SQLException ignored) { }
+            }
+		}    
+    }
 }

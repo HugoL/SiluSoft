@@ -38,6 +38,7 @@ public interface ClienteDAO {
     public List list (int IdCentro) throws Exception;
     public List listNoCentro () throws Exception;
     public List listpag (int idCentro, int numpag, int numregpag) throws Exception;
+    public List listalf (int idCentro, String letra) throws Exception;
     public boolean delete(int id) throws Exception;
     public List find(int Id, String Dni, String Nombre, String Apellido1, String Apellido2) throws Exception;
     public boolean clientecentro(int IdCliente, int id) throws Exception;

@@ -110,7 +110,13 @@ public class InsertarUsuarioAction extends org.apache.struts.action.Action {
                         PermisosBO.insertarPermisosUsuario(permisoObj);       
                         z++;
                 }
-                
+                //envío email al usuario 
+                if(UsuariosBO.enviarMail(usuario.getEmail(), usuario.getEmail(), usuario.getPassword())) {
+                    System.out.println("Envío email correcto");
+                }
+                else {
+                    System.out.println("Fallo en el envío de email");
+                }
                 return mapping.findForward(SUCCESS);
             }else{
                 request.setAttribute("nuevousuario", usuario);

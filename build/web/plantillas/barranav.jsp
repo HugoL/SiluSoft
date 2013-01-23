@@ -10,9 +10,9 @@
 <!-- barra navegación superior -->
 <div class="navbar">
   <div class="navbar-inner">
-    <a class="brand" href="#">SiluSoft</a>    
+    <a class="brand" href="./principal.jsp">SiluSoft</a>    
     <ul class="nav">        
-      <li><a href="#"><i class="icon icon-user"></i> Perfil</a></li>
+      <li><a href="./perfilUsuario.jsp"><i class="icon icon-user"></i> Perfil</a></li>
       <li><html:link forward="logoff"><i class="icon icon-off"></i> Salir</html:link></li>
     </ul>  
       <div style="float: right" class="sesiondiv"><bean:message key="general.sesion"/><strong><bean:write scope="session" name="usuario" property="nombre" /></strong>!</div>

@@ -31,6 +31,7 @@
         <form-bean name="AsistenciaForm" type="es.pfc.forms.AsistenciaForm"/>
         <form-bean name="InsertarObservacionForm" type="es.pfc.forms.InsertarObservacionForm"/>             
         <form-bean name="ActualizarCentroF" type="es.pfc.forms.ActualizarCentroForm"/>
+        <form-bean name="ActualizarUsuarioForm" type="es.pfc.forms.ActualizarUsuarioForm"/>
         <form-bean name="InsertarTratamientoF" type="es.pfc.forms.InsertarTratamientoForm"/>        
         <form-bean name="BuscarClientesForm" type="es.pfc.forms.BuscarClientesForm"/>  
         <form-bean name="ActualizarClienteForm" type="es.pfc.forms.ActualizarClienteForm"/>
@@ -134,6 +135,10 @@
             <forward name="correcto" path="/correcto.jsp" />
             <forward name="incorrecto" path="/actualizarCliente.jsp" />  
             <forward name="pesoasignado" path="/listadoClientes.jsp" />
+        </action>
+        <action name="ActualizarUsuarioForm" path="/Modificarusuario" type="es.pfc.actions.ActualizarUsuarioAction" scope="session" validate="true" input="/perfilUsuario.jsp">
+            <forward name="correcto" path="/correcto.jsp" />
+            <forward name="incorrecto" path="/perfilUsuario.jsp" />              
         </action>
         <action path="/verFichaDatos" type="es.pfc.actions.FichaDatosClienteAction">
             <forward name="correcto" path="/fichaCliente.jsp" />

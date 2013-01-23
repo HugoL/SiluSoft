@@ -305,6 +305,55 @@ public class ClienteDAOImp implements ClienteDAO {
         
     }
 
+     @Override
+     public List listalf(int idCentro, String letra)throws Exception{
+        Connection conn = null;
+        Context ctx = new InitialContext();
+        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
+        conn = ds.getConnection();
+        
+       
+        ResultSet result = null;
+        PreparedStatement statement = null;
+        boolean consultado=false;
+        int i;
+        Cliente cliente = null;
+        List list = new ArrayList();
+        //Vector vector =new Vector();
+        String sql="SELECT DISTINCT `Clientes`.`IdCliente`,`Clientes`.`Dni`,`Clientes`.`Nombre`, `Clientes`.`Apellidos`, `Clientes`.`Apellido2` FROM `Clientes`, `Clientes-Centros`, `Usuarios`WHERE `Clientes-Centros`.`IdCliente`=`Clientes`.`IdCliente` AND `Clientes-Centros`.`IdCentro`="+idCentro+" AND `Clientes`.`Apellidos` LIKE '"+letra+"%'ORDER BY Apellidos;";
+        try {   
+			statement = conn.prepareStatement(sql); 
+                        result=statement.executeQuery();
+                       
+			while(result.next()) {
+                            i=1;
+                            cliente = new Cliente();
+                            //i++;
+                            cliente.setIdCliente(result.getInt(i++));
+                            cliente.setDni(result.getString(i++));
+                            cliente.setNombre(result.getString(i++));
+                            cliente.setApellidos(result.getString(i++));  
+                            cliente.setApellido2(result.getString(i++));
+                            list.add(cliente);
+                            //vector.addElement(cliente);
+			}
+                        return list;
+
+		} catch(SQLException sqle) {
+			throw new Exception(sqle);
+		} finally {
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
+		}         
+     }
+     
     @Override
     public boolean delete(int id) throws Exception {
         boolean eliminado=false;
