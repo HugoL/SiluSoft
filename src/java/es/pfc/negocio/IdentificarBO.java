@@ -33,17 +33,11 @@ public class IdentificarBO {
             UsuarioDAOImpl loginDAO = new UsuarioDAOImpl ();
             Usuario miusuario = new Usuario();
             try {
-                  miusuario=loginDAO.consultarUsuario(Nombre,Password); 
-                  
-                  if (miusuario!=null) {
-                        //miusuario=loginDAO.consultaPermisos(miusuario);
-                        return miusuario;
-                  }
+                  miusuario=loginDAO.consultarUsuario(Nombre,Password);                                     
+                  return miusuario;                  
             } catch (Exception e) {
                   throw e;
-            }
-
-            return null;
+            }          
       }
     
     public static List damePermisosdeUsuario(int idUsuario) throws Exception{

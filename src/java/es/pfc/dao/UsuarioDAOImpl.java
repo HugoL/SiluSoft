@@ -91,7 +91,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                 return usuario;                             
             }else{
                 System.out.println("El usuario no se encuentra");
-                return null;
+                usuario.setIdUsuario(0);
+                return usuario;
             }
 
         } catch(SQLException sqle) {

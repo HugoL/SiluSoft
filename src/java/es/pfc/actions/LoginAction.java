@@ -70,8 +70,8 @@ public class LoginAction extends org.apache.struts.action.Action {
        //Si me lo permite es que los datos son correctos y creo la variable sesión
        try{
            miusuario=IdentificarBO.esUsuarioAutorizado(Nombre,Password);
-                      
-           if( miusuario!=null || miusuario.getIdUsuario()!=0){ 
+           System.out.println(miusuario.getIdUsuario());           
+           if(miusuario.getIdUsuario()!=0){ 
                HttpSession session = request.getSession(true);
                
                int idCentro = IdentificarBO.dameCentro(miusuario);
@@ -85,8 +85,8 @@ public class LoginAction extends org.apache.struts.action.Action {
                while(iter.hasNext()){
                     permiso = new Permiso();
                     permiso = (Permiso)iter.next();                    
-                    session.setAttribute(permiso.getPermiso(), permiso.getActivado());
-                    System.out.println("Atributos en sesión: "+permiso.getPermiso()+", "+permiso.getActivado());
+                    session.setAttribute(permiso.getPermiso(), permiso); //permiso -> poner permiso.getActivado()
+                    //System.out.println("Atributos en sesión: "+permiso.getPermiso()+", "+permiso.getActivado());
                }
                if(rol==1){
                    return mapping.findForward("paneladmin");

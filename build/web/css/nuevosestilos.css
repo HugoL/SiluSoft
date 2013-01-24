@@ -37,8 +37,14 @@ body{
 }
 
 .mipie{
-    background-color: white;
-    color: #585858;
+    background-color: #eee;
+   background-image: linear-gradient(bottom, #DEDEDE 34%, #F0F0F0 100%);
+    background-image: -o-linear-gradient(bottom, #DEDEDE 34%, #F0F0F0 100%);
+    background-image: -moz-linear-gradient(bottom, #DEDEDE 34%, #F0F0F0 100%);
+    background-image: -webkit-linear-gradient(bottom, #DEDEDE 34%, #F0F0F0 100%);
+    background-image: -ms-linear-gradient(bottom, #DEDEDE 34%, #F0F0F0 100%);
+
+    color: #414141;
     -webkit-border-radius: 6px;
      -moz-border-radius: 6px;
           border-radius: 6px;

@@ -108,8 +108,7 @@
                 <div class="clearfix"></div> 
                 
                 <div class="span3"><label><bean:message key="formulario.password"/>: *</label><html:password property="password" /></div>
-                <div class="clearfix"></div>                
-                <div class="span3"><label><bean:message key="formulario.password2"/>: *</label><html:password property="password2" value="" /></div>
+                <div class="clearfix"></div>                                
                 <div class="clearfix"></div>                 
                 <div class="span11" align="center"><input type="submit" class="btn btn-primary btn-danger" value="Insertar" /></div>
                 <div class="span11" align="center"><html:errors /></div>               

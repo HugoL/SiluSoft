@@ -30,49 +30,61 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!—[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]—>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <style>
+            body { margin-left: 30px; margin-right: 30px;}
+        </style>
+        <link href="../css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="../css/nuevosestilos.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Insertar Evento</title>
-        <LINK href="../estilo.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <div class="cuerpoblanco">
-            <logic:present name="usuario">
-            <logic:equal name="ManipulaAgenda" property="activado" value="true">
-		<p align="center" class="<%= estilo %>"><br />Anotaci&oacute;n de agenda para el d&iacute;a <strong><%= fecha %></strong></p>
-            <center><html:form action="/InsertaEvento" >
+           <%-- include header --%>
+     <tiles:insert page="../plantillas/barranav.jsp" flush="true"/>
+     <div class="container mifondo">            
+     <div class="containter">   
+     <div class="mi-hero-unit">
+    <logic:equal name="ManipulaAgenda" property="activado" value="true">
+        <div class="row"> 
+            <legend><br />Anotaci&oacute;n de agenda para el d&iacute;a <strong><%= fecha %></strong></legend>
+            <html:form action="/InsertaEvento" styleClass="form-inline" >
                 <html:hidden property="evento" value="<%=evento%>" /><br />
                 <html:hidden property="maquina" value="<%=maquina%>" /><br />
                 <html:hidden property="fecha" value="<%=fecha%>" /><br />
-				<p>Escribe en el cuadro de texto la anotaci&oacute;n </p>
-                 <br/>
-                Cliente: <html:select property="acto" >
+                <div class="span11">Escribe en el cuadro de texto la anotaci&oacute;n </div>
+                
+                <label>Cliente: </label><html:select property="acto" >
                     <html:option value="0">---</html:option>
                     <logic:iterate id="cliente" name="listaClientes" scope="session" type="es.pfc.model.Cliente">
                         <html:option value="${cliente.nombre} ${cliente.apellidos}"><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></html:option>
                     </logic:iterate>                 
                 </html:select>
-                    Trabajador:  <html:select property="asignado" >
+                <label>Trabajador:  </label><html:select property="asignado" >
                     <html:option value="0">---</html:option>
                     <logic:iterate id="usuariolista" name="listaUsuarios" scope="session" type="es.pfc.model.Usuario">
                         <html:option value="${usuariolista.nombre} ${usuariolista.apellidos}"><bean:write name="usuariolista" property="nombre" /> <bean:write name="usuariolista" property="apellidos" /></html:option>
                     </logic:iterate>                 
                 </html:select>
-                    Otra informaci&oacute;n: <html:text property="masinfo" > </html:text>
-                    <br />
-                <html:submit value="Enviar" />
-            </html:form></center>
+                
+                    <label>Otra informaci&oacute;n: </label><html:text property="masinfo" > </html:text>
+                    
+                    <html:submit value="Enviar" styleClass="btn btn-danger" />
+            </html:form>
         </logic:equal>
+        </div>
+    </div>
         <logic:notEqual name="ManipulaAgenda" property="activado" value="true">
          <table width="80%" border="0" cellspacing="0" cellpadding="0" class="tabla" >   
     		<tr>
                     <td><div class="cuerpoblanco" align="center"><p> Ud. no tiene permisos para introducir datos en la agenda</p><br /><a href="javascript:history.back()"> Volver</a></div></td>
     		</tr>   
      	</table>    
-        </logic:notEqual>
-            </logic:present>
-            <logic:notPresent name="usuario">
-            <div class="cuerpoblanco" align="center"> No se le reconoce como usuario</div>
-                </logic:notPresent>
+        </logic:notEqual>            
+     </div>
         </div>
     </body>
 </html>
