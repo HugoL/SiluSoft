@@ -67,8 +67,16 @@ public class InsertarImcClienteAction extends org.apache.struts.action.Action {
             }
             //FÓRMULA PARA CALCULAR LAS SESIONES!!!
             //de momento pongo las sesiones que me parecen...
-            sesiones.setFit(15);
-            sesiones.setConfort(12);
+            int sobrepeso;
+            int pesoideal = 0;
+            sobrepeso = (int) (peso - pesoideal); //me falta saber el peso ideal
+            int y;             
+            y = new Double(sobrepeso / 3).intValue();       
+            int fit = 6*y;
+            int comfort = 4*y;
+            
+            sesiones.setFit(15); //sesiones.setFit(fit);
+            sesiones.setConfort(12); //sesiones.setConfort(comfort);
             sesiones.setTotal(sesiones.getFit()+sesiones.getConfort());
         }else{
             System.out.println("no existe sobrepeso");

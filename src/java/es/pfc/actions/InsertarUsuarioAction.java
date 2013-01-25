@@ -96,7 +96,7 @@ public class InsertarUsuarioAction extends org.apache.struts.action.Action {
         }*/
        miusuario=UsuariosBO.insertaUsuarioCentro(usuario);
        System.out.println("miusuario.idusuario: "+miusuario.getIdUsuario());
-        if(usuario!=null){
+        if(usuario!=null || miusuario.getIdUsuario()!=0){
                 for(int i=pos;i<pos+7;i++){                         
                         permisoObj = new Permiso();
                         permisoObj.setIdUsuario(miusuario.getIdUsuario());

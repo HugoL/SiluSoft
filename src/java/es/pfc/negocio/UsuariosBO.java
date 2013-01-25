@@ -127,13 +127,24 @@ public class UsuariosBO {
             return false;
         }
         Properties props = new Properties();
-        props.put("mail.smtp.host","smtp.gmail.com");
+        props.put("mail.smtp.host","mail.siludermis.com");
         props.put("mail.from", "admin@silusoft.com");
         props.put("mail.smtp.auth", "true");
         props.put("mail.debug", "true");
-        props.put("mail.smtp.port","465");
-
-        Session session = Session.getInstance(props, null);
+        props.put("mail.smtp.port","5025");
+        props.put("mail.smtp.user", "angelines@siludermis.com");
+        props.put("mail.smtp.starttls.enable","false"); 
+        props.put("mail.transport.protocol", "smtp");
+        props.put("mail.smtp.pass", "michico");
+        
+        
+        Session session = Session.getInstance( props , new javax.mail.Authenticator() {      
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(
+                            "angelines@siludermis.com", "michico");// Specify the Username and the PassWord
+                }
+            });
+        session.setDebug(true);
         try {
         MimeMessage msg = new MimeMessage(session);
         msg.setFrom();
@@ -141,8 +152,11 @@ public class UsuariosBO {
                           email);
         msg.setSubject("Siludermis SiluSoft");
         msg.setSentDate(new Date());
-        msg.setText("Hola, le da la bienvenida el equipo de Siludermis!\n. Sus datos de acceso son:\nusuario: "+usuario+"\ncontraseña: "+password);
-        Transport.send(msg);
+        msg.setText("Hola, le da la bienvenida el equipo de Siludermis!\n Nos agradece comuniarle que se le ha dado de alta como usuario en la aplicación.\nSus datos de acceso son:\nusuario: "+usuario+"\ncontraseña: "+password+".\n\nPuede acceder a la aplicación a través de esta dirección: www.silusoft.com/SiluSoft2\n\n<img src='http://www.silusoft.com/img/logo.png'/>");
+        Transport t = session.getTransport("smtp");
+        t.connect("angelines@siludermis.com","michico");
+        Transport.send(msg);        
+        t.close();
         } catch (MessagingException mex) {
             System.out.println("Fallo en el envío, excepción: " + mex);
         }

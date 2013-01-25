@@ -129,7 +129,7 @@
     		</tr>   
      	</table>    
         </logic:notEqual>
-        
+    </div>  
      </logic:present>
     <logic:notPresent name="usuario" scope="session">
         <center><bean:message key="general.noidentificado"/></center><br /><html:link href="./Registro.do"><bean:message key="general.identificarse"/></html:link>

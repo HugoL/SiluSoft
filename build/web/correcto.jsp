@@ -21,6 +21,7 @@
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 <!DOCTYPE html>
 <html:html>
     <head>
@@ -37,11 +38,16 @@
         <title>Correcto</title>
     </head>
     <body>
+     <%-- include header --%>
+     <tiles:insert page="plantillas/barranav.jsp" flush="true"/>
     <div class="containter">   
     <div class="mi-hero-unit">    
         <div class="row">            
             <div class="aler alert-success"><h5>Operación realizada con éxito</h5></div>        
         <html:errors/>            
         <html:link href="/SiluSoft/principal.jsp" styleClass="btn btn-success">Volver</html:link>
+        </div>
+    </div>
+    </div>
     </body>
 </html:html>
