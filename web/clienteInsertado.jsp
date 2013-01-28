@@ -55,7 +55,7 @@
     <div class="span11 cuerpoficha">
     <logic:present name="cliente">             
         <div class="alert alert-success"><h4><bean:message key="clientein.titulo"/></h4></div>                         
-        <div class="span5" align="center"><a class="btn btn-danger" href="ActualizarCliente.do?Id=<bean:write name="cliente" property="idCliente"/>"><em class="icon-user icon-white"></em><bean:message key="clientein.rellenaficha"/></a></div> 
+        <div class="span5" align="center"><a class="btn btn-danger" href="DameDatosCliente.do?dni=<bean:write name='cliente' property='dni'/>&op=8"><em class="icon-user icon-white"></em><bean:message key="clientein.rellenaficha"/></a></div> 
         <div class="span5" align="center"><html:link styleClass="btn btn-success" href="principal.jsp"><em class="icon-home icon-white"></em> <bean:message key="general.volvermenu"/></html:link></div>   
     </logic:present>
     </logic:present><!-- usuario -->

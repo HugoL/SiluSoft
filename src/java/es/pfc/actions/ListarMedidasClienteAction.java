@@ -50,8 +50,7 @@ public class ListarMedidasClienteAction extends org.apache.struts.action.Action 
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        int idCliente = Integer.parseInt(request.getParameter("Id"));
-        String dni = request.getParameter("Dni");
+        int idCliente = Integer.parseInt(request.getParameter("Id"));        
         List lista = new ArrayList();
         try{
             //lista=ClientesBO.listaMedidas(idCliente);

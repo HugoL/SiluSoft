@@ -63,12 +63,12 @@
     <div class="clearfix"></div>  
     <div class="span11 cuerpoficha">
         <div class="span11"><bean:message key="medidas.sesiones"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></div>         
-        <div class="span11">
+        <div class="span10">
          <logic:iterate id="zonamedida" name="listadoMedidas" scope="request" type="es.pfc.model.Medidas">
              <span><bean:write name="zonamedida" property="zona" /></span>
          </logic:iterate>
           </div>
-        <div class="span11">
+        <div class="span10">
          <logic:iterate id="medida" name="listadoMedidas" scope="request" type="es.pfc.model.Medidas">
              <span><bean:write name="medida" property="medida" /></span>
          </logic:iterate>
@@ -86,12 +86,13 @@
     		</tr>   
      	</table>    
         </logic:notEqual>
+    </div>
+    </div>
      </logic:present>
     <logic:notPresent name="usuario" scope="session">
      </logic:notPresent>
      <%-- include header --%>
     <tiles:insert page="plantillas/pie.jsp" flush="true"/>
-    </div>
      </div>
      </div>
     </body>

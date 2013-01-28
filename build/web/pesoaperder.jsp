@@ -1,31 +1,17 @@
 <%-- 
-    SiluSoft
-    Copyright (C) 2012  Hugo Langa Roy
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+    Document   : pesoaperder
+    Created on : 28-ene-2013, 10:50:42
+    Author     : Administrador
 --%>
-
 <%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
     <head>
-        <!—[if lt IE 9]>
+         <!—[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]—>
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -35,10 +21,10 @@
         <link href="css/bootstrap-responsive.css" rel="stylesheet">
         <link href="css/nuevosestilos.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><bean:message key="medidas.sesiones"/></title>         
+        <title><bean:message key="medidas.sesiones"/></title>
     </head>
     <body>
-       <%-- include header --%>
+          <%-- include header --%>
      <tiles:insert page="plantillas/barranav.jsp" flush="true"/>
      <div class="container mifondo">
      
@@ -60,17 +46,15 @@
     </div> <!-- menu ficha -->    
     <div class="clearfix"></div>  
     <div class="span11 cuerpoficha">
-    <logic:present name="cliente">
-                    <html:form action="/InsertaImc">   
-                        <div align="center">
-                        <div class="span10"><bean:message key="medidas.imc"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></div>
-                        <div class="span5"><label><bean:message key="cliente.insertapeso"/>: </label><html:text property="peso" /><span class="add-on">Kg.</span></div>
-                        <div class="clearfix"></div>
-                        <div class="span5"><label><bean:message key="cliente.insertamedida"/>: </label><html:text property="altura" /><span class="add-on">m.</span></div>
-                        <div class="clearfix"></div>
-                        <div class="span10"><html:submit value="Insertar" styleClass="btn btn-danger" /></div>
-                        </div>
-                    </html:form>
+        <div><bean:message key="medidas.imc"/><span class="label label-warning"><bean:write name="imc" /></span></div>        
+        <logic:present name="cliente">
+        <html:form action="/CalculaSesiones" styleClass="form-inline">
+            <input type="hidden" property="imc" value="<bean:write name="imc"/>" />
+            <input type="hidden" property="peso" value="<bean:write name="peso"/>" />
+            <input type="hidden" property="idcliente" value="<bean:write name="cliente" property="id"/>"/>
+            <html:text property="kilossobran"/>                                                       
+            <html:submit value="Enviar" styleClass="btn btn-danger"/>
+        </html:form>        
     <div class="span11" align="center"><a class="btn btn-success" href="principal.jsp"><em class="icon-home icon-white"></em> Volver al menú</a>
                 <a class="btn btn-warning" href="ListaClientes.do"><em class="icon-list icon-white"></em> Listado de clientes </a></div>
             </div><!-- row -->
@@ -81,7 +65,7 @@
     		<tr>
                     <td><div class="cuerpoblanco" align="center"><p> <bean:message key="general.noprivilegios"/></p><br /><a href="javascript:history.back()"><bean:message key="general.volver"/></a></div></td>
     		</tr>   
-            </table></center>    
+        </table></center>    
         </logic:notEqual>
         </div>
     </div>
@@ -92,6 +76,6 @@
      <%-- include header --%>
     <tiles:insert page="plantillas/pie.jsp" flush="true"/>
      </div>
-     </div>
+     </div>    
     </body>
 </html>

@@ -65,19 +65,7 @@ public class InsertarImcClienteAction extends org.apache.struts.action.Action {
             }else{ //el imc es 30 o más
                 System.out.println("existe obesidad");
             }
-            //FÓRMULA PARA CALCULAR LAS SESIONES!!!
-            //de momento pongo las sesiones que me parecen...
-            int sobrepeso;
-            int pesoideal = 0;
-            sobrepeso = (int) (peso - pesoideal); //me falta saber el peso ideal
-            int y;             
-            y = new Double(sobrepeso / 3).intValue();       
-            int fit = 6*y;
-            int comfort = 4*y;
             
-            sesiones.setFit(15); //sesiones.setFit(fit);
-            sesiones.setConfort(12); //sesiones.setConfort(comfort);
-            sesiones.setTotal(sesiones.getFit()+sesiones.getConfort());
         }else{
             System.out.println("no existe sobrepeso");
             sesiones.setFit(0);

@@ -65,6 +65,7 @@
             <form-property name="activadotxt" type="java.lang.String[]" />
             <form-property name="idCentro" type="java.lang.Integer" />
         </form-bean>
+        <form-bean name="CalcularSesionesForm" type="es.pfc.forms.CalcularSesionesForm"/>
         <form-bean name="InsertarTratamientoCentroForm" type="es.pfc.forms.InsertarTratamientoCentroForm"/>
         
         <form-bean name="InsertarSesionesClienteForm" type="es.pfc.forms.InsertarSesionesClienteForm"/>
@@ -278,7 +279,7 @@
             <forward name="correcto" path="/InsertarUsuario.jsp"/>
         </action>
         <action input="/incorrecto.jsp" name="InsertarImcClienteForm" path="/InsertaImc" scope="session" type="es.pfc.actions.InsertarImcClienteAction">
-            <forward name="correcto" path="/confirmarNumeroSesiones.jsp" />
+            <forward name="correcto" path="/pesoaperder.jsp" />
             <forward name="incorrecto" path="/incorrecto.jsp" />
         </action>
         <action input="/incorrecto.jsp" name="InsertarSesionesClienteForm" path="/InsertaSesiones" scope="session" type="es.pfc.actions.InsertarSesionesClienteAction">

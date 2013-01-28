@@ -45,7 +45,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     
                         
     @Override
-    public Usuario consultarUsuario (String Nombre, String Password) throws Exception {            
+    public Usuario consultarUsuario (String Nombre, String Password) throws Exception {     
+        //variables para la conexion
+            Connection conn = null;
+            Context ctx = new InitialContext();
+            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
+            conn = ds.getConnection();       
+       
+            ResultSet result = null;
+            PreparedStatement statement = null;   
                 try {
                         
                         URL url = Loader.getResource("log4j.properties");
@@ -58,16 +66,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                         System.out.println ("Excepción al inicializar el log: " + e.toString());
                 }
         
-        try {           
-            //variables para la conexion
-            Connection conn = null;
-            Context ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-            conn = ds.getConnection();       
-       
-            ResultSet result = null;
-            PreparedStatement statement = null;                            
-            
+        try {                                                            
             Usuario usuario = new Usuario();
             //preparacion de la consulta
             String consulta="select * from SiluBd.Usuarios where Nombre='"+Nombre+"' && Password='"+Password+"';";
@@ -99,6 +98,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             logger.debug(sqle);
             throw new Exception("Excepción en UsuarioDAOImpl.consultarUsuario: "+sqle);
         }
+         //cierro la conexion    
+                finally {
+			if(result != null)
+				try { result.close(); } catch(SQLException ignored) { }
+			if(statement != null)
+				try { statement.close(); } catch(SQLException ignored) { }
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) { }
+		}   
     
     }
     
@@ -106,17 +114,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     public boolean comprobarDatosUsuario (String nombre, String password) throws Exception {
         
         //Pido conexion 
-       
-       //inserto los datos en la BD
-       try {
-            Connection conn = null;
+       Connection conn = null;
             Context ctx = new InitialContext();
             DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
             conn = ds.getConnection();
-
             ResultSet result = null;
-            PreparedStatement statement = null;
-       
+            PreparedStatement statement = null;      
+       try {            
 			int i = 0;
 			//conn = getConexion();
 			statement = conn.prepareStatement("select * from Usuarios where Nombre='"+nombre+"' && Password='"+password+"';"); //, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY
@@ -142,7 +146,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		} catch(SQLException sqle) {
 			throw new Exception("Primera excepcion..."+sqle);
                 }
-    
+       //cierro la conexion    
+                finally {
+			if(result != null)
+				try { result.close(); } catch(SQLException ignored) { }
+			if(statement != null)
+				try { statement.close(); } catch(SQLException ignored) { }
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) { }
+		}       
     }
     
     @Override
@@ -151,18 +163,16 @@ public class UsuarioDAOImpl implements UsuarioDAO {
        int idCentro = usuario.getIdCentro(); 
        int i,id; 
         //Pido conexion 
-       
-       //inserto los datos en la BD
-       try {
-            Connection conn = null;
+       Connection conn = null;
             Context ctx = new InitialContext();
             DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
             conn = ds.getConnection();
         
        
             ResultSet result = null;
-            PreparedStatement statement = null;                      
-
+            PreparedStatement statement = null;       
+       //inserto los datos en la BD
+       try {                           
             statement = conn.prepareStatement("SELECT `IdCentro` FROM `SiluBd`.`Usuarios` WHERE `Dni`='"+usuario.getDni()+"';");
             //String consulta="SELECT * FROM `SiluBd`.`Centros` WHERE IdCentro='"+idCentro+"';";
             result = statement.executeQuery();
@@ -177,19 +187,27 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	} catch(SQLException sqle) {
 			throw new Exception("Excepción en UsuarioDAOImpl.consultarCentro: "+sqle);
         }
+       //cierro la conexion    
+                finally {
+			if(result != null)
+				try { result.close(); } catch(SQLException ignored) { }
+			if(statement != null)
+				try { statement.close(); } catch(SQLException ignored) { }
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) { }
+		}   
     }
     
     public int dameROl(String Dni) throws Exception{
-         try {
-            Connection conn = null;
+        Connection conn = null;
             Context ctx = new InitialContext();
             DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
             conn = ds.getConnection();
             int rol,i=0;
        
             ResultSet result = null;
-            PreparedStatement statement = null;                      
-
+            PreparedStatement statement = null;   
+        try {                               
             statement = conn.prepareStatement("SELECT `Rol` FROM `SiluBd`.`Usuarios` WHERE `Dni`='"+Dni+"';");
             result = statement.executeQuery();
             if(result.next()) { 
@@ -203,6 +221,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 	} catch(SQLException sqle) {
 			throw new Exception("Excepción en UsuarioDAOImpl.dameRol: "+sqle);
         }
+          //cierro la conexion    
+                finally {
+			if(result != null)
+				try { result.close(); } catch(SQLException ignored) { }
+			if(statement != null)
+				try { statement.close(); } catch(SQLException ignored) { }
+			if(conn != null)
+				try { conn.close(); } catch(SQLException ignored) { }
+		}
     }
 
     @Override

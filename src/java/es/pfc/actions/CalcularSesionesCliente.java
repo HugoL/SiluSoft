@@ -17,6 +17,8 @@
  */
 package es.pfc.actions;
 
+import es.pfc.forms.CalcularSesionesForm;
+import es.pfc.forms.InsertarClienteForm;
 import es.pfc.model.Cliente;
 import es.pfc.model.Sesiones;
 import es.pfc.negocio.ClientesBO;
@@ -52,16 +54,31 @@ public class CalcularSesionesCliente extends org.apache.struts.action.Action {
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-            int idCliente = Integer.parseInt(request.getParameter("id"));
-            int fit= Integer.parseInt(request.getParameter("fit"));
-            int confort = Integer.parseInt(request.getParameter("confort"));
+            CalcularSesionesForm CalculaSesionesForm = (CalcularSesionesForm) form;
             Sesiones sesiones = new Sesiones();
-            sesiones.setConfort(confort);
-            sesiones.setFit(fit);
-            if(ClientesBO.insertaSesiones(sesiones, idCliente)){                        
-                List lista = new ArrayList();
+            //COGER DEL FORMULARIO EL PESO, Y LOS KILOS A PERDER
+           
+            //int idCliente = Integer.parseInt(request.getParameter("id"));
+            //int fit= Integer.parseInt(request.getParameter("fit"));
+            //int confort = Integer.parseInt(request.getParameter("confort"));
+            
+            
+            //FÓRMULA PARA CALCULAR LAS SESIONES!!!            
+            int sobrepeso;
+            int pesoideal = 0;
+            sobrepeso = (int) (peso - pesoideal); //me falta saber el peso ideal
+            int y;             
+            y = new Double(sobrepeso / 3).intValue();       
+            int fit = 6*y;
+            int comfort = 4*y;
+            
+            sesiones.setFit(15); //sesiones.setFit(fit);
+            sesiones.setConfort(12); //sesiones.setConfort(comfort);
+            sesiones.setTotal(sesiones.getFit()+sesiones.getConfort());         
+            if(ClientesBO.insertaSesiones(sesiones, CalculaSesionesForm.getIdcliente())){                        
+                /*List lista = new ArrayList();
                 lista=ClientesBO.esEncontrado(idCliente,null,null,null,null);            
-                request.setAttribute("cliente",lista.get(0));
+                request.setAttribute("cliente",lista.get(0));*/
                 System.out.println("CalcularSesionesClienteAction sesiones: "+sesiones.getConfort());
                 request.setAttribute("sesiones", sesiones);
                 return mapping.findForward(SUCCESS);

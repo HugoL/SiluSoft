@@ -30,6 +30,7 @@ public class Sesiones implements Serializable {
     private int total;
     private int resconfort;
     private int resfit;
+    private int kilossobran;
     
     public Sesiones(){
         

@@ -68,8 +68,8 @@
                 <div class="clearfix"></div>
                 <div class="span4 well well-small"><bean:message key="general.comfort"/>
                     <span class="badge badge-info"><bean:write name="sesiones" property="confort" /></span></div>
-                    <div class="span4 well well-small"><bean:message key="general.total"/></td>
-                        <span class="badge badge-warning"><bean:write name="sesiones" property="total" /></div>                
+                <div class="span4 well well-small"><bean:message key="general.total"/></td>
+                    <span class="badge badge-warning"><bean:write name="sesiones" property="total" /></span></div>                
 		  
             </logic:present>
             <logic:notPresent name="sesiones" >

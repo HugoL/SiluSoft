@@ -51,11 +51,11 @@
         <div class="row"> 
     <div class="span11">
     <ul class="nav nav-tabs">  
-        <li class="active"><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=3">Datos</a></li> 
+        <li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=3">Datos</a></li> 
 	<li><a a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=1">Tratamiento</a></li>
       	<li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=6">Observación</a></li>   
 	<li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=4">Test</a></li>
-        <li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=5">Medidas</a></li>			    		
+        <li class="active"><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=5">Medidas</a></li>			    		
     </ul>
     </div> <!-- menu ficha -->    
     <div class="clearfix"></div>  
@@ -63,7 +63,7 @@
     <logic:present name="cliente">
                     <html:form action="/InsertaImc">   
                         <div align="center">
-                        <div class="span10"><bean:message key="medidas.para"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></div>
+                        <div class="span10"><bean:message key="medidas.imc"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></div>
                         <div class="span5"><label><bean:message key="cliente.insertapeso"/>: </label><html:text property="peso" /><span class="add-on">Kg.</span></div>
                         <div class="clearfix"></div>
                         <div class="span5"><label><bean:message key="cliente.insertamedida"/>: </label><html:text property="altura" /><span class="add-on">m.</span></div>
@@ -71,7 +71,6 @@
                         <div class="span10"><html:submit value="Insertar" styleClass="btn btn-danger" /></div>
                         </div>
                     </html:form>
-
     <div class="span11" align="center"><a class="btn btn-success" href="principal.jsp"><em class="icon-home icon-white"></em> Volver al menú</a>
                 <a class="btn btn-warning" href="ListaClientes.do"><em class="icon-list icon-white"></em> Listado de clientes </a></div>
             </div><!-- row -->

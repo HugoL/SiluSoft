@@ -41,8 +41,7 @@
     <body>
        <%-- include header --%>
     <tiles:insert page="plantillas/barranav.jsp" flush="true"/>
-     <div class="container mifondo">
-     
+     <div class="container mifondo">     
      <tiles:insert page="plantillas/logo.jsp" flush="true"/>
      <logic:present name="usuario">
      <div class="containter">   
@@ -91,13 +90,14 @@
     </div>
      </logic:present>
     <logic:notPresent name="usuario" scope="session">
+        <div class="alert alert-danger"><bean:message key="general.noidentificado"/></div>
      </logic:notPresent>
     <logic:notPresent name="usuario" scope="session">
     <center><bean:message key="general.noidentificado"/><br /><html:link href="./Registro.do"><bean:message key="general.identificarse"/></html:link></center>
     </logic:notPresent>
-     <%-- include header --%>
-    <tiles:insert page="plantillas/pie.jsp" flush="true"/>
     </div>
+     <%-- include header --%>
+    <tiles:insert page="plantillas/pie.jsp" flush="true"/>    
         </div>
      </div>       
     </body>

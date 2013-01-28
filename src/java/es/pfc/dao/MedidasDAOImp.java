@@ -35,7 +35,7 @@ public class MedidasDAOImp implements MedidasDAO{
     public List leerZonas() throws Exception {        
         Connection conn = null;
         Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
+        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");        
         conn = ds.getConnection();      
        
         ResultSet result = null;
