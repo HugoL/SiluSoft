@@ -56,7 +56,7 @@ public class InsertarImcClienteAction extends org.apache.struts.action.Action {
         
         altura=(float) Math.pow(altura, altura);    
         //CALCULO IMC 
-        float imc = peso/altura;
+        float imc = peso/(altura*altura);
         System.out.println("IMC calculado: "+imc);
         request.setAttribute("imc", imc);
         if(imc>24.9){

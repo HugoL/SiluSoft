@@ -62,18 +62,18 @@ public class CalcularSesionesCliente extends org.apache.struts.action.Action {
             //int fit= Integer.parseInt(request.getParameter("fit"));
             //int confort = Integer.parseInt(request.getParameter("confort"));
             
-            
             //FÓRMULA PARA CALCULAR LAS SESIONES!!!            
             int sobrepeso;
+            sobrepeso = CalculaSesionesForm.getKilossobran();
             int pesoideal = 0;
-            sobrepeso = (int) (peso - pesoideal); //me falta saber el peso ideal
+            //sobrepeso = (int) (peso - pesoideal); //me falta saber el peso ideal
             int y;             
             y = new Double(sobrepeso / 3).intValue();       
             int fit = 6*y;
             int comfort = 4*y;
             
-            sesiones.setFit(15); //sesiones.setFit(fit);
-            sesiones.setConfort(12); //sesiones.setConfort(comfort);
+            sesiones.setFit(fit); //sesiones.setFit(fit);
+            sesiones.setConfort(comfort); //sesiones.setConfort(comfort);
             sesiones.setTotal(sesiones.getFit()+sesiones.getConfort());         
             if(ClientesBO.insertaSesiones(sesiones, CalculaSesionesForm.getIdcliente())){                        
                 /*List lista = new ArrayList();
