@@ -64,9 +64,10 @@
                 <div class="span11" align="center"><a class="btn btn-success" href="listaMedidas.do?Id=<bean:write name="cliente" property="idCliente"/>&Dni=<bean:write name="cliente" property="dni"/>">Ver medidas</a></div>		                
                     <html:form action="/insertaSesion">                        		
                         <logic:iterate id="medida" name="listaZonas" scope="request" type="es.pfc.model.Medidas">
-                            <div class="span5" align="right"><bean:write name="medida" property="zona" /></div>
-                            <div class="span2"><html:text property="campos" size="5" value="" /> mm.</div>
-                            <input type="hidden" name="idZona" value="<bean:write name="medida" property="idZona"/>"/>                         
+                            <div class="span5" align="right"><div class="control-group"><label><bean:write name="medida" property="zona" />
+                                <html:text property="campos" size="5" value="" /></label><span class="add-on">mm.</span></div>
+                            <input type="hidden" name="idZona" value="<bean:write name="medida" property="idZona"/>"/>    
+                            </div>
                         </logic:iterate>
                               		               
                         <input type="hidden" name="idCliente" value="<bean:write name="cliente" property="idCliente"/>"/>

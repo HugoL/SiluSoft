@@ -60,10 +60,10 @@
     </div> <!-- menu ficha -->    
     <div class="clearfix"></div>  
     <div class="span11 cuerpoficha">
+        <legend><bean:message key="medidas.imc"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></legend>
     <logic:present name="cliente">
                     <html:form action="/InsertaImc">   
-                        <div align="center">
-                        <div class="span10"><bean:message key="medidas.imc"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></div>
+                        <div align="center">                        
                         <div class="span5"><label><bean:message key="cliente.insertapeso"/>: </label><html:text property="peso" /><span class="add-on">Kg.</span></div>
                         <div class="clearfix"></div>
                         <div class="span5"><label><bean:message key="cliente.insertamedida"/>: </label><html:text property="altura" /><span class="add-on">m.</span></div>

@@ -36,7 +36,7 @@
         <link href="css/bootstrap-responsive.css" rel="stylesheet">
         <link href="css/nuevosestilos.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title><bean:message key="sesiones.titulo"/></title>
+        <title>calculo de sesiones</title>
     </head>
     <body>
        <%-- include header --%>

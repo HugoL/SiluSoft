@@ -25,19 +25,19 @@ import org.apache.struts.validator.ValidatorForm;
  */
 public class InsertarImcClienteForm extends ValidatorForm {
         
-    private int idCliente;
+    private int id;
     private float peso;
     private float altura;
     /**
      * @return
      */
-    public int getIdCliente() {
-        return idCliente;
+    public int getId() {
+        return id;
     }
 
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente=idCliente;
+    public void setId(int id) {
+        this.id=id;
     }
 
     

@@ -59,6 +59,7 @@ public class InsertarImcClienteAction extends org.apache.struts.action.Action {
         float imc = peso/(altura*altura);
         System.out.println("IMC calculado: "+imc);
         request.setAttribute("imc", imc);
+        request.setAttribute("peso",peso);
         if(imc>24.9){
             if(imc>24.9 && imc<30.0){
                 System.out.println("existe sobrepeso");
