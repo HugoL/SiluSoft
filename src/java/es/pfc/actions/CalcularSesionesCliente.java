@@ -76,13 +76,13 @@ public class CalcularSesionesCliente extends org.apache.struts.action.Action {
             y = new Double(sobrepeso / 3).intValue();       
             int fit = 6*y;
             int comfort = 4*y;
-            System.out.println("Id del cliente: "+CalculaSesionesForm.getIdclientepeso());
-            sesiones.setIdCliente(cliente.getIdCliente());
+            System.out.println("Id del cliente: "+CalculaSesionesForm.getIdCliente());
+            sesiones.setIdCliente(CalculaSesionesForm.getIdCliente());
             sesiones.setFit(fit); //sesiones.setFit(fit);
             sesiones.setConfort(comfort); //sesiones.setConfort(comfort);
             System.out.println("fit: "+sesiones.getFit()+" comfort: "+sesiones.getConfort());
             sesiones.setTotal(sesiones.getFit()+sesiones.getConfort());         
-            if(ClientesBO.insertaSesiones(sesiones, cliente.getIdCliente())){                        
+            if(ClientesBO.insertaSesiones(sesiones, sesiones.getIdCliente())){                        
                 /*List lista = new ArrayList();
                 lista=ClientesBO.esEncontrado(idCliente,null,null,null,null);            
                 request.setAttribute("cliente",lista.get(0));*/

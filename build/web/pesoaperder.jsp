@@ -51,7 +51,7 @@
         <html:form action="/CalculaSesiones">
             <input type="hidden" property="imc" value="<bean:write name="imc"/>" />
             <input type="hidden" property="peso" value="<bean:write name="peso"/>" />
-            <input type="hidden" property="idclientepeso" value="<bean:write name="cliente" property="idCliente"/>"/>
+            <html:hidden name="cliente" property="idCliente"/>
             <div class="input-append"><label>Kg. a perder</label><html:text property="kilossobran" styleClass="input-mini"/>  <span class="add-on">.Kg</span></div>                
             <div class="span10">
             <html:submit value="Enviar" styleClass="btn btn-danger"/>

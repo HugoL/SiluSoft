@@ -52,26 +52,21 @@
         <div class="row"> 
     <div class="span11">
     <ul class="nav nav-tabs">  
-        <li class="active"><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=3">Datos</a></li> 
+        <li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=3">Datos</a></li> 
 	<li><a a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=1">Tratamiento</a></li>
       	<li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=6">Observación</a></li>   
 	<li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=4">Test</a></li>
-        <li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=5">Medidas</a></li>			    		
+        <li class="active"><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=5">Medidas</a></li>			    		
     </ul>
     </div> <!-- menu ficha -->    
     <div class="clearfix"></div>  
     <div class="span11 cuerpoficha">
-             <div class="span3"><bean:message key="sesiones.para"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /><br /><br/></strong></div>
-             <div class="clearfix"></div>
-                 
-             <div class="span10" align="center"><img src="imagenes/maquinas.png" /></div>
-                 
-             <div class="span3" align="center"><bean:message key="general.fit"/>: </div>
-             <div class="span3" align="center"><bean:message key="general.comfort"/>:</div>
-             <div class="clearfix"></div>
-             
-             <div class="span3" align="center"><strong><bean:write name="sesiones" property="fit" /></strong> <bean:message key="sesiones.sesiones"/></div>
-             <div class="span3" align="center"><strong><bean:write name="sesiones" property="confort" /></strong> <bean:message key="sesiones.sesiones"/></div>
+        <legend><bean:message key="sesiones.para"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></legend>                 
+             <div class="span11" align="center"><img src="imagenes/maquinas.png" /></div>
+             <div class="span10" align="center">    
+                 <div class="span4"><h4><bean:message key="general.fit"/>: </h4> <strong><b><bean:write name="sesiones" property="fit" /></b></strong> <bean:message key="sesiones.sesiones"/></div>
+                 <div class="span4"><h4><bean:message key="general.comfort"/>:</h4> <strong><bean:write name="sesiones" property="confort" /></strong> <bean:message key="sesiones.sesiones"/></div>
+             </div>
              <div class="clearfix"></div>
     </div>
        <div class="span11"><a class="btn btn-success" href="principal.jsp"><em class="icon-home icon-white"></em> Volver al menú</a>

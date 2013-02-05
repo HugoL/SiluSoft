@@ -12,7 +12,7 @@ import org.apache.struts.validator.ValidatorForm;
  */
 public class CalcularSesionesForm extends ValidatorForm {
     
-    private int id;
+    private int idCliente;
     private float imc;
     private int kilossobran;
 
@@ -44,12 +44,12 @@ public class CalcularSesionesForm extends ValidatorForm {
         this.kilossobran=kilossobran;
     }
     
-     public int getIdclientepeso() {
-        return id;
+     public int getIdCliente() {
+        return idCliente;
     }
        
-    public void setIdclientepeso(int id) {
-        this.id=id;
+    public void setIdCliente(int idCliente) {
+        this.idCliente=idCliente;
     }
 
     /**
