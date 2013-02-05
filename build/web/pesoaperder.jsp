@@ -45,16 +45,19 @@
     </ul>
     </div> <!-- menu ficha -->    
     <div class="clearfix"></div>  
-    <div class="span11 cuerpoficha">
-        <div><bean:message key="medidas.imc"/><span class="label label-warning"><bean:write name="imc" /></span></div>        
+    <div class="span11 cuerpoficha" align="center">
+        <div><bean:message key="medidas.imc"/> de <strong><bean:write name="cliente" property="nombre"/> <bean:write name="cliente" property="apellidos"/></strong>: <span class="label label-warning"><bean:write name="imc" /></span><br/><br/></div>        
         <logic:present name="cliente">
-        <html:form action="/CalculaSesiones" styleClass="form-inline">
+        <html:form action="/CalculaSesiones">
             <input type="hidden" property="imc" value="<bean:write name="imc"/>" />
             <input type="hidden" property="peso" value="<bean:write name="peso"/>" />
-            <input type="hidden" property="idcliente" value="<bean:write name="cliente" property="id"/>"/>
-            <html:text property="kilossobran"/>                                                       
+            <input type="hidden" property="idclientepeso" value="<bean:write name="cliente" property="idCliente"/>"/>
+            <div class="input-append"><label>Kg. a perder</label><html:text property="kilossobran" styleClass="input-mini"/>  <span class="add-on">.Kg</span></div>                
+            <div class="span10">
             <html:submit value="Enviar" styleClass="btn btn-danger"/>
-        </html:form>        
+            </div>
+        </html:form>  
+            <div class="clearfix"><p>&nbsp;</p></div>
     <div class="span11" align="center"><a class="btn btn-success" href="principal.jsp"><em class="icon-home icon-white"></em> Volver al menú</a>
                 <a class="btn btn-warning" href="ListaClientes.do"><em class="icon-list icon-white"></em> Listado de clientes </a></div>
             </div><!-- row -->

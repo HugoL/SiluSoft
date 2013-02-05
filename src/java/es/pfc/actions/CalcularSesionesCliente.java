@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -64,6 +65,10 @@ public class CalcularSesionesCliente extends org.apache.struts.action.Action {
             
             //FÓRMULA PARA CALCULAR LAS SESIONES!!!            
             int sobrepeso;
+            HttpSession sesion = request.getSession(false);
+            Cliente cliente = new Cliente();
+            cliente=(Cliente)request.getAttribute("cliente");
+            
             sobrepeso = CalculaSesionesForm.getKilossobran();
             int pesoideal = 0;
             //sobrepeso = (int) (peso - pesoideal); //me falta saber el peso ideal
@@ -71,11 +76,13 @@ public class CalcularSesionesCliente extends org.apache.struts.action.Action {
             y = new Double(sobrepeso / 3).intValue();       
             int fit = 6*y;
             int comfort = 4*y;
-            
+            System.out.println("Id del cliente: "+CalculaSesionesForm.getIdclientepeso());
+            sesiones.setIdCliente(cliente.getIdCliente());
             sesiones.setFit(fit); //sesiones.setFit(fit);
             sesiones.setConfort(comfort); //sesiones.setConfort(comfort);
+            System.out.println("fit: "+sesiones.getFit()+" comfort: "+sesiones.getConfort());
             sesiones.setTotal(sesiones.getFit()+sesiones.getConfort());         
-            if(ClientesBO.insertaSesiones(sesiones, CalculaSesionesForm.getIdcliente())){                        
+            if(ClientesBO.insertaSesiones(sesiones, cliente.getIdCliente())){                        
                 /*List lista = new ArrayList();
                 lista=ClientesBO.esEncontrado(idCliente,null,null,null,null);            
                 request.setAttribute("cliente",lista.get(0));*/

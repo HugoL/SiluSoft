@@ -73,9 +73,7 @@ public class InsertarImcClienteAction extends org.apache.struts.action.Action {
             sesiones.setConfort(0);
         }        
         
-        request.setAttribute("sesiones", sesiones);
-
-        
+        request.setAttribute("sesiones", sesiones);        
         return mapping.findForward(SUCCESS);
     }
 }

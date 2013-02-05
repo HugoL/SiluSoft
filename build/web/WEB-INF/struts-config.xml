@@ -186,7 +186,7 @@
              <forward name="correcto" path="/listarMedidasCliente.jsp" />
              <forward name="incorrecto" path="/incorrecto.jsp" />
         </action>
-        <action path="/CalculaSesiones" type="es.pfc.actions.CalcularSesionesCliente" input="/incorrecto.jsp">
+        <action path="/CalculaSesiones" name="CalcularSesionesForm" type="es.pfc.actions.CalcularSesionesCliente" input="/incorrecto.jsp">
             <forward name="correcto" path="/sesionesCalculadas.jsp" />
             <forward name="incorrecto" path="/incorrecto.jsp" />
         </action>
