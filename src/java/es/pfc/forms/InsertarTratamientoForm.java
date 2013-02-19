@@ -36,9 +36,17 @@ public class InsertarTratamientoForm extends ValidatorForm{
     private int Idcentro;
     private String descripcion;
     private float precio;
+    private int idTratamiento;
     /**
      * @return
      */
+    public int getIdTratamiento(){
+        return idTratamiento;
+    }
+    
+    public void setIdTratamiento(int IdTratamiento){
+        this.idTratamiento = idTratamiento;
+    }
     
     public int getIdcliente(){
         return Idcliente;

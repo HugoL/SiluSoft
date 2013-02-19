@@ -85,13 +85,16 @@ public class InsertaTesClienteDinamicoAction extends org.apache.struts.action.Ac
             PreguntaTestBO.insertarTestCliente(test);
             return mapping.findForward(SUCCESS);            
         }else{
-            if(!insertado)
+            if(!insertado) {
                 System.out.println("PETA porque no se insertan todos los resultados");
+            }
             else
-                if(test.getResultado()==null)
-                    System.out.println("PETA porque no se ha insertado el resultado del TEST");
-                else
-                    System.out.println("PETA porque no se insertan los resultados ni el resultado del TEST");
+                if(test.getResultado()==null) {
+                System.out.println("PETA porque no se ha insertado el resultado del TEST");
+            }
+                else {
+                System.out.println("PETA porque no se insertan los resultados ni el resultado del TEST");
+            }
         
             return mapping.findForward(FAILURE);    
         }

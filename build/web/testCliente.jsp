@@ -122,6 +122,7 @@
                                             <html:option value="4"><bean:write name="pregunta" property="respsanguinea" /></html:option> 
                                             <html:option value="3"><bean:write name="pregunta" property="resplinfatica" /></html:option>
                                             <html:option value="2"><bean:write name="pregunta" property="respbiliosa" /></html:option>
+                                            <html:option value="1"><bean:write name="pregunta" property="respnerviosa" /></html:option>
                                           </html:select></td>
                     </tr>
                        </logic:iterate>   

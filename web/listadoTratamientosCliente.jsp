@@ -75,17 +75,18 @@
                 <div class="clearfix"></div>
             </logic:equal>
         <logic:iterate id="tratamiento" name="listadotrat" scope="request" type="es.pfc.model.Tratamiento">
-            <html:form action="/InsertarTratamiento">	 
+            <html:form action="/ActualizarTratamiento" styleClass="form-inline">	 
+                <html:hidden name="tratamiento" property="idTratamiento"/>
                 <div class="span3"><bean:message key="tratamiento.tipo"/>:</div>
-                <div class="span3"><strong><bean:write name="tratamiento" property="tipo" /></strong></div>
+                <div class="span3"><strong><html:text name="tratamiento" property="tipo" /></strong></div>
                 <div class="clearfix"></div>
-                <div class="span3"><strong><bean:message key="formulario.fechaInicio"/>: </strong><bean:write name="tratamiento" property="fechaInicio" />,&nbsp; </div>
-                <div class="span3"><strong><bean:message key="formulario.fechaFin"/>: </strong><bean:write name="tratamiento" property="fechaFin" /></div>
+                <div class="span3"><strong><bean:message key="formulario.fechaInicio"/>: </strong><html:text name="tratamiento" property="fechaInicio" />,&nbsp; </div>
+                <div class="span3"><strong><bean:message key="formulario.fechaFin"/>: </strong><html:text name="tratamiento" property="fechaFin" /></div>
                 <div class="clearfix"></div>
-                <div class="span3"><strong><bean:message key="tratamiento.intervalos"/>: </strong><bean:write name="tratamiento" property="intervalos" />,&nbsp; </div>
-                <div class="span3"><strong><bean:message key="tratamiento.mantenimiento"/>: </strong><bean:write name="tratamiento" property="mantenimiento" /></div>
+                <div class="span3"><strong><bean:message key="tratamiento.intervalos"/>: </strong><html:text name="tratamiento" property="intervalos" />,&nbsp; </div>
+                <div class="span3"><strong><bean:message key="tratamiento.mantenimiento"/>: </strong><html:text name="tratamiento" property="mantenimiento" /></div>
                 <div class="clearfix"></div>
-                <div class="span3"><strong><bean:message key="tratamiento.observaciones"/>: </strong><bean:write name="tratamiento" property="observaciones" />,&nbsp; </div>
+                <div class="span3"><strong><bean:message key="tratamiento.observaciones"/>: </strong><html:text name="tratamiento" property="observaciones" />,&nbsp; </div>
                 <div class="span3"><strong><bean:message key="tratamiento.resultados"/>: </strong><bean:write name="tratamiento" property="resultados" /></div>
                 <div class="clearfix"></div>
                 <div class="span3" align="center"><html:submit value="Modificar" styleClass="btn btn-danger" /></div>

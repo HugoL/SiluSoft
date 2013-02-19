@@ -152,7 +152,8 @@ public class TratamientosDAOImp implements TratamientosDAO {
         //Pido conexion       
        try {    
 			//statement = conn.prepareStatement("UPDATE  `SiluBd`.`TratamientoDeCliente` SET  `Nombre` =  '"+Nombre+"', `Descripcion` = '"+Descripcion+"', `Precio` = '"+Precio+"' WHERE  `TratamientoDeCliente`.`Referencia` =  '"+tratamiento.getIdTratamiento()+"';"); //, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY
-                        String consulta= "UPDATE  `SiluBd`.`TratamientoDeCliente` SET  `TipoTratamiento` =  '"+tratamiento.getTipo()+"', `FechaInicio` = '"+tratamiento.getFechaInicio()+"', `FechaFin` = '"+tratamiento.getFechaFin()+"', `Intervalos` = '"+tratamiento.getIntervalos()+"', `Resultados` = '"+tratamiento.getIntervalos()+"', `Resultados` = '"+tratamiento.getResultados()+"', `Mantenimiento` = '"+tratamiento.getMantenimiento()+"', `Observaciones` = '"+tratamiento.getObservaciones()+"' WHERE  `TratamientoDeCliente`.`Referencia` =  '"+tratamiento.getIdTratamiento()+"';";
+                        String consulta= "UPDATE  `SiluBd`.`TratamientoDeCliente` SET  `TipoTratamiento` =  '"+tratamiento.getTipo()+"', `FechaInicio` = '"+tratamiento.getFechaInicio()+"', `FechaFin` = '"+tratamiento.getFechaFin()+"', `Intervalos` = '"+tratamiento.getIntervalos()+"', `Resultados` = '"+tratamiento.getIntervalos()+"', `Resultados` = '"+tratamiento.getResultados()+"', `Mantenimiento` = '"+tratamiento.getMantenimiento()+"', `Observaciones` = '"+tratamiento.getObservaciones()+"' WHERE  `TratamientoDeCliente`.`Referencia` =  "+tratamiento.getIdTratamiento()+";";
+                        System.out.println(consulta);
                         actualizado=statement.execute(consulta);
                         result=statement.getResultSet();
                         

@@ -52,6 +52,7 @@ public class ActualizarTratamientoAction extends org.apache.struts.action.Action
         
         InsertarTratamientoForm tratamientoForm = (InsertarTratamientoForm) form;
         Tratamiento tratamiento = new Tratamiento();
+        tratamiento.setIdTratamiento(tratamientoForm.getIdTratamiento());
         tratamiento.setIdCliente(tratamientoForm.getIdcliente());
         System.out.println("Asignado al tratamiento idCliente: "+tratamientoForm.getIdcliente());
         tratamiento.setTipo(tratamientoForm.getTipo());
