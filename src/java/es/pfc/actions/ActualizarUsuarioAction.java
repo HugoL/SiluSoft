@@ -49,9 +49,9 @@ public class ActualizarUsuarioAction extends org.apache.struts.action.Action{
         miusuario.setEmail(UsuarioForm.getEmail());
         
         if(UsuariosBO.actualizaUsuario(miusuario)) {                    
-                                return mapping.findForward(SUCCESS);                                            
+            return mapping.findForward(SUCCESS);                                            
         }else {                    
-                                return mapping.findForward(FAILURE);                          
+            return mapping.findForward(FAILURE);                          
         }
     }
 }

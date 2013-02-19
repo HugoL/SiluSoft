@@ -69,7 +69,7 @@ public class MiAgendaAction extends org.apache.struts.action.Action {
         Date fecha = null;
         List lista = new ArrayList();
         List listaUsuarios = new ArrayList();
-        
+        int diasemana;
          HttpSession session = request.getSession(false);
         Usuario usuario=(Usuario) session.getAttribute("usuario");  
         
@@ -87,6 +87,7 @@ public class MiAgendaAction extends org.apache.struts.action.Action {
         
         if("0".equals(var)){
             fecha=new Date(mifecha.getTime());
+            diasemana = calendario.get(Calendar.DAY_OF_WEEK);
         }else{          
            //convierto el parametro fecha en tipo util.Date
            fechica=request.getParameter("fecha");
@@ -96,15 +97,17 @@ public class MiAgendaAction extends org.apache.struts.action.Action {
            calendario.setTime(mifecha); 
            if("1".equals(var)){ //sumo un dia
                
-                calendario.add(Calendar.DATE,1); //le suma 1 dia               
-                fechaagenda=formato.format(calendario.getTime());               
+                calendario.add(Calendar.DATE,1); //le suma 1 dia                         
+                fechaagenda=formato.format(calendario.getTime());        
+                diasemana = calendario.get(Calendar.DAY_OF_WEEK);
                 //convierto la cadena fechica a formato fecha (sql.date)
                 java.util.Date parsedUtilDate = formater.parse(fechaagenda); 
                 fecha= new java.sql.Date(parsedUtilDate.getTime());
            }else{
                if("-1".equals(var)){ //resto un dia
                     calendario.add(Calendar.DATE,-1); //le suma 1 dia
-                    fechaagenda=formato.format(calendario.getTime());                   
+                    fechaagenda=formato.format(calendario.getTime());
+                    diasemana = calendario.get(Calendar.DAY_OF_WEEK);
                     //convierto la cadena fechica a formato fecha (sql.date)
                     java.util.Date parsedUtilDate = formater.parse(fechaagenda);  
                     fecha= new java.sql.Date(parsedUtilDate.getTime());
@@ -113,6 +116,7 @@ public class MiAgendaAction extends org.apache.struts.action.Action {
                     //System.out.println(fechaagenda);
                     //fecha=fechaagenda;
                    fecha=new Date(mifecha.getTime());
+                   diasemana = calendario.get(Calendar.DAY_OF_WEEK);
                }               
            }                    
         }
@@ -138,8 +142,10 @@ public class MiAgendaAction extends org.apache.struts.action.Action {
                 //agenda=MiAgendaBO.dameMisEventos(agendatemp.getSala(), usuario.getIdCentro(),fecha, j);            
                 miagenda=MiAgendaBO.dameEventos(agendatemp.getSala(), usuario.getIdCentro(),fecha);            
                 //relleno los campos necesarios     
-                System.out.println("MiAgenda Action, sala: "+i+" acto: "+agenda.getActo()+" evento: "+agenda.getEvento());
+                //System.out.println("MiAgenda Action, sala: "+i+" acto: "+agenda.getActo()+" evento: "+agenda.getEvento());
                 miagenda.setFecha(fecha);
+                String dia = damedia(diasemana);            
+            agenda.setDiaSemana(dia);
                 miagenda.setIdCentro(usuario.getIdCentro());
                 miagenda.setIdSala(agendatemp.getIdSala());
                 miagenda.setSala(agendatemp.getSala());            
@@ -151,13 +157,41 @@ public class MiAgendaAction extends org.apache.struts.action.Action {
         request.setAttribute("listaAgendas",listaAgendas);
         request.setAttribute("agenda",agenda);
         
-        //Recupero la Lista de los clientes para luego hacer el select
-        lista = ClientesBO.esListado(usuario.getIdCentro());
-        session.setAttribute("listaClientes", lista);
         listaUsuarios = UsuariosBO.listaUsuarios(usuario.getIdCentro());
         session.setAttribute("listaUsuarios", listaUsuarios);
         
         return mapping.findForward(SUCCESS);
     
+    }
+    
+    private String damedia(int num){
+        String dia="";
+        switch(num){
+            case 0: 
+                dia = "lunes";
+                break;
+            case 1: 
+                dia = "domingo";
+                break;
+            case 2: 
+                dia = "lunes";
+                break;
+            case 3: 
+                dia = "martes";
+                break;
+            case 4: 
+                dia = "miércoles";
+                break;
+            case 5: 
+                dia = "jueves";
+                break;
+            case 6: 
+                dia = "viernes";
+                break;
+            case 7: 
+                dia = "sábado";
+                break;
+        }                
+        return dia;        
     }
 }

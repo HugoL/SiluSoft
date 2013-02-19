@@ -56,15 +56,15 @@
     <div class="row">           
     <div class="span11 cuerpoficha">   
          <div id="agenda"> 
-                        <div class="span11" align="center"><h4><bean:message key="agenda.titulo"/></h4></div>
+                        <legend><h4><bean:message key="agenda.titulo"/></h4></legend>
                         <div class="span10"><center><a class="btn btn-inverse" href="miAgenda.do?var=0"><bean:message key="agenda.hoy"/></a></center></div>
                         <div class="clearfix"></div>
-                        <div class="span10"><center><a class="btn btn-danger btn-small" href="miAgenda.do?fecha=<%=String.valueOf(agendafit.getFecha()) %>&var=-1"><em class="icon icon-arrow-left icon-white"></em></a> <strong><bean:write name="agenda" property="fecha" /></strong> <a class="btn btn-danger btn-small" href="miAgenda.do?fecha=<%=String.valueOf(agendafit.getFecha()) %>&var=1"><em class="icon icon-arrow-right icon-white"></em></a></center></div>
-                        <div class="clearfix"></div>
+                        <div class="span10"><center><a class="btn btn-danger btn-small" href="miAgenda.do?fecha=<%=String.valueOf(agendafit.getFecha()) %>&var=-1"><em class="icon icon-arrow-left icon-white"></em></a> <strong><bean:write name="agenda" property="fecha" /></strong> <a class="btn btn-danger btn-small" href="miAgenda.do?fecha=<%=String.valueOf(agendafit.getFecha()) %>&var=1"><em class="icon icon-arrow-right icon-white"></em></a></center></div>                        
+                        <div class="clearfix">&nbsp;</div>
                         <div class="span10">
                         <table class="table table-bordered table-striped">					                       
                         <tr class="warning">
-                          <td></td>
+                          <td><span class="label label-success"><bean:write name="agenda" property="diaSemana" /></span></td>
                         <logic:iterate id="sala" name="listaAgendas" scope="request" type="es.pfc.model.Agenda">                              
                               <td class="agendaotra"><div align="center"><strong><bean:write name="sala" property="sala" /></strong></div></td>
                           </logic:iterate>                          
@@ -236,10 +236,7 @@
                               
                           </logic:iterate>
                         </tr>                     
-                  </table>                       
-                  <div class="span2">                    
-                      <p><html:image styleClass="img-rounded" src="./imagenes/calendario.png"/></p>
-                  </div>
+                  </table>                                         
                 </div><!-- contenedor agenda -->			                                                  
 	</div><!-- agenda -->
         <div class="span11" align="center"><a class="btn btn-success" href="principal2.jsp"><em class="icon-home icon-white"></em> <bean:message key="general.volvermenu"/></a></div>

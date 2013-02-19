@@ -80,9 +80,10 @@ public class Agenda2Action extends org.apache.struts.action.Action {
              
         //si le paso una fecha como parametro la mando para hacer la consulta sobre esa fecha
         //sino hago la consulta con la fecha de hoy  
-        
+        int diasemana; 
         if("0".equals(var)){
             fecha=new Date(mifecha.getTime());
+            diasemana = calendario.get(Calendar.DAY_OF_WEEK);
         }else{          
            //convierto el parametro fecha en tipo util.Date
            fechica=request.getParameter("fecha");
@@ -93,14 +94,16 @@ public class Agenda2Action extends org.apache.struts.action.Action {
            if("1".equals(var)){ //sumo un dia
                
                 calendario.add(Calendar.DATE,1); //le suma 1 dia               
-                fechaagenda=formato.format(calendario.getTime());               
+                fechaagenda=formato.format(calendario.getTime());     
+                diasemana = calendario.get(Calendar.DAY_OF_WEEK);
                 //convierto la cadena fechica a formato fecha (sql.date)
                 java.util.Date parsedUtilDate = formater.parse(fechaagenda); 
                 fecha= new java.sql.Date(parsedUtilDate.getTime());
            }else{
                if("-1".equals(var)){ //resto un dia
                     calendario.add(Calendar.DATE,-1); //le suma 1 dia
-                    fechaagenda=formato.format(calendario.getTime());                   
+                    fechaagenda=formato.format(calendario.getTime());   
+                    diasemana = calendario.get(Calendar.DAY_OF_WEEK);
                     //convierto la cadena fechica a formato fecha (sql.date)
                     java.util.Date parsedUtilDate = formater.parse(fechaagenda);  
                     fecha= new java.sql.Date(parsedUtilDate.getTime());
@@ -109,6 +112,7 @@ public class Agenda2Action extends org.apache.struts.action.Action {
                     //System.out.println(fechaagenda);
                     //fecha=fechaagenda;
                    fecha=new Date(mifecha.getTime());
+                   diasemana = calendario.get(Calendar.DAY_OF_WEEK);
                }               
            }                    
         }
@@ -127,6 +131,9 @@ public class Agenda2Action extends org.apache.struts.action.Action {
             agenda=AgendaBO.dameEventos(agendatemp.getSala(), usuario.getIdCentro(),fecha);
             //relleno los campos necesarios            
             agenda.setFecha(fecha);
+            String dia = damedia(diasemana);
+            System.out.println("dia: "+dia);
+            agenda.setDiaSemana(dia);
             agenda.setIdCentro(usuario.getIdCentro());
             agenda.setIdSala(agendatemp.getIdSala());
             agenda.setSala(agendatemp.getSala());            
@@ -143,5 +150,33 @@ public class Agenda2Action extends org.apache.struts.action.Action {
         session.setAttribute("listaUsuarios", listaUsuarios);
         
         return mapping.findForward(SUCCESS);
+    }
+    
+    private String damedia(int num){
+        String dia="";
+        switch(num){
+            case 0: 
+                dia = "domingo";
+                break;
+            case 1: 
+                dia = "lunes";
+                break;
+            case 2: 
+                dia = "martes";
+                break;
+            case 3: 
+                dia = "miércoles";
+                break;
+            case 4: 
+                dia = "jueves";
+                break;
+            case 5: 
+                dia = "viernes";
+                break;
+            case 6: 
+                dia = "sábado";
+                break;
+        }                
+        return dia;        
     }
 }

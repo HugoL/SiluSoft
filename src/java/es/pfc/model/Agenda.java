@@ -61,6 +61,7 @@ public class Agenda implements Serializable{
     private String evento203;
     private String estado;
     private int valoracion;
+    private String diaSemana;
     
     public Agenda(){
         
@@ -346,4 +347,11 @@ public class Agenda implements Serializable{
       this.valoracion=valoracion;
     }
     
+    public String getDiaSemana(){
+        return diaSemana;
+    }
+    
+    public void setDiaSemana(String diaSemana){
+      this.diaSemana=diaSemana;
+    }
 }

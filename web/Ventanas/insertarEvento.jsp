@@ -44,7 +44,6 @@
     </head>
     <body>
            <%-- include header --%>
-     <tiles:insert page="../plantillas/barranav.jsp" flush="true"/>
      <div class="container mifondo">            
      <div class="containter">   
      <div class="mi-hero-unit">
@@ -57,12 +56,7 @@
                 <html:hidden property="fecha" value="<%=fecha%>" /><br />
                 <div class="span11">Escribe en el cuadro de texto la anotaci&oacute;n </div>
                 
-                <label>Cliente: </label><html:select property="acto" >
-                    <html:option value="0">---</html:option>
-                    <logic:iterate id="cliente" name="listaClientes" scope="session" type="es.pfc.model.Cliente">
-                        <html:option value="${cliente.nombre} ${cliente.apellidos}"><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></html:option>
-                    </logic:iterate>                 
-                </html:select>
+                <label>Cliente: </label><html:text property="acto" />                    
                 <label>Trabajador:  </label><html:select property="asignado" >
                     <html:option value="0">---</html:option>
                     <logic:iterate id="usuariolista" name="listaUsuarios" scope="session" type="es.pfc.model.Usuario">
@@ -70,7 +64,7 @@
                     </logic:iterate>                 
                 </html:select>
                 
-                    <label>Otra informaci&oacute;n: </label><html:text property="masinfo" > </html:text>
+                    <label>Otra informaci&oacute;n: </label><html:text property="masinfo" maxlength="20" > </html:text>
                     
                     <html:submit value="Enviar" styleClass="btn btn-danger" />
             </html:form>

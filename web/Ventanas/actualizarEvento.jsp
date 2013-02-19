@@ -44,7 +44,6 @@
         <title>Actualiza Estado Evento</title>
     </head>
     <body>
-     <tiles:insert page="../plantillas/barranav.jsp" flush="true"/>
      <div class="container mifondo">            
      <div class="containter">   
      <div class="mi-hero-unit">
@@ -58,12 +57,7 @@
 				<div class="span11">Escribe en el cuadro de texto la anotaci&oacute;n </div>
                 
                                 <label>Cliente:</label> <html:text property="acto" disabled="true" size="50"/>
-                                <label>Cambiar cliente:</label> <html:select property="acto" >
-                    <html:option value="0">---</html:option>
-                    <logic:iterate id="cliente" name="listaClientes" scope="session" type="es.pfc.model.Cliente">
-                        <html:option value="${cliente.nombre} ${cliente.apellidos}"><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></html:option>
-                    </logic:iterate>                 
-                </html:select>
+                                <label>Cambiar cliente:</label> <html:text property="acto" />                    
                     <label>Trabajador:</label>  <html:select property="asignado" >
                     <html:option value="0">---</html:option>
                     <logic:iterate id="usuariolista" name="listaUsuarios" scope="session" type="es.pfc.model.Usuario">
@@ -71,7 +65,7 @@
                     </logic:iterate>                 
                 </html:select>
                     <div class="clearfix"><br/></div>
-                    <label>Otra informacion:</label> <html:text property="masinfo" > </html:text>                    
+                    <label>Otra informacion:</label> <html:text property="masinfo" maxlength="20" > </html:text>                    
                     <label>Estado:</label><html:select property="estado">
                         <html:option value="en curso">En curso</html:option>
                         <html:option value="cancelado">Cancelado</html:option>
