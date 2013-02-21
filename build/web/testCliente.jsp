@@ -70,8 +70,7 @@
      <logic:present name="usuario">
      <div class="containter">   
     <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
-    <div class="mi-hero-unit">
-        <div class="span11 nombreusuario"><bean:message key="general.sesion"/><strong><bean:write scope="session" name="usuario" property="nombre" /></strong>&nbsp;</div>
+    <div class="mi-hero-unit">        
         <div class="row"> 
     <div class="span11">
     <ul class="nav nav-tabs">  
@@ -84,9 +83,8 @@
     </div> <!-- menu ficha -->    
     <div class="clearfix"></div>  
     <div class="span11 cuerpoficha"> 
-        <div class="span11"><h3><bean:message key="test.de"/><strong> <bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></h3></div>
-        <logic:equal name="ManipulaClientes" property="activado" value="true">
-            <bean:message key="general.sesion"/>: <strong><bean:write scope="session" name="usuario" property="nombre" /></strong>&nbsp;</p>
+        <legend><bean:message key="test.de"/><strong> <bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></legend>
+        <logic:equal name="ManipulaClientes" property="activado" value="true">            
 	  	<table align="center" class="table-bordered">                    
                     <html:form action="/InsertaTestDinamico">
                         <html:hidden name="cliente" property="idCliente"/>                                                    

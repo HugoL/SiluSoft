@@ -61,15 +61,29 @@
     <div class="clearfix"></div>  
     <div class="span11 cuerpoficha">
                 <legend><bean:message key="medidas.para"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></legend>
-                <div class="span11" align="center"><a class="btn btn-success" href="listaMedidas.do?Id=<bean:write name="cliente" property="idCliente"/>&Dni=<bean:write name="cliente" property="dni"/>">Ver medidas</a></div>		                
-                    <html:form action="/insertaSesion">                        		
-                        <logic:iterate id="medida" name="listaZonas" scope="request" type="es.pfc.model.Medidas">
-                            <div class="span5" align="right"><div class="control-group"><label><bean:write name="medida" property="zona" />
-                                <html:text property="campos" size="5" value="" /></label><span class="add-on">mm.</span></div>
+                <div class="span11" align="center"><a class="btn btn-success" href="listaMedidas.do?Id=<bean:write name="cliente" property="idCliente"/>&Dni=<bean:write name="cliente" property="dni"/>">Ver medidas</a><br/><br/></div>		                
+                <html:form action="/insertaSesion" styleClass="form-horizontal">  
+                        <div class="span4 well" >                        
+                        <logic:iterate id="medida" name="listaZonas" scope="request" type="es.pfc.model.Medidas" length="5">
+                            <div align="center" class="control-group">
+                                <div class="input-prepend"><span class="add-on"><bean:write name="medida" property="zona" /></span>
+                                    <html:text property="campos" size="5" value="" styleClass="input-mini" /><span class="add-on">mm.</span>
+                                </div>
                             <input type="hidden" name="idZona" value="<bean:write name="medida" property="idZona"/>"/>    
                             </div>
                         </logic:iterate>
-                              		               
+                        </div>
+                        <div class="span4 well">
+                        <logic:iterate id="medida" name="listaZonas" scope="request" type="es.pfc.model.Medidas" offset="6">
+                            <div align="center" class="control-group">
+                                <div class="input-prepend">
+                                    <span class="add-on"><bean:write name="medida" property="zona" /></span>
+                                    <html:text property="campos" size="5" value="" styleClass="input-mini" /><span class="add-on">.cm</span>
+                                </div>
+                            <input type="hidden" name="idZona" value="<bean:write name="medida" property="idZona"/>"/>    
+                            </div>
+                        </logic:iterate>
+                        </div>      	                        
                         <input type="hidden" name="idCliente" value="<bean:write name="cliente" property="idCliente"/>"/>
 		
                 <div class="span11"><center><input type="submit" class="btn btn-danger btn-primary" value="Insertar" /></center></div>

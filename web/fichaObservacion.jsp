@@ -48,8 +48,7 @@
      <logic:present name="usuario">
      <div class="containter">   
     <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
-    <div class="mi-hero-unit">
-        <div class="span11 nombreusuario"><bean:message key="general.sesion"/><strong><bean:write scope="session" name="usuario" property="nombre" /></strong>&nbsp;</div>
+    <div class="mi-hero-unit">       
     <logic:equal name="ConsultaClientes" property="activado" value="true">
     <div class="row"> 
     <div class="span11">
@@ -64,7 +63,7 @@
     <div class="clearfix"></div>  
     <div class="span11 cuerpoficha"> 
             <html:form action="/InsertaObservacion" >              
-                <div class="span11" alignt="center"><h4><bean:message key="observaciones.titulo"/> <bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /><input type="hidden" name="idCliente" value="<bean:write name="cliente" property="idCliente"/>"/></h4></div>
+                <legend><bean:message key="observaciones.titulo"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /><input type="hidden" name="idCliente" value="<bean:write name="cliente" property="idCliente"/>"/></strong></legend>
                 <div class="span11"><h5><bean:message key="observaciones.motivo"/>:</h5></div>
 		<div class="span3"><label><bean:message key="observaciones.estetico"/></label>
                     <html:radio property="motivo" value="estetico" /></div>	                    

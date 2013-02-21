@@ -47,8 +47,7 @@
      <logic:present name="usuario">
      <div class="containter">   
     <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
-    <div class="mi-hero-unit">
-        <div class="span11 nombreusuario"><bean:message key="general.sesion"/><strong><bean:write scope="session" name="usuario" property="nombre" /></strong>&nbsp;</div>
+    <div class="mi-hero-unit">        
     <logic:equal name="ConsultaClientes" property="activado" value="true">
         <div class="row"> 
     <div class="span11">
@@ -63,7 +62,7 @@
     <div class="clearfix"></div>  
     <div class="span11 cuerpoficha">
         <logic:present name="cliente">
-            <div class="span11" alignt="center"><center><h4><bean:message key="tratamiento.nuevo"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></h4></center></div>
+            <legend><bean:message key="tratamiento.nuevo"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></legend>
         <logic:equal name="ManipulaClientes" property="activado" value="true">
             <html:form action="/InsertarTratamiento" styleClass="form-horizontal">                                    
              <html:hidden name="cliente" property="idCliente"/>

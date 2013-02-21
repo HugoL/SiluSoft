@@ -51,6 +51,7 @@
      <div class="row">                                               
      <div class="clearfix"></div>  
     <div class="span11 cuerpoficha">
+        <legend><bean:message key="test.de"/><strong> <bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></legend>
     <logic:present name="cliente">
      <div class="span10"><bean:message key="test.de"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong>:</div>
                                 <logic:iterate id="pregunta" name="listaPreguntas" scope="request" type="es.pfc.model.PreguntaTest">

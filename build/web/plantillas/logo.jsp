@@ -20,6 +20,6 @@
 <!DOCTYPE html>
 <!-- redes sociales -->
 	<div class="row-fluid">
-            <div class="span12" align="center"><img src="img/cabecera.png"/></div>           		        
+            <div class="span12" align="center"><img src="img/cabecera2.png"/></div>           		        
 	</div>  
 	<!-- -------------- -->    

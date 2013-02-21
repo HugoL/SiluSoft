@@ -40,8 +40,7 @@
      <logic:present name="usuario">
      <div class="containter">   
     <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
-    <div class="mi-hero-unit">
-        <div class="span11 nombreusuario"><bean:message key="general.sesion"/><strong><bean:write scope="session" name="usuario" property="nombre" /></strong>&nbsp;</div>
+    <div class="mi-hero-unit">        
     <div class="row">
 	 <h3><bean:message key="buscarcliente.titulo"/></h3>
          <div class="well">
@@ -56,7 +55,7 @@
             <div><label><bean:message key="formulario.apellido2"/>:</label>
                 <html:text property="apellido2" /></div>      
                 
-                <div><p><input type="submit" class="btn btn-warning" value="Buscar" /></p></div>                 
+                <div><p><input type="submit" class="btn btn-danger" value="Buscar" /></p></div>                 
         </html:form>
          </div>	
          <div><a href="principal.jsp" class="btn btn-success"><em class="icon-home icon-white"></em> Volver al menú</a></div>

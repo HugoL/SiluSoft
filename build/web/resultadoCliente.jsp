@@ -53,21 +53,28 @@
     <div class="mi-hero-unit">    
         <div class="row"> 
             <div class="span10"><h4><bean:message key="buscarcliente.resultado"/></h4></div>
-        <logic:present name="cliente">
-            <div class="span2"><strong><bean:message key="formulario.dni"/></strong></div>
-            <div class="span2"><strong><bean:message key="formulario.nombre"/></strong></div>
-            <div class="span2"><strong><bean:message key="formulario.apellido1"/></strong></div>  
-            <div class="span2"><strong><bean:message key="formulario.apellido2"/></strong></div>
-            
+        
+            <logic:present name="cliente">
+                 <table class="table table-condensed table-striped">
+        	<thead>                
+                    <th><strong><bean:message key="formulario.nombre" /></strong></th>
+                    <th><strong><bean:message key="formulario.apellido1"/></strong></th>  
+                    <th><strong><bean:message key="formulario.apellido2"/></strong></th>  
+                    <th></th>          
+                    <th></th>
+                </thead>
+                <tbody>                       
         <logic:iterate id="cliente" name="cliente" scope="request" type="es.pfc.model.Cliente">                         
-                <div class="span2"><bean:write name="cliente" property="dni" /></div>
-                <div class="span2"><bean:write name="cliente" property="nombre" /></div>          
-                <div class="span2"><bean:write name="cliente" property="apellidos" /></div>
-                <div class="span2"><bean:write name="cliente" property="apellido2" /></div>
-                <div class="span1"><a href="DameDatosCliente.do?dni=<bean:write name='cliente' property='dni'/>&op=8" class="btn btn-warning">Editar</a></div>
-                <div class="span1"><a href="DameDatosCliente.do?dni=<bean:write name='cliente' property='dni'/>&op=3" class="btn btn-inverse">Ficha</a></div>
-                <div class="span1"><a href="EliminarCliente.do?Id=<bean:write name="cliente" property="idCliente" />" class="btn btn-danger">Eliminar</a></div>            
+            <tr>        
+        <td><bean:write name="cliente" property="nombre" /></div>
+                <td><bean:write name="cliente" property="apellidos" /></td>                   
+                <td><bean:write name="cliente" property="apellido2" /></td>
+                <td><a href="DameDatosCliente.do?dni=<bean:write name='cliente' property='dni'/>&op=8" class="btn btn-warning">Editar</a></td>
+                <td><a href="DameDatosCliente.do?dni=<bean:write name='cliente' property='dni'/>&op=3" class="btn btn-inverse">Ficha</a></td>
+                <td><a href="EliminarCliente.do?Id=<bean:write name="cliente" property="idCliente" />" class="btn btn-danger">Eliminar</a></td>            
         </logic:iterate>
+            </tbody>
+            </table>
         </logic:present>
         <logic:notPresent name="cliente">
             <div><center><bean:message key="buscarcliente.noresultado"/></center></div>
