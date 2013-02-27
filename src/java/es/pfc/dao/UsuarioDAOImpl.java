@@ -59,7 +59,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                         System.out.println ("Excepción al inicializar el log: " + e.toString());
                 }
         
-        try {                                                            
+        try {         
+            Password = hash(Password);
             Usuario usuario = new Usuario();
             //preparacion de la consulta
             String consulta="select * from SiluBd.Usuarios where Nombre='"+Nombre+"' && Password='"+Password+"';";
@@ -111,6 +112,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             ResultSet result = null;
             PreparedStatement statement = null;      
        try {            
+                        password = hash(password);
 			int i = 0;
 			//conn = getConexion();
 			statement = conn.prepareStatement("select * from Usuarios where Nombre='"+nombre+"' && Password='"+password+"';"); //, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY
@@ -138,19 +140,21 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                 }
        //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}       
     }
     
     @Override
     public int consultarCentro (Usuario usuario) throws Exception {
-       
-       int idCentro = usuario.getIdCentro(); 
+             
        int i,id; 
         //Pido conexion 
             Connection conn = Conexion.getConexion();
@@ -176,12 +180,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         }
        //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}   
     }
     
@@ -235,9 +242,10 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         
         
         //Pido conexion       
-        try {                         
+        try {              
+                        String password = hash(usuario.getPassword());
 			 //, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY
-                        String consulta= "INSERT INTO `SiluBd`.`Usuarios` (`Dni`, `Nombre`, `Apellidos`,`Telefono`, `Email`, `Password`, `IdCentro`, `Rol`) VALUES ('"+usuario.getDni()+"', '"+usuario.getNombre()+"', '"+usuario.getApellidos()+"', '"+usuario.getTelefono()+"', '"+usuario.getEmail()+"', '"+usuario.getPassword()+"', "+usuario.getIdCentro()+", "+usuario.getRol()+");";
+                        String consulta= "INSERT INTO `SiluBd`.`Usuarios` (`Dni`, `Nombre`, `Apellidos`,`Telefono`, `Email`, `Password`, `IdCentro`, `Rol`) VALUES ('"+usuario.getDni()+"', '"+usuario.getNombre()+"', '"+usuario.getApellidos()+"', '"+usuario.getTelefono()+"', '"+usuario.getEmail()+"', '"+password+"', "+usuario.getIdCentro()+", "+usuario.getRol()+");";
                         System.out.println(consulta);
                         statement = conn.prepareStatement(consulta);
                         //System.out.println(consulta);

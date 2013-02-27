@@ -23,6 +23,9 @@
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% 
+    int i=0;
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -38,7 +41,8 @@
         <link href="css/bootstrap-responsive.css" rel="stylesheet" >
         <link href="css/nuevosestilos.css" rel="stylesheet" >
         <link rel="stylesheet" type="text/css" href="tcal.css" />
-	<script type="text/javascript" src="tcal.js"></script> 
+	<script type="text/javascript" src="tcal.js"></script>
+        <script type="text/javascript" src="JS/jquery.js"></script>
         <script language="javascript">
             var i=0,j=0,k=0,z=0;
            
@@ -57,8 +61,49 @@
             function nerviosa(){
                 z++;
                 document.resultados.nerviosatext.value=z;  
-            }      
-           
+            }                 
+        </script>
+        <script>
+        $(document).ready(function(){
+            $("select#sel1").change(function(){               
+               alert($("select#sel1").val());
+            });
+        
+        
+        $('btncalcula').click(function() {
+    // get all the inputs into an array.
+    var $selects = $('#form_test :select');
+
+    // not sure if you wanted this, but I thought I'd add it.
+    // get an associative array of just the values.
+    var values = {};
+    $selects.each(function() {
+        values[this.name] = $(this).val();
+        alert(this.name+", "+this.val);
+    });
+    //calcula(values);
+});
+});
+    function calcula(values){
+        var nerviosa = 0;
+        var biliosa = 0;
+        var linfatica = 0;
+        var sanguinea = 0;
+        values.each(function(){
+            switch(values){
+                case 0:
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+            }     
+            
+        });
+            
+    }
         </script>
     </head>
     <body>
@@ -86,7 +131,7 @@
         <legend><bean:message key="test.de"/><strong> <bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></legend>
         <logic:equal name="ManipulaClientes" property="activado" value="true">            
 	  	<table align="center" class="table-bordered">                    
-                    <html:form action="/InsertaTestDinamico">
+                    <html:form action="/InsertaTestDinamico" styleId="form_test">
                         <html:hidden name="cliente" property="idCliente"/>                                                    
                         <thead>    
                     <tr>
@@ -123,11 +168,12 @@
                                             <html:option value="1"><bean:write name="pregunta" property="respnerviosa" /></html:option>
                                           </html:select></td>
                     </tr>
+                    <% i++; %>
                        </logic:iterate>   
                     <tr>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
-                        <td>&nbsp;</td>
+                        <td><input type="button" id="btncalcula" value="calcular resultado" class="btn btn-primary" /></td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
                         <td>&nbsp;</td>
