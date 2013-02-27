@@ -34,16 +34,11 @@ public class CentroDAOImp implements CentroDAO{
     
     @Override
     public boolean create(Centro centro) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion();    
        
-        boolean result;
-        ResultSet result2;
+        boolean result;        
         PreparedStatement statement = null;      
-        String consulta = "";
-        int i;
+        String consulta = "";        
   
         consulta= "INSERT INTO `SiluBd`.`Centros` (Nombre,Direccion,Telefono) VALUES ('"+centro.getNombre()+"','"+centro.getDireccion()+"','"+centro.getTelefono()+"');";                
       
@@ -54,8 +49,9 @@ public class CentroDAOImp implements CentroDAO{
                         statement = conn.prepareStatement(consulta); 
                         result=statement.execute();                     			
                               
-                        if(result)
+                        if(result) {
                             return true;
+                        }
                         return false;
 
 		} catch(SQLException sqle) {
@@ -74,10 +70,7 @@ public class CentroDAOImp implements CentroDAO{
     @Override
     public Centro read(int id) throws Exception {
         //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion();
        
         ResultSet result = null;
         PreparedStatement statement = null;      
@@ -132,10 +125,7 @@ public class CentroDAOImp implements CentroDAO{
        String Telefono = centro.getTelefono();
        
         //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();     
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -171,10 +161,7 @@ public class CentroDAOImp implements CentroDAO{
     
     @Override
     public List list() throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();
+         Connection conn = Conexion.getConexion();
         
        
         ResultSet result = null;
@@ -218,15 +205,11 @@ public class CentroDAOImp implements CentroDAO{
     
     @Override
     public boolean insertaTratamiento(String nombre, String descripcion, int idCentro) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion();     
        
         boolean result;
         PreparedStatement statement = null;      
-        String consulta = "";
-        int i;
+        String consulta = "";       
   
         consulta= "INSERT INTO `SiluBd`.`Tratamientos` (Nombre,Descripcion,IdCentro) VALUES ('"+nombre+"','"+descripcion+"',"+idCentro+");";                
         System.out.println(consulta);
@@ -262,10 +245,7 @@ public class CentroDAOImp implements CentroDAO{
     @Override
     public int dameIdCentro(Centro centro) throws Exception {
         //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion();
        
         ResultSet result = null;
         PreparedStatement statement = null;     
@@ -299,10 +279,7 @@ public class CentroDAOImp implements CentroDAO{
     @Override
     public List listarUsuarios() throws Exception {
         //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();     
        
         ResultSet result = null;
         PreparedStatement statement = null;     
@@ -345,10 +322,7 @@ public class CentroDAOImp implements CentroDAO{
     
     @Override
     public boolean insertaSala(int idCentro,String nombre) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion();      
        
         boolean result;
         PreparedStatement statement = null;      
@@ -384,8 +358,5 @@ public class CentroDAOImp implements CentroDAO{
 			if(conn != null)
 				try { conn.close(); } catch(SQLException ignored) { }
 		}
-    }
-    
-    
-    
+    }            
 }

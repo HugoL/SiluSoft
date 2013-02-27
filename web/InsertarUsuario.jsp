@@ -95,7 +95,7 @@
                                 <% i++; %>
                 </logic:iterate>    
                 </div>                
-                <div class="span11"><strong>i: <%=i%></strong></div>
+                <!--<div class="span11"><strong>i: <%=i%></strong></div>-->
                 <div class="span3"><label><bean:message key="formulario.rol"/>: </label>
                 
                     <select name="rol" onchange="javascript:mostrar(this,<%=tam%>,<%=i%>)" >                            

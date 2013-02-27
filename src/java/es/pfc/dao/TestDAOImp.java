@@ -17,20 +17,11 @@
  */
 package es.pfc.dao;
 
-import es.pfc.model.TestCliente;
-import es.pfc.model.Cliente;
-import es.pfc.model.Medidas;
-import es.pfc.model.Observacion;
-import es.pfc.model.Peso;
 import es.pfc.model.PreguntaTest;
-import es.pfc.model.Sesiones;
 import es.pfc.model.TestCliente;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.*;
 /**
  *
  * @author ko
@@ -40,23 +31,18 @@ public class TestDAOImp implements TestDAO{
     @Override
     public TestCliente leeclienteTest(int id) throws Exception {
          TestCliente test = new TestCliente();
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();       
        
         ResultSet result = null;
         PreparedStatement statement = null;
         
-        String consulta= "SELECT * FROM `Clientes-Test` WHERE idCliente="+id+";";      
-        int i=0;
+        String consulta= "SELECT * FROM `Clientes-Test` WHERE idCliente="+id+";";             
         //Pido conexion       
        try {    
                         statement = conn.prepareStatement(consulta); 
                         result=statement.executeQuery();
                        
-			if(result.next()) {
-                            i=1;                          
+			if(result.next()) {                                                  
                             test.setResultado(result.getString("Resultado"));   
                             test.setIdCliente(result.getInt("idCliente"));
                             test.setFecha(String.valueOf(result.getDate("Fecha")));
@@ -83,10 +69,7 @@ public class TestDAOImp implements TestDAO{
     public List leepreguntasTest() throws Exception {
         
         PreguntaTest pregunta = null;
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();       
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -123,10 +106,7 @@ public class TestDAOImp implements TestDAO{
 
     @Override
     public boolean insertaclienteTest(TestCliente test) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+       Connection conn = Conexion.getConexion();     
        
         boolean result;
         PreparedStatement statement = null;
@@ -159,10 +139,7 @@ public class TestDAOImp implements TestDAO{
     @Override
     public List leerespuestasTest() throws Exception {
         TestCliente test;
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();       
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -200,10 +177,7 @@ public class TestDAOImp implements TestDAO{
     @Override
     public List leeresultadosTest(int idCliente) throws Exception {
         PreguntaTest pregunta = null;
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();      
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -241,10 +215,7 @@ public class TestDAOImp implements TestDAO{
 
     @Override
     public PreguntaTest leeTextoPregunta(PreguntaTest pregunta) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();      
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -276,10 +247,7 @@ public class TestDAOImp implements TestDAO{
 
     @Override
     public PreguntaTest leeRespuestasPregunta(PreguntaTest pregunta) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion(); 
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -314,10 +282,7 @@ public class TestDAOImp implements TestDAO{
 
     @Override
     public boolean comprobarTest(int id) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion(); 
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -328,10 +293,11 @@ public class TestDAOImp implements TestDAO{
                         statement = conn.prepareStatement(consulta); 
                         result=statement.executeQuery();
                        
-			if(result.next())                                             
+			if(result.next()) {
                             return true;
-			else
+                        }else {
                             return false;
+                        }
                         
 		} catch(SQLException sqle) {
 			throw new Exception("Excepcion TestDAOImp..."+sqle);
@@ -349,10 +315,7 @@ public class TestDAOImp implements TestDAO{
     
     @Override
     public PreguntaTest preguntaResultado(PreguntaTest pregunta) throws Exception{
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();       
        
         ResultSet result = null;
         ResultSet result2 = null;
@@ -413,10 +376,7 @@ public class TestDAOImp implements TestDAO{
 
     @Override
     public boolean insertarResultadoPregunta(PreguntaTest pregunta) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();       
        
         boolean result;
         PreparedStatement statement = null;

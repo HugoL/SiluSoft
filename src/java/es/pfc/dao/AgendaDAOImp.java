@@ -35,10 +35,7 @@ public class AgendaDAOImp implements AgendaDAO {
     @Override
     public Agenda listarEventos(String sala, int idCentro,Date fecha) throws Exception {
          //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -129,25 +126,24 @@ public class AgendaDAOImp implements AgendaDAO {
         }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
     @Override
     public boolean insertarEvento(Agenda agenda, String evento) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();  
        
         //ResultSet result = null;
         PreparedStatement statement = null;
-        List list = new ArrayList();
         String consulta = "";
         int i=0;
         
@@ -163,8 +159,7 @@ public class AgendaDAOImp implements AgendaDAO {
                             return true;      
 			}else{
                             return false;
-                        }
-                        
+                        }                        
 
 		} catch(SQLException sqle) {
 			throw new Exception("Excepcion AgendaDAOImp..."+sqle);
@@ -172,25 +167,22 @@ public class AgendaDAOImp implements AgendaDAO {
                 //cierro la conexion    
                 finally {
 			
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
     @Override
     public boolean actualizarEvento(Agenda agenda, String evento) throws Exception{
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion(); 
        
         //ResultSet result = null;
-        PreparedStatement statement = null;
-        List list = new ArrayList();
-        String consulta = "";
-        int i=0;
+        PreparedStatement statement = null;        
+        String consulta = "";      
         
             consulta= "UPDATE `SiluBd`.`Agenga` SET "+evento+"='"+agenda.getActo()+"' WHERE Fecha='"+agenda.getFecha()+"' AND IdCentro="+agenda.getIdCentro()+" AND Sala="+agenda.getSala()+";";  
             System.out.println("Consulta: "+consulta);
@@ -213,19 +205,18 @@ public class AgendaDAOImp implements AgendaDAO {
                 //cierro la conexion    
                 finally {
 			
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
     
     @Override
     public List listaIdSala(String sala, int idCentro) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -253,21 +244,21 @@ public class AgendaDAOImp implements AgendaDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
     @Override
     public boolean existenEventos(int idCentro, Date fecha, int sala) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();    
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -294,21 +285,21 @@ public class AgendaDAOImp implements AgendaDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
     @Override
     public List listarSalas(int idCentro) throws Exception {
-         Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion();
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -338,21 +329,21 @@ public class AgendaDAOImp implements AgendaDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
     @Override
     public List numeroEventos() throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion();     
        
         Evento evento;
         ResultSet result = null;
@@ -380,22 +371,22 @@ public class AgendaDAOImp implements AgendaDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
     @Override
     public Agenda listarMisEventos(String sala, int idCentro, Date fecha, int evento) throws Exception {
         //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion();     
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -431,26 +422,25 @@ public class AgendaDAOImp implements AgendaDAO {
         }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
                 }
 
     }
 
     @Override
     public boolean insertaEstadoEvento(String evento, int idCentro, int idSala, Date fecha, String estado, int idUsuario, int valoracion) throws Exception {
-         Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion();     
        
         //ResultSet result = null;
-        PreparedStatement statement = null;
-        List list = new ArrayList();
+        PreparedStatement statement = null;        
         String consulta = "";
         int i=0;
         
@@ -474,23 +464,21 @@ public class AgendaDAOImp implements AgendaDAO {
                 //cierro la conexion    
                 finally {
 			
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
     @Override
     public Agenda verEstadoEvento(Agenda agenda,String evento) throws Exception {
-         Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();  
        
         ResultSet result = null;
-        PreparedStatement statement = null;
-        List list = new ArrayList();
+        PreparedStatement statement = null;        
         String consulta = "";
         int i=0;
             consulta= "SELECT Estado,Usuario,Valoracion FROM EstadoEventos WHERE Evento'"+evento+"' AND IdCentro = "+agenda.getIdCentro()+" AND Sala ="+agenda.getSala()+" AND Fecha = "+agenda.getFecha()+" ;";  
@@ -513,27 +501,24 @@ public class AgendaDAOImp implements AgendaDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
     @Override
     public boolean actualizaEstadoEvento(String evento, int idCentro, int idSala, Date fecha, String estado, int idUsuario, int valoracion) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
-       
-        //ResultSet result = null;
+         Connection conn = Conexion.getConexion(); 
+               
         PreparedStatement statement = null;
-        List list = new ArrayList();
-        String consulta = "";
-        int i=0;
+        String consulta = "";        
         
             consulta= "UPDATE `SiluBd`.`EstadoEventos` SET Estado='"+estado+"', Usuario="+idUsuario+", Valoracion="+valoracion+" WHERE Fecha='"+fecha+"' AND Centro="+idCentro+" AND Sala="+idSala+" AND Evento='"+evento+"';";  
             System.out.println("Consulta: "+consulta);
@@ -554,10 +539,12 @@ public class AgendaDAOImp implements AgendaDAO {
                 //cierro la conexion    
                 finally {
 			
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
         
     }

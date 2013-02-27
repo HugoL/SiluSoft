@@ -129,8 +129,7 @@
 
     .carousel-caption {
       background-color: transparent;
-      position: static;
-      max-width: 550px;
+      position: static;      
       padding: 0 20px;
       margin-top: 200px;
     }
@@ -139,7 +138,10 @@
       margin: 0;
       line-height: 1.25;
       color: #fff;
-      text-shadow: 0 1px 1px rgba(0,0,0,.4);
+      text-shadow: 0 1px 1px rgba(0,0,0,.8);     
+    }
+    .carousel-caption h1{
+        font-size: 60px;
     }
     .carousel-caption .btn {
       margin-top: 10px;
@@ -251,7 +253,7 @@
         height: 300px;
       }
       .carousel-caption {
-        width: 65%;
+        width: 80%;
         padding: 0 70px;
         margin-top: 100px;
       }
@@ -260,7 +262,7 @@
       }
       .carousel-caption .lead,
       .carousel-caption .btn {
-        font-size: 18px;
+        font-size: 25px;
       }
 
       .marketing .span4 + .span4 {
@@ -290,7 +292,7 @@
             <div class="carousel-caption">
               <h1>SiluSoft</h1>
               <p class="lead">Software de administración de centros Siludermis.</p>
-              <a class="btn btn-large btn-danger" href="./registro.jsp">Acceder</a>
+              <a class="btn btn-large btn-acceso" href="./registro.jsp">Acceder</a>
             </div>
           </div>
         </div>                

@@ -19,24 +19,14 @@ package es.pfc.dao;
 
 
 
-import es.pfc.forms.InsertarObservacionForm;
 import es.pfc.model.Cliente;
-import es.pfc.model.Medidas;
 import es.pfc.model.Observacion;
 import es.pfc.model.Peso;
 import es.pfc.model.Sesiones;
-import es.pfc.model.TestCliente;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.*;
-import org.apache.struts.action.ActionForm;
 import org.apache.log4j.Logger;
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.PropertyConfigurator;
-import org.apache.log4j.helpers.Loader;
 
 /**
  *
@@ -53,23 +43,11 @@ public class ClienteDAOImp implements ClienteDAO {
            System.out.println("El cliente es nulo!!");
            return null;
        }
-       String Dni = cliente.getDni();
-       String Nombre = cliente.getNombre();
-       String Apellidos = cliente.getApellidos();
-       String Apellido2 = cliente.getApellido2();
-       int Edad = cliente.getEdad();
-       String Direccion = cliente.getDireccion();
-       String Telefono = cliente.getTelefono();
-       String Email = cliente.getEmail();
-       String Observaciones = cliente.getObservaciones();      
-       boolean insertado=false;
-       int i = 0;
+             
+       boolean insertado=false;     
        
        //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion(); 
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -96,26 +74,25 @@ public class ClienteDAOImp implements ClienteDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}    
     }
     
     @Override
     public Cliente read(String dni) throws Exception {
        Cliente cliente= null;
-       boolean leido;
        int i;
        
        //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion();  
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -161,27 +138,25 @@ public class ClienteDAOImp implements ClienteDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
         
     }
 
     @Override
     public List list(int IdCentro) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();
-        
-       
+         Connection conn = Conexion.getConexion(); 
+               
         ResultSet result = null;
         PreparedStatement statement = null;
-        boolean consultado=false;
         int i;
         Cliente cliente = null;
         List list = new ArrayList();
@@ -223,12 +198,8 @@ public class ClienteDAOImp implements ClienteDAO {
      @Override
     public List listpag(int idCentro, int numpag, int numregpag) throws Exception {
        
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();
-        
-       
+        Connection conn = Conexion.getConexion(); 
+               
         ResultSet result = null;
         Statement st = null;  
         st=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
@@ -281,23 +252,13 @@ public class ClienteDAOImp implements ClienteDAO {
     } catch (Exception e) {
     } finally {
         if(st!=null) {
-            try {
-                st.close();
-            } catch (SQLException e) {            
-            }
+            try {st.close();} catch (SQLException e) { }
         }
         if(result!=null) {                
-            try {
-                result.close();
-            } catch (SQLException e) {            
-            }
+            try { result.close(); } catch (SQLException e) { }
         }
         if(conn!=null) {
-            try {
-                conn.close();
-            } catch (SQLException e) {                
-            }
-            
+            try { conn.close(); } catch (SQLException e) { }            
         }
     }
 
@@ -307,15 +268,11 @@ public class ClienteDAOImp implements ClienteDAO {
 
      @Override
      public List listalf(int idCentro, String letra)throws Exception{
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();
+         Connection conn = Conexion.getConexion(); 
         
        
         ResultSet result = null;
-        PreparedStatement statement = null;
-        boolean consultado=false;
+        PreparedStatement statement = null;   
         int i;
         Cliente cliente = null;
         List list = new ArrayList();
@@ -360,16 +317,11 @@ public class ClienteDAOImp implements ClienteDAO {
         int i = 0;
        
        //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion(); 
        
         ResultSet result = null;
         PreparedStatement statement = null;
-        
-        
-        //Pido conexion       
+                           
        try {    
 			statement = conn.prepareStatement("DELETE FROM `SiluBd`.`Clientes` WHERE IdCliente='"+id+"';"); //, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY
                         String consulta= "DELETE FROM `SiluBd`.`Clientes` WHERE IdCliente='"+id+"';";                       
@@ -389,12 +341,15 @@ public class ClienteDAOImp implements ClienteDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
@@ -414,10 +369,7 @@ public class ClienteDAOImp implements ClienteDAO {
        String Apellido2 = cliente.getApellido2();
        
         //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion();     
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -444,27 +396,26 @@ public class ClienteDAOImp implements ClienteDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}   
      
     }
 
     @Override
     public List find(int Id, String Dni, String Nombre, String Apellido1, String Apellido2) throws Exception {
-       Cliente cliente= null;
-       boolean leido;
+       Cliente cliente= null;       
        int i;
        
        //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion();    
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -541,12 +492,15 @@ public class ClienteDAOImp implements ClienteDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
         
     }  
@@ -556,10 +510,7 @@ public class ClienteDAOImp implements ClienteDAO {
         
         boolean insertado=false;
          //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion(); 
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -578,12 +529,15 @@ public class ClienteDAOImp implements ClienteDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}    
     }
 
@@ -591,10 +545,7 @@ public class ClienteDAOImp implements ClienteDAO {
     public boolean clientepeso(int IdCliente, float peso, String fecha) throws Exception {
         boolean insertado=false;
          //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion();      
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -614,22 +565,22 @@ public class ClienteDAOImp implements ClienteDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
     @Override
     public List readPeso(int idCliente) throws Exception {
         //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion();       
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -658,22 +609,22 @@ public class ClienteDAOImp implements ClienteDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
     @Override
     public float comprobarpeso(int IdCliente, String fecha) throws Exception {
         //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion();      
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -700,21 +651,21 @@ public class ClienteDAOImp implements ClienteDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }      
 
     @Override
     public boolean insertaSesionesCliente(Sesiones sesiones,int idCliente) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();  
        
         boolean result;
         PreparedStatement statement = null;       
@@ -734,21 +685,20 @@ public class ClienteDAOImp implements ClienteDAO {
 			throw new Exception("Excepcion ClienteDAOImp..."+sqle);
         }
         //cierro la conexion    
-        finally {
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+        finally {           
+		if(statement != null) {
+                try { statement.close(); } catch(SQLException ignored) { }
+            }
+			if(conn != null) {
+                try { conn.close(); } catch(SQLException ignored) { }
+            }
 	}
     }
 
     @Override
     public Sesiones listaSesionesCliente(int idCliente) throws Exception {
         Sesiones sesiones= new Sesiones();
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();     
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -783,21 +733,21 @@ public class ClienteDAOImp implements ClienteDAO {
                 
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
     @Override
     public boolean insertaObservacionCliente(Observacion observacion) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+       Connection conn = Conexion.getConexion();     
        
        boolean result;
         PreparedStatement statement = null;
@@ -819,20 +769,19 @@ public class ClienteDAOImp implements ClienteDAO {
                 //cierro la conexion    
                 finally {
 			
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
     @Override
     public Observacion listarObservacionCliente(int idCliente) throws Exception {
         Observacion observacion = new Observacion();
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();    
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -890,22 +839,22 @@ public class ClienteDAOImp implements ClienteDAO {
                 
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
     @Override
     public boolean insertarAsistenciaFitCliente(int idCliente) throws Exception {
         int actualizado;
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();      
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -932,21 +881,22 @@ public class ClienteDAOImp implements ClienteDAO {
               
                 //cierro la conexion    
                 finally {
-			
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+                    if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
     @Override
     public boolean insertarAsistenciaConfortCliente(int idCliente) throws Exception {
         int actualizado;
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();     
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -972,20 +922,22 @@ public class ClienteDAOImp implements ClienteDAO {
               
                 //cierro la conexion    
                 finally {
+                    if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
 			
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
     @Override
     public int leeIdQr(String url) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();    
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -1012,21 +964,21 @@ public class ClienteDAOImp implements ClienteDAO {
                 
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
     @Override
     public boolean actualizaSesionesCliente(Sesiones sesiones) throws Exception { 
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();
        
         int result;
         PreparedStatement statement = null;       
@@ -1047,7 +999,7 @@ public class ClienteDAOImp implements ClienteDAO {
         }
         //cierro la conexion    
         finally {
-			if(statement != null) {
+		if(statement != null) {
                 try { statement.close(); } catch(SQLException ignored) { }
             }
 			if(conn != null) {
@@ -1058,10 +1010,7 @@ public class ClienteDAOImp implements ClienteDAO {
 
     @Override
     public boolean asociarClientesCentro(int idcliente, int idcentro) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();    
        
         int result;
         PreparedStatement statement = null;       
@@ -1092,15 +1041,11 @@ public class ClienteDAOImp implements ClienteDAO {
 
     @Override
     public List listNoCentro() throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();
+        Connection conn = Conexion.getConexion();
         
        
         ResultSet result = null;
-        PreparedStatement statement = null;
-        boolean consultado=false;
+        PreparedStatement statement = null;       
         int i;
         Cliente cliente = null;
         List list = new ArrayList();
@@ -1127,26 +1072,25 @@ public class ClienteDAOImp implements ClienteDAO {
 		} catch(SQLException sqle) {
 			throw new Exception(sqle);
 		} finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
     @Override
     public Cliente readPorId(int id) throws Exception {
-       Cliente cliente= null;
-       boolean leido;
+       Cliente cliente= null;      
        int i;
        
        //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();   
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -1192,17 +1136,15 @@ public class ClienteDAOImp implements ClienteDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
-    }
-
-   
-    
-   
-
+    }          
 }

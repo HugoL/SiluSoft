@@ -17,23 +17,17 @@
  */
 package es.pfc.dao;
 
-
-import es.pfc.model.Centro;
 import es.pfc.model.Permiso;
 import es.pfc.model.Usuario;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.servlet.http.HttpSession;
-import javax.sql.*;
-import org.apache.log4j.Logger;
 import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.Logger;
 import org.apache.log4j.helpers.Loader;
-
 
 /**
  *
@@ -42,15 +36,14 @@ import org.apache.log4j.helpers.Loader;
 public class UsuarioDAOImpl implements UsuarioDAO {    
     private static Logger logger = Logger.getLogger(UsuarioDAOImpl.class);
     private static org.apache.log4j.Logger registro;
-    
+    private static final char[] HEXADECIMAL = { '0', '1', '2', '3',
+        '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
                         
     @Override
     public Usuario consultarUsuario (String Nombre, String Password) throws Exception {     
-        //variables para la conexion
-            Connection conn = null;
-            Context ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-            conn = ds.getConnection();       
+        //variables para la conexion            
+            Connection conn = null;            
+            conn = Conexion.getConexion();       
        
             ResultSet result = null;
             PreparedStatement statement = null;   
@@ -113,11 +106,8 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     @Override
     public boolean comprobarDatosUsuario (String nombre, String password) throws Exception {
         
-        //Pido conexion 
-       Connection conn = null;
-            Context ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-            conn = ds.getConnection();
+        //Pido conexion        
+            Connection conn = Conexion.getConexion(); 
             ResultSet result = null;
             PreparedStatement statement = null;      
        try {            
@@ -163,10 +153,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
        int idCentro = usuario.getIdCentro(); 
        int i,id; 
         //Pido conexion 
-       Connection conn = null;
-            Context ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-            conn = ds.getConnection();
+            Connection conn = Conexion.getConexion();
         
        
             ResultSet result = null;
@@ -199,10 +186,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     }
     
     public int dameROl(String Dni) throws Exception{
-        Connection conn = null;
-            Context ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-            conn = ds.getConnection();
+       Connection conn = Conexion.getConexion();
             int rol,i=0;
        
             ResultSet result = null;
@@ -244,10 +228,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
        int i = 0;
        
        //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+       Connection conn = Conexion.getConexion();
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -334,10 +315,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     @Override
     public List listarUsuarios(int idCentro) throws Exception {
         //variables para la conexion
-            Connection conn = null;
-            Context ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-            conn = ds.getConnection();       
+            Connection conn = Conexion.getConexion();
        
             ResultSet result = null;
             PreparedStatement statement = null;     
@@ -383,10 +361,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     @Override
     public List consultarRoles() throws Exception {
         //variables para la conexion
-            Connection conn = null;
-            Context ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-            conn = ds.getConnection();       
+            Connection conn = Conexion.getConexion();      
        
             ResultSet result = null;
             PreparedStatement statement = null;     
@@ -423,10 +398,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     @Override
     public List consultaPermisosNuevo(int idUsuario) throws Exception {
         //variables para la conexion
-            Connection conn = null;
-            Context ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-            conn = ds.getConnection();       
+           Connection conn = Conexion.getConexion();  
        
             ResultSet result = null;
             PreparedStatement statement = null;     
@@ -469,10 +441,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
     @Override
     public boolean modificarPerfil(Usuario usuario) throws Exception {
         //variables para la conexion
-            Connection conn = null;
-            Context ctx = new InitialContext();
-            DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-            conn = ds.getConnection();       
+           Connection conn = Conexion.getConexion();    
        
             ResultSet result = null;
             PreparedStatement statement = null; 
@@ -504,5 +473,24 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                 try { conn.close(); } catch(SQLException ignored) { }
             }
 		}    
+    }
+    
+    //convertir cadena a md5 (para las contraseñas)
+    public  String hash(String stringToHash)  {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] bytes = md.digest(stringToHash.getBytes());
+            StringBuilder sb = new StringBuilder(2 * bytes.length);
+            for (int i = 0; i < bytes.length; i++) {
+                int low = (int)(bytes[i] & 0x0f);
+                int high = (int)((bytes[i] & 0xf0) >> 4);
+                sb.append(HEXADECIMAL[high]);
+                sb.append(HEXADECIMAL[low]);
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            //exception handling goes here
+            return null;
+        }
     }
 }

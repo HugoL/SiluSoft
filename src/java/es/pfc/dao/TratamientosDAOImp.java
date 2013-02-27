@@ -18,14 +18,9 @@
 package es.pfc.dao;
 
 import es.pfc.model.Tratamiento;
-import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.*;
 
 /**
  *
@@ -36,10 +31,7 @@ public class TratamientosDAOImp implements TratamientosDAO {
     @Override
     public Tratamiento create(Tratamiento tratamiento) throws Exception {       
        //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+       Connection conn = Conexion.getConexion();       
        
         boolean insertado;
         ResultSet result = null;
@@ -79,14 +71,10 @@ public class TratamientosDAOImp implements TratamientosDAO {
        int i;
        
        //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();       
        
         ResultSet result = null;
-        PreparedStatement statement = null;
-        List list = new ArrayList();
+        PreparedStatement statement = null;        
         String consulta = "";
         if(id!=0){ //busco por dni
             consulta= "SELECT * FROM `SiluBd`.`TratamientoDeCliente` WHERE Referencia='"+id+"';";                
@@ -140,10 +128,7 @@ public class TratamientosDAOImp implements TratamientosDAO {
        boolean actualizado;
        
         //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();       
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -181,15 +166,11 @@ public class TratamientosDAOImp implements TratamientosDAO {
 
     @Override
     public List list(int IdCliente) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();
+        Connection conn = Conexion.getConexion(); 
         
        
         ResultSet result = null;
-        PreparedStatement statement = null;
-        boolean consultado=false;
+        PreparedStatement statement = null;       
         int i;
         Tratamiento tratamiento = null;
         List list = new ArrayList();
@@ -229,14 +210,9 @@ public class TratamientosDAOImp implements TratamientosDAO {
 
     @Override
     public boolean delete(int id) throws Exception {
-        boolean eliminado=false;
-        int i = 0;
+        boolean eliminado=false;        
        
-       //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+       Connection conn = Conexion.getConexion();    
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -280,10 +256,7 @@ public class TratamientosDAOImp implements TratamientosDAO {
        int i;
        
        //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();     
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -335,10 +308,7 @@ public class TratamientosDAOImp implements TratamientosDAO {
 
     @Override
     public List listGeneral(int idCentro) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();        
+       Connection conn = Conexion.getConexion();         
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -379,10 +349,7 @@ public class TratamientosDAOImp implements TratamientosDAO {
         int i = 0;
        
        //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();      
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -420,15 +387,10 @@ public class TratamientosDAOImp implements TratamientosDAO {
     }
 
     @Override
-    public boolean comprobarTratamientoCliente(int idTratamiento) throws Exception {
-        Tratamiento tratamiento = null;
-       int i;
+    public boolean comprobarTratamientoCliente(int idTratamiento) throws Exception {       
        
        //variables para la conexion
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();      
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -463,10 +425,7 @@ public class TratamientosDAOImp implements TratamientosDAO {
 
     @Override
     public boolean createTratamientoCentro(Tratamiento tratamiento) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();       
        
         boolean insertado;
         ResultSet result = null;

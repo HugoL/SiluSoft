@@ -21,9 +21,6 @@ import es.pfc.model.Medidas;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.*;
 
 /**
  *
@@ -33,10 +30,7 @@ public class MedidasDAOImp implements MedidasDAO{
 
     @Override
     public List leerZonas() throws Exception {        
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");        
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();   
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -74,14 +68,10 @@ public class MedidasDAOImp implements MedidasDAO{
 
     @Override
     public Medidas leerMedida(Medidas medida) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion();     
        
         ResultSet result = null;
-        PreparedStatement statement = null;
-        List lista = new ArrayList();
+        PreparedStatement statement = null;      
  
         
         String consulta= "SELECT Fecha,Medida FROM `MedidasCliente` WHERE IdCliente ="+medida.getIdCliente()+" AND IdZona = "+medida.getIdZona()+";";      
@@ -115,10 +105,7 @@ public class MedidasDAOImp implements MedidasDAO{
     public List leerMedidasCliente(int idCliente) throws Exception {
         List lista = new ArrayList();
         Medidas medidas;
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion();     
        
         ResultSet result = null;
         PreparedStatement statement = null;
@@ -162,10 +149,7 @@ public class MedidasDAOImp implements MedidasDAO{
 
     @Override
     public boolean insertarMedidas(Medidas medidas) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion();     
        
         boolean result;
         PreparedStatement statement = null;

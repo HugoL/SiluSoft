@@ -18,13 +18,9 @@
 package es.pfc.dao;
 
 import es.pfc.model.Permiso;
-import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.*;
 /**
  *
  * @author ko
@@ -33,16 +29,13 @@ public class PermisosDAOImp implements PermisosDAO{
 
     @Override
     public List listarRoles() throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+         Connection conn = Conexion.getConexion();
        
         //ResultSet result = null;
         PreparedStatement statement = null;
+        ResultSet result = null;
         List list = new ArrayList();
         String consulta = "";
-        int i=0;
         Permiso permisos;
         
             consulta= "SELECT IdRol, NombreRol FROM `SiluBd`.`Roles` WHERE IdRol NOT LIKE 1;";  
@@ -51,7 +44,7 @@ public class PermisosDAOImp implements PermisosDAO{
         try {    
 			//statement = conn.prepareStatement("SELECT * FROM `SiluBd`.`Clientes` WHERE Dni='"+Dni+"';"); //, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY
                         statement = conn.prepareStatement(consulta); 
-                        ResultSet result=statement.executeQuery();
+                        result=statement.executeQuery();
                         
 			while(result.next()) {
                             permisos = new Permiso();
@@ -67,7 +60,8 @@ public class PermisosDAOImp implements PermisosDAO{
                 }
                 //cierro la conexion    
                 finally {
-			
+			if(result != null)
+				try { result.close(); } catch(SQLException ignored) { }
 			if(statement != null)
 				try { statement.close(); } catch(SQLException ignored) { }
 			if(conn != null)
@@ -77,25 +71,21 @@ public class PermisosDAOImp implements PermisosDAO{
 
     @Override
     public List listarPermisos() throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion();      
        
         //ResultSet result = null;
         PreparedStatement statement = null;
         List list = new ArrayList();
         String consulta = "";
-        int i=0;
         Permiso permisos;
-        
+        ResultSet result = null;
         consulta= "SELECT Nombre FROM `SiluBd`.`ListaPermisos`;";  
         System.out.println("Consulta: "+consulta);
         //Pido conexion       
         try {    
 			//statement = conn.prepareStatement("SELECT * FROM `SiluBd`.`Clientes` WHERE Dni='"+Dni+"';"); //, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY
                         statement = conn.prepareStatement(consulta); 
-                        ResultSet result=statement.executeQuery();
+                        result=statement.executeQuery();
                         
 			while(result.next()) {
                             permisos = new Permiso();
@@ -110,7 +100,9 @@ public class PermisosDAOImp implements PermisosDAO{
                 }
                 //cierro la conexion    
                 finally {
-			
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
 			if(statement != null)
 				try { statement.close(); } catch(SQLException ignored) { }
 			if(conn != null)
@@ -120,13 +112,11 @@ public class PermisosDAOImp implements PermisosDAO{
 
     @Override
     public List listarPermisosUsuario(int idUsuario) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+        Connection conn = Conexion.getConexion(); 
        
         //ResultSet result = null;
         PreparedStatement statement = null;
+        ResultSet result = null;
         List list = new ArrayList();
         String consulta = "";
         int i=0;
@@ -137,7 +127,7 @@ public class PermisosDAOImp implements PermisosDAO{
         //Pido conexion       
         try {    
                         statement = conn.prepareStatement(consulta); 
-                        ResultSet result=statement.executeQuery();
+                        result=statement.executeQuery();
                         
 			while(result.next()) {
                             permisos = new Permiso();
@@ -152,7 +142,9 @@ public class PermisosDAOImp implements PermisosDAO{
                 }
                 //cierro la conexion    
                 finally {
-			
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
 			if(statement != null)
 				try { statement.close(); } catch(SQLException ignored) { }
 			if(conn != null)
@@ -162,10 +154,7 @@ public class PermisosDAOImp implements PermisosDAO{
 
     @Override
     public boolean insertarPermisosUsuario(Permiso permiso) throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+       Connection conn = Conexion.getConexion(); 
        
         boolean insertado;
         ResultSet result = null;
@@ -190,8 +179,9 @@ public class PermisosDAOImp implements PermisosDAO{
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
 			if(statement != null)
 				try { statement.close(); } catch(SQLException ignored) { }
 			if(conn != null)
@@ -201,13 +191,11 @@ public class PermisosDAOImp implements PermisosDAO{
 
     @Override
     public List listarPermisosDefecto() throws Exception {
-        Connection conn = null;
-        Context ctx = new InitialContext();
-        DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/SiluBd");
-        conn = ds.getConnection();      
+       Connection conn = Conexion.getConexion();  
        
         //ResultSet result = null;
         PreparedStatement statement = null;
+        ResultSet result = null;
         List list = new ArrayList();
         String consulta = "";
         int i=0;
@@ -218,7 +206,7 @@ public class PermisosDAOImp implements PermisosDAO{
         //Pido conexion       
         try {    
                         statement = conn.prepareStatement(consulta); 
-                        ResultSet result=statement.executeQuery();
+                        result=statement.executeQuery();
                         
 			while(result.next()) {
                             permisos = new Permiso();       
@@ -236,7 +224,9 @@ public class PermisosDAOImp implements PermisosDAO{
                 }
                 //cierro la conexion    
                 finally {
-			
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
 			if(statement != null)
 				try { statement.close(); } catch(SQLException ignored) { }
 			if(conn != null)
