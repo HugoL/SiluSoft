@@ -18,12 +18,9 @@
 package es.pfc.dao;
 
 import es.pfc.model.Cliente;
-import es.pfc.model.Medidas;
 import es.pfc.model.Observacion;
 import es.pfc.model.Sesiones;
-import es.pfc.model.TestCliente;
 import java.util.List;
-import org.apache.struts.action.ActionForm;
 
 /**
  *
@@ -53,5 +50,7 @@ public interface ClienteDAO {
     public boolean insertarAsistenciaConfortCliente(int idCliente) throws Exception;
     public int leeIdQr(String url) throws Exception;
     public boolean asociarClientesCentro(int idcliente, int idcentro) throws Exception;
-
+    public Cliente login(String identificador, String password) throws Exception;
+    public String insertarPassword(int id, String password) throws Exception;
+    public String renovarPassword(int id, String password) throws Exception;
 }

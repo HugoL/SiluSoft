@@ -21,11 +21,8 @@
 <%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% 
-    int i=0;
-%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -42,68 +39,83 @@
         <link href="css/nuevosestilos.css" rel="stylesheet" >
         <link rel="stylesheet" type="text/css" href="tcal.css" />
 	<script type="text/javascript" src="tcal.js"></script>
-        <script type="text/javascript" src="JS/jquery.js"></script>
-        <script language="javascript">
-            var i=0,j=0,k=0,z=0;
-           
-            function sanguinea(){
-                i++;
-                document.resultados.sanguineatext.value=i;                
-            }
-            function biliosa(){
-                j++;
-                document.resultados.biliosatext.value=j;  
-            }
-            function linfatica(){
-                k++;
-                document.resultados.linfaticatext.value=k;  
-            }
-            function nerviosa(){
-                z++;
-                document.resultados.nerviosatext.value=z;  
-            }                 
-        </script>
+        <script type="text/javascript" src="JS/jquery.js"></script>        
         <script>
         $(document).ready(function(){
-            $("select#sel1").change(function(){               
-               alert($("select#sel1").val());
+            var values = {};
+            $("#nerviosatxt").val("0");
+            $("#biliosatxt").val("0");
+            $("#nerviosatxt").val("0");
+            $("#linfaticatxt").val("0"); 
+            $("#sanguineatxt").val("0");
+            $("select.sel").change(function(){ 
+                var valor = this.value;
+                var id = this.id; 
+                var cont = 0;
+                //compruebo si se está cambiando un valor que ya se había dado           
+                if(values[id]!=null){
+                     switch(values[id]){
+                    case "1":                        
+                        cont = parseInt($("#nerviosatxt").val(),10)-1;                                               
+                        values[id] = valor;
+                        $("#nerviosatxt").val(cont);
+                        break;
+                    case "2":
+                        cont = parseInt($("#biliosatxt").val(),10)-1;        
+                        values[id] = valor;
+                        $("#biliosatxt").val(cont);
+                        break;
+                    case "3":
+                        cont = parseInt($("#linfaticatxt").val(),10)-1;    
+                        values[id] = valor;
+                        $("#linfaticatxt").val(cont);
+                        break;
+                    case "4":
+                        cont = parseInt($("#sanguineatxt").val(),10)-1; 
+                        values[id] = valor;
+                        $("#sanguineatxt").val(cont);
+                        break;
+                    default:
+                }
+                }
+                //alert (valor);
+                switch(valor){
+                    case "1":                        
+                        cont = parseInt($("#nerviosatxt").val(),10)+1;                                               
+                        values[id] = valor;
+                        $("#nerviosatxt").val(cont);
+                        break;
+                    case "2":
+                        cont = parseInt($("#biliosatxt").val(),10)+1;        
+                        values[id] = valor;
+                        $("#biliosatxt").val(cont);
+                        break;
+                    case "3":
+                        cont = parseInt($("#linfaticatxt").val(),10)+1;    
+                        values[id] = valor;
+                        $("#linfaticatxt").val(cont);
+                        break;
+                    case "4":
+                        cont = parseInt($("#sanguineatxt").val(),10)+1; 
+                        values[id] = valor;
+                        $("#sanguineatxt").val(cont);
+                        break;
+                    default:
+                }
+            });        
+        
+            $('btncalcula').click(function() {
+                // get all the inputs into an array.
+                var $selects = $('#form_test :select');   
+                // get an associative array of just the values.
+                var values = {};
+                $selects.each(function() {
+                    values[this.name] = $(this).val();
+                    alert(this.name+", "+this.val);
+                });
+                 //calcula(values);
             });
-        
-        
-        $('btncalcula').click(function() {
-    // get all the inputs into an array.
-    var $selects = $('#form_test :select');
-
-    // not sure if you wanted this, but I thought I'd add it.
-    // get an associative array of just the values.
-    var values = {};
-    $selects.each(function() {
-        values[this.name] = $(this).val();
-        alert(this.name+", "+this.val);
-    });
-    //calcula(values);
-});
-});
-    function calcula(values){
-        var nerviosa = 0;
-        var biliosa = 0;
-        var linfatica = 0;
-        var sanguinea = 0;
-        values.each(function(){
-            switch(values){
-                case 0:
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-            }     
-            
-        });
-            
-    }
+        });    
         </script>
     </head>
     <body>
@@ -151,47 +163,75 @@
 			<td><div align="center"><strong><bean:message key="test.biliosa"/></strong></div></td>
 			<td><div align="center"><strong><bean:message key="test.nerviosa"/></strong></div></td>
                         <td><div align="center"><strong><bean:message key="test.respuesta"/></strong></div></td>
-		   </tr>                       
+		   </tr>                          
                        <logic:iterate id="pregunta" name="listaPreguntas" scope="request" type="es.pfc.model.PreguntaTest">                         
-                   <tr>
+                   <tr>                      
                        <input type="hidden" name="numPregunta" value="<bean:write name="pregunta" property="idPregunta"/>"/>
                         <td class="warning"><strong><bean:write name="pregunta" property="texto" /></strong></td>                            
                         <td align="center" class="datos"><bean:write name="pregunta" property="respsanguinea" /></td>
                         <td align="center" class="datos"><bean:write name="pregunta" property="resplinfatica" /></td>
                         <td align="center" class="datos"><bean:write name="pregunta" property="respbiliosa" /></td>
                         <td align="center" class="datos"><bean:write name="pregunta" property="respnerviosa" /></td>
-                        <td class="datos"><html:select property="campos">
-                                            <html:option value="0">--</html:option>
-                                            <html:option value="4"><bean:write name="pregunta" property="respsanguinea" /></html:option> 
-                                            <html:option value="3"><bean:write name="pregunta" property="resplinfatica" /></html:option>
-                                            <html:option value="2"><bean:write name="pregunta" property="respbiliosa" /></html:option>
-                                            <html:option value="1"><bean:write name="pregunta" property="respnerviosa" /></html:option>
-                                          </html:select></td>
-                    </tr>
-                    <% i++; %>
+                        <td class="datos"><select property="campos" id="sel<bean:write name="pregunta" property="idPregunta"/>" class="sel">
+                                            <option value="0">--</option>
+                                            <option value="4"><bean:write name="pregunta" property="respsanguinea" /></option> 
+                                            <option value="3"><bean:write name="pregunta" property="resplinfatica" /></option>
+                                            <option value="2"><bean:write name="pregunta" property="respbiliosa" /></option>
+                                            <option value="1"><bean:write name="pregunta" property="respnerviosa" /></option>
+                                          </select></td>
+                    </tr>                    
                        </logic:iterate>   
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td><input type="button" id="btncalcula" value="calcular resultado" class="btn btn-primary" /></td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
+                    <tr>                        
+                        <td></td>
+                        <td>
+                           <div class="control-group success">
+                           <label class="control-label">Sanguínea</label>
+                           <div class="controls">
+                                <input type="text" name="sanguineatxt" id="sanguineatxt" class="span1" />                  
+                           </div>
+                           </div>
+                        </td>
+                        <td>
+                            <div class="control-group warning">
+                           <label class="control-label">Linfática</label>
+                           <div class="controls">
+                                <input type="text" name="linfaticatxt" id="linfaticatxt" class="span1"/>                
+                           </div>
+                           </div>
+                        </td>
+                        <td>
+                            <div class="control-group info">
+                           <label class="control-label">Biliosa</label>
+                           <div class="controls">
+                                <input type="text" name="biliosatxt" id="biliosatxt" class="span1" />                
+                           </div>
+                           </div>
+                        </td>
+                        <td>
+                        <div class="control-group error">
+                           <label class="control-label">Nerviosa</label>
+                           <div class="controls">
+                                <input type="text" name="nerviosatxt" id="nerviosatxt" class="span1" />               
+                           </div>
+                           </div>                                
+                       </td>
+                        <td></td>
+                    </tr>                    
                     <tr  class="warning">
                         <td><strong><bean:message key="test.resultado"/>: </strong></td>
-                                    <td colspan="4" align="center">
+                        <td colspan="4" align="center">
                                         <select name="morfologia" id="morfologia">
                                             <option value="Nerviosa"><bean:message key="test.nerviosa"/></option> 
                                             <option value="Biliosa"><bean:message key="test.biliosa"/></option>
                                             <option value="Linfatica"><bean:message key="test.linfatica"/></option>
                                             <option value="Sanguinea"><bean:message key="test.sanguinea"/></option>
                                         </select>
-                                    </td>				  
+                        </td>	
+                        <td></td>
                     </tr>
                     
                     <tr>
-                        <td colspan=5>&nbsp;</td>
+                        <td colspan=6>&nbsp;</td>
                     </tr>
             </tbody>
 		</table>

@@ -33,7 +33,7 @@
     <!-- Le styles -->
     <link href="./css/bootstrap.css" rel="stylesheet">
     <link href="./css/bootstrap-responsive.css" rel="stylesheet">
-
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway">
     <style>
 
     /* GLOBAL STYLES
@@ -131,14 +131,17 @@
       background-color: transparent;
       position: static;      
       padding: 0 20px;
-      margin-top: 200px;
+      margin-top: 200px;      
+    }
+    .lead{
+      font-family: 'Raleway', serif; 
     }
     .carousel-caption h1,
     .carousel-caption .lead {
       margin: 0;
       line-height: 1.25;
       color: #fff;
-      text-shadow: 0 1px 1px rgba(0,0,0,.8);     
+      text-shadow: 0 1px 1px rgba(0,0,0,.8);          
     }
     .carousel-caption h1{
         font-size: 60px;
@@ -153,6 +156,10 @@
     -------------------------------------------------- */
 
     /* Center align the text within the three columns below the carousel */
+    .marketing{
+      font-family: 'Raleway', serif;
+    }
+
     .marketing .span4 {
       text-align: center;
     }
@@ -291,7 +298,7 @@
           <div class="container">
             <div class="carousel-caption">
               <h1>SiluSoft</h1>
-              <p class="lead">Software de administración de centros Siludermis.</p>
+              <p class="lead">Software de administración de centros de estética.</p>
               <a class="btn btn-large btn-acceso" href="./registro.jsp">Acceder</a>
             </div>
           </div>

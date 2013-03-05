@@ -17,8 +17,10 @@
  */
 package es.pfc.negocio;
 
+import es.pfc.dao.ClienteDAOImp;
 import es.pfc.dao.UsuarioDAOImpl;
 import es.pfc.model.Centro;
+import es.pfc.model.Cliente;
 import es.pfc.model.Usuario;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,5 +69,16 @@ public class IdentificarBO {
                   throw e;
             }
       }
+    
+    public static Cliente esClienteAutorizado(String identificador, String password)throws Exception{
+        ClienteDAOImp consultacliente = new ClienteDAOImp();
+        Cliente cliente = new Cliente();
+        try{            
+            cliente = consultacliente.login(identificador, password);            
+        }catch(Exception e){
+            throw e;            
+        }
+        return cliente;        
+    }
    
 }

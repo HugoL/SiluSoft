@@ -23,6 +23,8 @@ import es.pfc.model.Cliente;
 import es.pfc.model.Observacion;
 import es.pfc.model.Peso;
 import es.pfc.model.Sesiones;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,9 @@ import org.apache.log4j.Logger;
 public class ClienteDAOImp implements ClienteDAO {
     private static Logger logger = Logger.getLogger(ClienteDAOImp.class);
     private static org.apache.log4j.Logger registro;
+    private static final char[] HEXADECIMAL = { '0', '1', '2', '3',
+        '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
+    
     @Override
     public Cliente create(Cliente cliente, int IdCentro) throws Exception {
        
@@ -1147,4 +1152,139 @@ public class ClienteDAOImp implements ClienteDAO {
                     }
 		}
     }          
+
+    @Override
+    public Cliente login(String identificador, String password) throws Exception {
+        //variables para la conexion
+        Connection conn = Conexion.getConexion();   
+       
+        ResultSet result = null;
+        PreparedStatement statement = null;
+        Cliente cliente;
+        String consulta= "SELECT IdCliente, Dni, Nombre, Apellidos, Apellido2, Edad, Direccion, Teleono, Email,Altura,IMC FROM `SiluBd`.`Clientes` WHERE Dni = ? AND Pass = ?;";
+        
+        try {    
+                        statement = conn.prepareStatement(consulta); 
+                        statement.setString(1, identificador);
+                        statement.setString(2, password);
+                        result=statement.executeQuery();
+                       
+			if(result.next()) {                           
+                            cliente = new Cliente();
+                            cliente.setIdCliente(result.getInt("IdCliente"));                       
+                            cliente.setDni(result.getString("Dni"));
+                            cliente.setNombre(result.getString("Nombre"));
+                            cliente.setApellidos(result.getString("Apellidos"));
+                            cliente.setApellido2(result.getString("Apellido2"));
+                            cliente.setEdad(result.getInt("Edad"));                       
+                            cliente.setDireccion(result.getString("Direccion"));
+                            cliente.setTelefono(result.getString("Telefono"));
+                            cliente.setEmail(result.getString("Email"));
+                            cliente.setObservaciones(result.getString("Altura"));
+                            cliente.setAltura(result.getFloat("IMC")); 
+                            return cliente;                            
+			}else{
+                            System.out.println("No se encuentra el cliente con ese identificador: "+identificador);
+                            return null;
+                        }                        
+		} catch(SQLException sqle) {
+			throw new Exception("Excepcion ClienteDAOImp..."+sqle);
+                }
+                //cierro la conexion    
+                finally {
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
+		}                
+    }
+
+    @Override
+    public String insertarPassword(int id, String password) throws Exception {
+        Connection conn = Conexion.getConexion();    
+       
+        int result;   
+        PreparedStatement statement = null;       
+        String consulta= "INSERT INTO Clientes(Password) VALUES (?) WHERE IdCliente = ? ;";      
+        System.out.println("consulta: "+consulta);
+        try{
+             statement = conn.prepareStatement(consulta);
+             statement.setString(1, hash(password));
+             statement.setInt(2, id);
+             result=statement.executeUpdate(consulta);                    
+             if(result==0) {                                 
+                return password;                         
+             }
+             logger.debug(result);           
+             return null;
+        } catch(SQLException sqle) {
+            logger.debug("Error en ClienteDAOImp.generarPassword: "+sqle);
+            throw new Exception("Excepcion ClienteDAOImp..."+sqle);
+        }
+        //cierro la conexion    
+        finally {
+			if(statement != null) {
+                try { statement.close(); } catch(SQLException ignored) { }
+            }
+			if(conn != null) {
+                try { conn.close(); } catch(SQLException ignored) { }
+            }
+	}
+    }        
+
+    @Override
+    public String renovarPassword(int id, String password) throws Exception {
+        Connection conn = Conexion.getConexion();    
+       
+        int result;
+        PreparedStatement statement = null;       
+        String consulta= "UPDATE SET (Password = ?) WHERE IdCliente = ?;";      
+        System.out.println("consulta: "+consulta);
+        try{
+             statement = conn.prepareStatement(consulta);
+             statement.setString(1, hash(password));
+             statement.setInt(2, id);
+             result=statement.executeUpdate(consulta);                    
+             if(result==0) {                                 
+                return password;                         
+             }
+             logger.debug(result);           
+             return null;
+        } catch(SQLException sqle) {
+            logger.debug("Error en ClienteDAOImp.generarPassword: "+sqle);
+            throw new Exception("Excepcion ClienteDAOImp..."+sqle);
+        }
+        //cierro la conexion    
+        finally {
+			if(statement != null) {
+                try { statement.close(); } catch(SQLException ignored) { }
+            }
+			if(conn != null) {
+                try { conn.close(); } catch(SQLException ignored) { }
+            }
+	}
+    }
+    
+     public  String hash(String stringToHash)  {
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] bytes = md.digest(stringToHash.getBytes());
+            StringBuilder sb = new StringBuilder(2 * bytes.length);
+            for (int i = 0; i < bytes.length; i++) {
+                int low = (int)(bytes[i] & 0x0f);
+                int high = (int)((bytes[i] & 0xf0) >> 4);
+                sb.append(HEXADECIMAL[high]);
+                sb.append(HEXADECIMAL[low]);
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            //exception handling goes here
+            return null;
+        }
+    }
 }

@@ -65,11 +65,11 @@
             <form-property name="activadotxt" type="java.lang.String[]" />
             <form-property name="idCentro" type="java.lang.Integer" />
         </form-bean>
+        <form-bean name="LoginClientesForm" type="es.pfc.forms.LoginClientesForm"/>
         <form-bean name="CalcularSesionesForm" type="es.pfc.forms.CalcularSesionesForm"/>
-        <form-bean name="InsertarTratamientoCentroForm" type="es.pfc.forms.InsertarTratamientoCentroForm"/>
-        
+        <form-bean name="InsertarTratamientoCentroForm" type="es.pfc.forms.InsertarTratamientoCentroForm"/>        
         <form-bean name="InsertarSesionesClienteForm" type="es.pfc.forms.InsertarSesionesClienteForm"/>
-        <form-bean name="InsertarImcClienteForm" type="es.pfc.forms.InsertarImcClienteForm"/>
+        <form-bean name="InsertarImcClienteForm" type="es.pfc.forms.InsertarImcClienteForm"/>       
     </form-beans>
 <!-- ==========Excepciones  Globales ============================== -->
     <global-exceptions>
@@ -144,8 +144,7 @@
         <action path="/verFichaDatos" type="es.pfc.actions.FichaDatosClienteAction">
             <forward name="correcto" path="/fichaCliente.jsp" />
             <forward name="incorrecto" path="/incorrecto.jsp" /> 
-        </action>
-        
+        </action>        
         <action name="InsertarTratamientoF" path="/InsertarTratamiento" type="es.pfc.actions.InsertarTratamientoAction" input="/incorrecto.jsp" validate="true">
             <forward name="correcto" path="/correcto.jsp" />
             <forward name="incorrecto" path="/incorrecto.jsp" /> 
@@ -176,8 +175,7 @@
             <forward name="asistencia" path="/asistencia.jsp" /> 
             <forward name="actualiza" path="/actualizarCliente.jsp" />   
             <forward name="incorrecto" path="/incorrecto.jsp" /> 
-        </action>
-        
+        </action>        
         <action input="/incorrecto.jsp" name="InsertarMedidasDinamicoForm" path="/insertaSesion" scope="session" type="es.pfc.actions.InsertaMedidasClienteDinamicoAction">
              <forward name="correcto" path="/medidasInsertadas.jsp" />
              <forward name="incorrecto" path="/incorrecto.jsp" />
@@ -245,8 +243,7 @@
         </action>
         <action path="/VerTest" type="es.pfc.actions.VerTestClienteAction" input="/incorrecto.jsp">
             <forward name="correcto" path="/verTestCliente.jsp" />
-        </action>        
-        
+        </action>                
         <action input="/incorrecto.jsp" name="InsertarTestDinamicoForm" path="/InsertaTestDinamico" scope="session" type="es.pfc.actions.InsertaTesClienteDinamicoAction" >
             <forward name="correcto" path="/correcto.jsp" />
             <forward name="incorrecto" path="/desconocido.jsp" />
@@ -287,9 +284,12 @@
             <forward name="incorrecto" path="/incorrecto.jsp" />
         </action>
         <action input="/incorrecto.jsp" name="InsertarUsuarioForm" path="/InsertaUsuarioAdmin" scope="session" type="es.pfc.actions.InsertarUsuarioAdminAction">
-            <forward name="correcto" path="/superAdmin.jsp"/>
-            
-        </action>    
+            <forward name="correcto" path="/superAdmin.jsp"/>            
+        </action>  
+        <action input="cliente/erroracceso.jsp" name="LoginClientesForm" path="/AccesoClientes" scope="session" type="es.pfc.actions.AccesoClientesAction">
+            <forward name="correcto" path="cliente/clientePerfil.jsp" />
+            <forward name="incorrecto" path="cliente/erroracceso.jsp" />            
+        </action>      
     </action-mappings>
    
 <!-- ========== Controller Configuration ======================== -->

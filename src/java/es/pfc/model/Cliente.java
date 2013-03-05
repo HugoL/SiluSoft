@@ -42,7 +42,7 @@ public class Cliente implements Serializable {
     private float IMC;
     private String fechapeso;
     private String url;
-    
+    private String password;
     
     
     public Cliente(){
@@ -182,6 +182,14 @@ public class Cliente implements Serializable {
 
       public void setUrl(String url) {
             this.url=url;
+      }
+      
+       public String getPassword() {
+            return password;
+      }
+
+      public void setPassword(String password) {
+            this.password = password;
       }
     
 }
