@@ -40,7 +40,7 @@
         <link href="../css/bootstrap-responsive.css" rel="stylesheet">
         <link href="../css/nuevosestilos.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Insertar Evento</title>
+        <title>Insertar Evento</title>        
     </head>
     <body>
            <%-- include header --%>

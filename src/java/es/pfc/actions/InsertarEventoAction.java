@@ -21,12 +21,9 @@ import es.pfc.forms.InsertarEventoAgendaForm;
 import es.pfc.model.Agenda;
 import es.pfc.model.Usuario;
 import es.pfc.negocio.AgendaBO;
-import es.pfc.negocio.ClientesBO;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -84,12 +81,14 @@ public class InsertarEventoAction extends org.apache.struts.action.Action {
         
         if(!"1".equals(op)){
             System.out.println("Introduzco estado del evento");      
-            if(AgendaBO.InsertaEventos(agenda,eventoform.getEvento()))
+            if(AgendaBO.InsertaEventos(agenda,eventoform.getEvento())) {
                 return mapping.findForward(SUCCESS);
+            }
         }else{
             System.out.println("Actualizo el estado del evento");
-            if(AgendaBO.ActualizaEvento(eventoform.getEvento(),agenda,usuario.getIdUsuario()))
+            if(AgendaBO.ActualizaEvento(eventoform.getEvento(),agenda,usuario.getIdUsuario())) {
                 return mapping.findForward(SUCCESS);
+            }
         }
         return mapping.findForward(FAILURE);
     }

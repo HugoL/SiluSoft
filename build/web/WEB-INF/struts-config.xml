@@ -209,8 +209,8 @@
             <forward name="incorrecto" path="/incorrecto.jsp" />
         </action>
         <action input="/incorrecto.jsp" name="InsertarEventoAgendaForm" path="/InsertaEvento" scope="session" type="es.pfc.actions.InsertarEventoAction" >
-            <forward name="correcto" path="/correcto.jsp" />
-            <forward name="incorrecto" path="/incorrecto.jsp" />
+            <forward name="correcto" path="/Ventanas/correcto.jsp" />
+            <forward name="incorrecto" path="/Ventanas/incorrecto.jsp" />
         </action>
         <action input="/InsertarUsuario.jsp" name="InsertarUsuarioDinamicoForm" path="/InsertaUsuario" scope="session" type="es.pfc.actions.InsertarUsuarioAction" validate="true">
             <forward name="correcto" path="/correcto.jsp" />
@@ -287,8 +287,8 @@
             <forward name="correcto" path="/superAdmin.jsp"/>            
         </action>  
         <action input="cliente/erroracceso.jsp" name="LoginClientesForm" path="/AccesoClientes" scope="session" type="es.pfc.actions.AccesoClientesAction">
-            <forward name="correcto" path="cliente/clientePerfil.jsp" />
-            <forward name="incorrecto" path="cliente/erroracceso.jsp" />            
+            <forward name="correcto" path="/cliente/clientePerfil.jsp" />
+            <forward name="incorrecto" path="/cliente/erroracceso.jsp" />            
         </action>      
     </action-mappings>
    
