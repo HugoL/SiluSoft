@@ -35,4 +35,5 @@ public interface TratamientosDAO {
     public boolean deleteTratamientoCentro(int id) throws Exception;
     public List find(int Id, String Nombre) throws Exception;
     public boolean comprobarTratamientoCliente(int idTratamiento) throws Exception;
+    public float precioTratamiento(int idCentro, int idTratamientoo) throws Exception;
 }

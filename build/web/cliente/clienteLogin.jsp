@@ -45,16 +45,16 @@
 	</div><!-- /header -->
 	
     <div data-role="content">
-        <div id="grid" class="ui-grid-a">
-            <html:form action="" >
+        <div id="grid" class="ui-grid-a" align="center">
+            <html:form action="/AccesoClientes.do" >
             <div data-role="fieldcontain" class="ui-hide-label">               
-                <input type="text" name="username" id="username" value="" placeholder="Dni"/>
+                <input type="text" name="identificador" id="identificador" value="" placeholder="Dni"/>
             </div>
             <div data-role="fieldcontain" class="ui-hide-label">               
-                <input type="text" name="username" id="username" value="" placeholder="Contraseña"/>
+                <input type="password" name="password" id="password" value="" placeholder="Contraseña"/>
             </div>
             <div data-role="fieldcontain" class="ui-hide-label">
-                <html:submit><button type="submit" data-theme="a" class="ui-btn-hidden" aria-disabled="false">Acceder</button></html:submit>
+                <html:submit>Acceder</html:submit>
             </div>
             </html:form>
         </div>

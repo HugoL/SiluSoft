@@ -133,12 +133,12 @@
             <forward name="incorrecto" path="/buscarCliente.jsp" />
         </action>
         <action name="ModificarC" path="/Modificar" type="es.pfc.actions.ModificarClienteAction" scope="session" validate="true" input="/actualizarCliente.jsp">
-            <forward name="correcto" path="/correcto.jsp" />
+            <forward name="correcto" path="/ListaClientes.do" />
             <forward name="incorrecto" path="/actualizarCliente.jsp" />  
             <forward name="pesoasignado" path="/listadoClientes.jsp" />
         </action>
         <action name="ActualizarUsuarioForm" path="/Modificarusuario" type="es.pfc.actions.ActualizarUsuarioAction" scope="session" validate="true" input="/perfilUsuario.jsp">
-            <forward name="correcto" path="/correcto.jsp" />
+            <forward name="correcto" path="/perfilUsuario.jsp" />
             <forward name="incorrecto" path="/perfilUsuario.jsp" />              
         </action>
         <action path="/verFichaDatos" type="es.pfc.actions.FichaDatosClienteAction">
@@ -173,7 +173,8 @@
             <forward name="sesiones" path="/insertarMedidasCliente.jsp" />
             <forward name="observacion" path="/ListaObservacion.do" />
             <forward name="asistencia" path="/asistencia.jsp" /> 
-            <forward name="actualiza" path="/actualizarCliente.jsp" />   
+            <forward name="actualiza" path="/actualizarCliente.jsp" /> 
+            <forward name="calculaimc" path="/imccliente.jsp" />   
             <forward name="incorrecto" path="/incorrecto.jsp" /> 
         </action>        
         <action input="/incorrecto.jsp" name="InsertarMedidasDinamicoForm" path="/insertaSesion" scope="session" type="es.pfc.actions.InsertaMedidasClienteDinamicoAction">
@@ -286,9 +287,13 @@
         <action input="/incorrecto.jsp" name="InsertarUsuarioForm" path="/InsertaUsuarioAdmin" scope="session" type="es.pfc.actions.InsertarUsuarioAdminAction">
             <forward name="correcto" path="/superAdmin.jsp"/>            
         </action>  
-        <action input="cliente/erroracceso.jsp" name="LoginClientesForm" path="/AccesoClientes" scope="session" type="es.pfc.actions.AccesoClientesAction">
-            <forward name="correcto" path="/cliente/clientePerfil.jsp" />
+        <action input="/incorrecto.jsp" name="LoginClientesForm" path="/AccesoClientes" scope="session" type="es.pfc.actions.AccesoClientesAction">
+            <forward name="correcto" path="/correcto.jsp" />
             <forward name="incorrecto" path="/cliente/erroracceso.jsp" />            
+        </action>   
+        <action input="/sesionesCalculadas.jsp" path="/CalculaPresupuesto" scope="session" type="es.pfc.actions.CalcularPresupuestoAction">
+            <forward name="correcto" path="/presupuesto.jsp" />
+            <forward name="incorrecto" path="/sesionesCalculadas.jsp" />            
         </action>      
     </action-mappings>
    

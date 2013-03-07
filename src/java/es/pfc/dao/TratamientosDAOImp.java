@@ -114,12 +114,15 @@ public class TratamientosDAOImp implements TratamientosDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
@@ -155,12 +158,15 @@ public class TratamientosDAOImp implements TratamientosDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
@@ -377,12 +383,15 @@ public class TratamientosDAOImp implements TratamientosDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
@@ -414,12 +423,15 @@ public class TratamientosDAOImp implements TratamientosDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
@@ -450,13 +462,57 @@ public class TratamientosDAOImp implements TratamientosDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}   
+    }
+
+    @Override
+    public float precioTratamiento(int idCentro, int idTratamiento) throws Exception {
+        //variables para la conexion
+        Connection conn = Conexion.getConexion();      
+       
+        ResultSet result = null;
+        PreparedStatement statement = null;
+        String consulta= "SELECT Precio FROM `SiluBd`.`Tratamientos` WHERE IdTratamiento = ? AND IdCentro = ?;";                
+        
+        //Pido conexion       
+       try {    
+			//statement = conn.prepareStatement("SELECT * FROM `SiluBd`.`Clientes` WHERE Dni='"+Dni+"';"); //, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY
+                        statement = conn.prepareStatement(consulta);
+                        statement.setInt(1, idTratamiento);
+                        statement.setInt(2, idCentro);
+                        result=statement.executeQuery();
+                       
+			if(result.next()) {                            
+                            return result.getFloat("Precio");                          
+			}else{
+                            return 0;
+                        }
+                        
+
+		} catch(SQLException sqle) {
+			throw new Exception("Excepcion TratamientosDAOImp..."+sqle);
+                }
+                //cierro la conexion    
+                finally {
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
+		}
     }
     
 }

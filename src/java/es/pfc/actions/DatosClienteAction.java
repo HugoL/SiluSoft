@@ -57,26 +57,35 @@ public class DatosClienteAction extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         String destino = "";
-        String dni = request.getParameter("dni");
-        int idcliente;
+        String dni = request.getParameter("dni");        
         //idcliente = Integer.parseInt(request.getParameter("id"));
         int op = Integer.parseInt(request.getParameter("op"));
         HttpSession session = request.getSession(true);
-        //System.out.println("op= "+op);
-        Cliente cliente = new Cliente();
+        Cliente cliente = new Cliente();                 
+        
+       
         try {
-           //cliente=ClientesBO.leerDatos(dni);
-            cliente=ClientesBO.leerDatos(dni);
-           if(cliente!=null){                
-               //request.setAttribute("cliente", cliente);               
+            //miro si el atributo cliente está creado
+            if(session.getAttribute("cliente")!=null){  
+                System.out.println("Existe cliente en la sesión: "+cliente.getDni()+". Dni parametro: "+dni);
+                cliente = (Cliente)session.getAttribute("cliente");
+                //si el el cliente de la sesion no es el mismo que el del dni del get, leo los datos del cliente con dni el del get
+                //para evitar que se haya quedado guardado en la sesión un cliente que habíamos vistado anteriormente
+                if(cliente.getDni() == null ? dni != null : !cliente.getDni().equals(dni)){ 
+                    System.out.println("El cliente de la sesion no coincide con el del parametro dni: "+dni);          
+                    cliente=ClientesBO.leerDatos(dni);
+                }
+            }else{
+                cliente=ClientesBO.leerDatos(dni);
+            }
+           
+           if(cliente!=null){                                       
                session.setAttribute("cliente", cliente);
-               //System.out.println("Cliente id: "+cliente.getIdCliente()+", nombre: "+cliente.getNombre());
                switch(op){ //aquí hago otra especia de controller para redirigir a la pagina que me interese segun la opcion
                    case 1: 
                        destino = "insertarTratamiento"; //Insertar Tratamiento
                        break;
                    case 2: 
-                       //request.setAttribute("dni", dni);
                        destino = "listaTratamientos"; //listar tratamientos
                        List lista = new ArrayList();                    
                        cliente=ClientesBO.leerDatos(dni);
@@ -148,6 +157,9 @@ public class DatosClienteAction extends org.apache.struts.action.Action {
                     case 8:
                         destino="actualiza";
                     break;
+                    case 9: //calcular imc
+                         destino="calculaimc";
+                        break;
                    default: return mapping.findForward(FAILURE);
                }
                System.out.println("Redirijo a: "+destino);

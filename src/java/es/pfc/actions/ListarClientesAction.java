@@ -73,6 +73,21 @@ public class ListarClientesAction extends org.apache.struts.action.Action {
             //POR LETRA DEL APELLIDO
             String pag;
             pag = request.getParameter("pag");
+            System.out.println("letra: "+pag);
+            //comprobar que pag es un parámetro válido
+            if(pag!=null){
+                if(!((pag.charAt(0) > 64 && pag.charAt(0) < 91) || (pag.charAt(0) > 96 && pag.charAt(0) < 123)) || pag.length()>1){                           
+                    System.out.println("raro");
+                    if(pag.charAt(0)== 'ñ'){                    
+                        pag="ñ";
+                    }          
+                    pag="a";
+                }
+            }else{                
+                pag="a";
+            }
+            
+            
             lista = ClientesBO.esListadoAlf(usuario.getIdCentro(), pag);
             
             System.out.println("Lista de clientes recogida");

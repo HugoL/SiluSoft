@@ -45,7 +45,7 @@
                     <arg key="Loginform.nombre"/>
                 <var>
                         <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                        <var-value>^[a-zA-ZáéíóúAÉÍÓÚÑñºª. ]*$</var-value>
                 </var>
             </field>
             <field
@@ -59,7 +59,7 @@
         <form name="InsertarCliente">
             <field
                 property="dni"
-                depends="required,minlength,maxlength">
+                depends="required,minlength,maxlength,mask">
                     <arg key="InsertarClienteForm.dni" position="0"/>
                     <arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
                     <arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
@@ -71,7 +71,10 @@
                 <var-name>maxlength</var-name>
                 <var-value>9</var-value>
             </var>
-                
+            <var>
+                <var-name>mask</var-name>
+                <var-value>^[0-9a-zA-Z]*$</var-value>
+            </var>    
             </field>
             <field
                 property="nombre"
@@ -79,7 +82,7 @@
                     <arg key="formulario.nombre"/>
                     <var>
                         <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-ZáéíóúAÉÍÓÚÑñ]*$</var-value>
+                        <var-value>^[0-9a-zA-ZáéíóúAÉÍÓÚÑñºª. ]*$</var-value>
                     </var>
             </field>
             <field
@@ -88,7 +91,7 @@
                     <arg key="formulario.apellido1"/>
                     <var>
                         <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-ZáéíóúAÉÍÓÚÑñ]*$</var-value>
+                        <var-value>^[0-9a-zA-ZáéíóúAÉÍÓÚÑñºª. ]*$</var-value>
                     </var>
             </field>
             <field
@@ -97,7 +100,7 @@
                     <arg key="formulario.apellido2"/>
                     <var>
                         <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-ZáéíóúAÉÍÓÚÑñ]*$</var-value>
+                        <var-value>^[0-9a-zA-ZáéíóúAÉÍÓÚÑñºª. ]*$</var-value>
                     </var>
             </field>
         </form>
@@ -130,21 +133,16 @@
                     <arg key="formulario.nombre"/>
                     <var>
                         <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                        <var-value>^[a-zA-ZáéíóúAÉÍÓÚÑñºª. ]*$</var-value>
                     </var>
             </field> 
             <field
                 property="apellidos"
-                depends="mask,minlength">
-                    <arg key="formulario.apellido1"/>
-                    <arg position="1" name="minlength" key="${var:minlength}" resource="false"/>                    
-                    <var>
-                        <var-name>minlength</var-name>
-                        <var-value>1</var-value>
-                    </var>
+                depends="mask">
+                    <arg key="formulario.apellido1"/>                                        
                     <var>
                         <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                        <var-value>^[a-zA-ZáéíóúAÉÍÓÚÑñºª. ]*$</var-value>
                     </var>
             </field> 
             <field
@@ -153,7 +151,7 @@
                     <arg key="formulario.apellido2"/>
                     <var>
                         <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                        <var-value>^[a-zA-ZáéíóúAÉÍÓÚÑñºª. ]*$</var-value>
                     </var>
             </field> 
             <field
@@ -209,7 +207,7 @@
                     <arg key="formulario.nombre"/>                    
                     <var>
                         <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                        <var-value>^[a-zA-ZáéíóúAÉÍÓÚÑñºª. ]*$</var-value>
                     </var>                    
             </field>
             <field
@@ -218,7 +216,7 @@
                     <arg key="formulario.apellido1"/>                    
                     <var>
                         <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                        <var-value>^[a-zA-ZáéíóúAÉÍÓÚÑñºª. ]*$</var-value>
                     </var>                    
             </field>
             <field
@@ -227,7 +225,7 @@
                     <arg key="formulario.apellido1"/>                    
                     <var>
                         <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                        <var-value>^[a-zA-ZáéíóúAÉÍÓÚÑñºª. ]*$</var-value>
                     </var>                    
             </field>
             </form>
@@ -267,7 +265,7 @@
                     <arg key="sala.nombre"/>    
                     <var>
                         <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                        <var-value>^[a-zA-ZáéíóúAÉÍÓÚÑñºª. ]*$</var-value>
                     </var>
             </field> 
             </form>
@@ -293,7 +291,7 @@
             </field> 
             <field
                 property="dni"
-                depends="required,minlength,maxlength">
+                depends="required,minlength,maxlength,mask">
                     <arg key="formulario.dni"/>
                     <arg position="1" name="minlength" key="${var:minlength}" resource="false"/>  
                     <arg position="1" name="maxlength" key="${var.maxlength}" resource="false"/>
@@ -305,6 +303,10 @@
                         <var-name>maxlength</var-name>
                         <var-value>9</var-value>
                     </var>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                    </var>
             </field>
             <field
                 property="nombre"
@@ -312,7 +314,7 @@
                     <arg key="formulario.nombre"/>                        
                     <var>
                         <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                        <var-value>^[a-zA-ZáéíóúAÉÍÓÚÑñºª. ]*$</var-value>
                     </var>            
             </field>
             <field
@@ -321,7 +323,7 @@
                     <arg key="formulario.apellido1"/>                            
                     <var>
                         <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                        <var-value>^[a-zA-ZáéíóúAÉÍÓÚÑñºª. ]*$</var-value>
                     </var>            
             </field>
              <field
@@ -347,19 +349,14 @@
                 property="password"
                 depends="required">
                     <arg key="formulario.password"/>                                                                
-            </field>
-            <field
-                property="password2"
-                depends="required">
-                    <arg key="formulario.password2"/>                                                                
-            </field>
+            </field>       
             </form>
             
             
             <form name="ActualizarClienteForm">
                 <field
                 property="dni"
-                depends="required,minlength,maxlength">
+                depends="required,minlength,maxlength,mask">
                     <arg key="formulario.dni"/>
                     <arg position="1" name="minlength" key="${var:minlength}" resource="false"/>  
                     <arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
@@ -371,6 +368,10 @@
                         <var-name>maxlength</var-name>
                         <var-value>9</var-value>
                     </var>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                    </var>
             </field>
             </form>
             
@@ -381,7 +382,7 @@
                     <arg key="tratamiento.tipo"/>   
                     <var>
                         <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                        <var-value>^[a-zA-ZáéíóúAÉÍÓÚÑñºª. ]*$</var-value>
                 </var>  
                 </field>                                             
                 <field
@@ -408,7 +409,7 @@
                     <arg key="tratamiento.intervalos"/>                                        
                     <var>
                         <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                        <var-value>^[a-zA-ZáéíóúAÉÍÓÚÑñºª. ]*$</var-value>
                     </var>  
                 </field>
                 <field
@@ -425,7 +426,7 @@
                     <arg key="formulario.nombre"/> 
                 <var>
                         <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-Z]*$</var-value>
+                        <var-value>^[a-zA-ZáéíóúAÉÍÓÚÑñºª. ]*$</var-value>
                 </var>      
                 </field> 
                 <field
@@ -470,49 +471,63 @@
                 </field>                
             </form>
             
-    </formset>
-
-
-    
-
-
-
-
-
-<!-- #######################################################################  -->
-
-    <!-- An example formset for another locale -->
-    <formset language="fr">
-
-        <constant>
-            <constant-name>postalCode</constant-name>
-            <constant-value>^[0-9a-zA-Z]*$</constant-value>
-        </constant>
-
-        <!-- An example form -->
-        <form name="logonForm">
+            <form name="ActualizarUsuarioForm"> <!-- formulario para modificar datos de cliente -->
             <field
-                property="username"
-                depends="required">
-                    <arg key="logonForm.username"/>
-            </field>
-            <field
-                property="password"
-                depends="required,mask">
-                    <arg key="logonForm.password"/>
+                property="dni"
+                depends="mask,maxlength,minlength">
+                    <arg key="formulario.dni"/>
+                    <arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+                    <arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
                     <var>
                         <var-name>mask</var-name>
                         <var-value>^[0-9a-zA-Z]*$</var-value>
                     </var>
-            </field>
-        </form>
-        <form name="InsertarUsuarioForm">
+                     <var>
+                        <var-name>minlength</var-name>
+                        <var-value>1</var-value>
+                    </var>
+                     <var>
+                        <var-name>maxlength</var-name>
+                        <var-value>9</var-value>
+                    </var>
+            </field> 
             <field
-                property="dni"
-                depends="required,minlength,maxlength">
-                    <arg key="formulario.dni"/>
-                    <arg position="1" name="minlength" key="${var:minlength}" resource="false"/>  
-                    <arg position="1" name="maxlength" key="${var.maxlength}" resource="false"/>
+                property="nombre"
+                depends="mask">
+                    <arg key="formulario.nombre"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[a-zA-ZáéíóúAÉÍÓÚÑñºª. ]*$</var-value>
+                    </var>
+            </field> 
+            <field
+                property="apellidos"
+                depends="mask">
+                    <arg key="formulario.apellido1"/>                                        
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[a-zA-ZáéíóúAÉÍÓÚÑñºª. ]*$</var-value>
+                    </var>
+            </field> 
+            <field
+                property="apellido2"
+                depends="mask">
+                    <arg key="formulario.apellido2"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[a-zA-ZáéíóúAÉÍÓÚÑñºª. ]*$</var-value>
+                    </var>
+            </field> 
+            <field
+                property="telefono"
+                depends="mask,minlength,maxlength">
+                    <arg key="formulario.telefono"/>
+                    <arg position="1" name="minlength" key="${var:minlength}" resource="false"/>
+                    <arg position="1" name="maxlength" key="${var:maxlength}" resource="false"/>
+                    <var>
+                        <var-name>mask</var-name>
+                        <var-value>^[0-9]*$</var-value>
+                    </var>
                     <var>
                         <var-name>minlength</var-name>
                         <var-value>9</var-value>
@@ -521,36 +536,14 @@
                         <var-name>maxlength</var-name>
                         <var-value>9</var-value>
                     </var>
-            </field>
+            </field> 
             <field
-                property="nombre"
-                depends="required,mask">
-                    <arg key="formulario.nombre"/>                        
-                    <var>
-                        <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-Z]*$</var-value>
-                    </var>            
-            </field>
-            <field
-                property="apellidos"
-                depends="required,mask">
-                    <arg key="formulario.apellido1"/>                            
-                    <var>
-                        <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-Z]*$</var-value>
-                    </var>            
-            </field>
-             <field
-                property="apellido2"
-                depends="mask">
-                    <arg key="formulario.apellido2"/>                            
-                    <var>
-                        <var-name>mask</var-name>
-                        <var-value>^[0-9a-zA-Z]*$</var-value>
-                    </var>            
-            </field>
+                property="email"
+                depends="email">
+                    <arg key="formulario.email"/>
+                    
+            </field> 
         </form>
-      
-   </formset>
-
+            
+    </formset>
 </form-validation>

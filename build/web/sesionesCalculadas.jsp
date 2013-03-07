@@ -56,19 +56,24 @@
 	<li><a a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=1">Tratamiento</a></li>
       	<li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=6">Observación</a></li>   
 	<li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=4">Test</a></li>
-        <li class="active"><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=5">Medidas</a></li>			    		
+        <li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=5">Medidas</a></li>			    		
+        <li class="active"><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=9">Calcular Sesiones</a></li>
     </ul>
     </div> <!-- menu ficha -->    
     <div class="clearfix"></div>  
     <div class="span11 cuerpoficha">
         <legend><bean:message key="sesiones.para"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></legend>                 
              <div class="span11" align="center"><img src="imagenes/maquinas.png" /></div>
+             <div class="clearfix">&nbsp;</div>
              <div class="span10" align="center">    
-                 <div class="span4"><h4><bean:message key="general.fit"/>: </h4> <strong><b><bean:write name="sesiones" property="fit" /></b></strong> <bean:message key="sesiones.sesiones"/></div>
-                 <div class="span4"><h4><bean:message key="general.comfort"/>:</h4> <strong><bean:write name="sesiones" property="confort" /></strong> <bean:message key="sesiones.sesiones"/></div>
+                 <div class="span4"><h4><bean:message key="general.fit"/>: <strong><b><bean:write name="sesiones" property="fit" /></b></strong> <bean:message key="sesiones.sesiones"/></h4> </div>
+                 <div class="span4"><h4><bean:message key="general.comfort"/>: <strong><bean:write name="sesiones" property="confort" /></strong> <bean:message key="sesiones.sesiones"/></h4></div>
              </div>
              <div class="clearfix"></div>
+             <div class="span4"><a class="btn btn-danger btn-primary" target="_blank" href="CalculaPresupuesto.do"><em class="icon-shopping-cart icon-white"></em> Presupuesto</a></div>
+             <div class="span4"><a class="btn btn-danger btn-primary" target="_blank" href="contrato.jsp"><em class="icon-thumbs-up icon-white"></em> Contrato</a></div>
     </div>
+             
        <div class="span11"><a class="btn btn-success" href="principal.jsp"><em class="icon-home icon-white"></em> Volver al menú</a>
                 <a class="btn btn-warning" href="ListaClientes.do"><em class="icon-list icon-white"></em> Listado de clientes </a></div>
             </div><!-- row -->

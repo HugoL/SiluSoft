@@ -25,6 +25,7 @@ import java.io.Serializable;
  */
 public class Sesiones implements Serializable {
     private int idCliente;
+    private int idTratamiento;
     private int fit;
     private int confort;
     private int total;
@@ -42,6 +43,14 @@ public class Sesiones implements Serializable {
     
     public void setIdCliente(int idCliente){
         this.idCliente=idCliente;
+    }
+    
+    public int getIdTratamiento(){
+        return idTratamiento;
+    }
+    
+    public void setIdTratamiento(int idTratamiento){
+        this.idTratamiento=idTratamiento;
     }
     
     public int getFit(){

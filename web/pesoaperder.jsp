@@ -41,18 +41,20 @@
 	<li><a a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=1">Tratamiento</a></li>
       	<li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=6">Observación</a></li>   
 	<li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=4">Test</a></li>
-        <li class="active"><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=5">Medidas</a></li>			    		
+        <li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=5">Medidas</a></li>			    		
+        <li class="active"><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=9">Calcular Sesiones</a></li>
     </ul>
     </div> <!-- menu ficha -->    
     <div class="clearfix"></div>  
     <div class="span11 cuerpoficha" align="center">
         <div><bean:message key="medidas.imc"/> de <strong><bean:write name="cliente" property="nombre"/> <bean:write name="cliente" property="apellidos"/></strong>: <span class="label label-warning"><bean:write name="imc" /></span><br/><br/></div>        
         <logic:present name="cliente">
-        <html:form action="/CalculaSesiones">
+            <html:form action="/CalculaSesiones" styleClass="form-inline">
             <input type="hidden" property="imc" value="<bean:write name="imc"/>" />
             <input type="hidden" property="peso" value="<bean:write name="peso"/>" />
             <html:hidden name="cliente" property="idCliente"/>
-            <div class="input-append"><label>Kg. a perder</label><html:text property="kilossobran" styleClass="input-mini"/>  <span class="add-on">.Kg</span></div>                
+            <div class="input-append"><label>Kg. a perder: </label><html:text property="kilossobran" styleClass="input-mini"/>  <span class="add-on">.Kg</span></div>                
+            <div class="clearfix">&nbsp;</div>
             <div class="span10">
             <html:submit value="Enviar" styleClass="btn btn-danger"/>
             </div>

@@ -37,7 +37,7 @@
         </style>
         <link href="css/bootstrap-responsive.css" rel="stylesheet">
         <link href="css/nuevosestilos.css" rel="stylesheet">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset= iso-8859-1">
         <title><bean:message key="cliente.actualizar"/></title>
     </head>
     <body>
@@ -59,6 +59,7 @@
       	<li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=6">Observación</a></li>   
 	<li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=4">Test</a></li>
         <li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=5">Medidas</a></li>			    		
+        <li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=9">Calcular Sesiones</a></li>
     </ul>
     </div> <!-- menu ficha -->    
     <div class="clearfix"></div>  
@@ -85,7 +86,7 @@
             <label><bean:message key="cliente.fechapeso"/>: </label><html:text property="fechapeso" value=""  styleClass="input-medium"/><span class="help-inline">(<bean:message key="cliente.dejablanco"/>)</span>
             </div>
             <div class="span11" align="center"><html:submit styleClass="btn btn-danger">Actualizar</html:submit></div>
-            <html:errors/>
+            <div class="span10 clearfix alert alert-error"><html:errors/></div>
             </fieldset>       
         </html:form>
             </div>

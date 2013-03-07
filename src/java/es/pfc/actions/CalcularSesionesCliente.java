@@ -18,13 +18,9 @@
 package es.pfc.actions;
 
 import es.pfc.forms.CalcularSesionesForm;
-import es.pfc.forms.InsertarClienteForm;
 import es.pfc.model.Cliente;
 import es.pfc.model.Sesiones;
 import es.pfc.negocio.ClientesBO;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -66,30 +62,27 @@ public class CalcularSesionesCliente extends org.apache.struts.action.Action {
             //FÓRMULA PARA CALCULAR LAS SESIONES!!!            
             int sobrepeso;
             HttpSession sesion = request.getSession(false);
+            if(sesion==null){
+                System.out.println("la sesión ha caducado");
+                return mapping.findForward(FAILURE);
+            }
             Cliente cliente = new Cliente();
             cliente=(Cliente)request.getAttribute("cliente");
             
-            sobrepeso = CalculaSesionesForm.getKilossobran();
-            int pesoideal = 0;
+            sobrepeso = CalculaSesionesForm.getKilossobran();           
             //sobrepeso = (int) (peso - pesoideal); //me falta saber el peso ideal
             int y;             
             y = new Double(sobrepeso / 3).intValue();       
             int fit = 6*y;
-            int comfort = 4*y;
-            System.out.println("Id del cliente: "+CalculaSesionesForm.getIdCliente());
+            int comfort = 4*y;            
             sesiones.setIdCliente(CalculaSesionesForm.getIdCliente());
             sesiones.setFit(fit); //sesiones.setFit(fit);
             sesiones.setConfort(comfort); //sesiones.setConfort(comfort);
-            System.out.println("fit: "+sesiones.getFit()+" comfort: "+sesiones.getConfort());
             sesiones.setTotal(sesiones.getFit()+sesiones.getConfort());         
-            if(ClientesBO.insertaSesiones(sesiones, sesiones.getIdCliente())){                        
-                /*List lista = new ArrayList();
-                lista=ClientesBO.esEncontrado(idCliente,null,null,null,null);            
-                request.setAttribute("cliente",lista.get(0));*/
-                System.out.println("CalcularSesionesClienteAction sesiones: "+sesiones.getConfort());
+            if(ClientesBO.insertaSesiones(sesiones, sesiones.getIdCliente())){         
                 request.setAttribute("sesiones", sesiones);
                 return mapping.findForward(SUCCESS);
             }
             return mapping.findForward(FAILURE);
-    }
+    }     
 }

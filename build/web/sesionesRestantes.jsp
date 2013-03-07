@@ -57,17 +57,17 @@
       	<li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=6">Observación</a></li>   
 	<li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=4">Test</a></li>
         <li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=5">Medidas</a></li>			    		
+        <li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=9">Calcular Sesiones</a></li>
     </ul>
     </div> <!-- menu ficha -->    
     <div class="clearfix"></div>  
     <div class="span11 cuerpoficha">
             <logic:present name="sesiones">
-                <div class="span4"><bean:message key="sesiones.restantes"/>: <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></div>
+                <legend><bean:message key="sesiones.restantes"/>: <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></legend>
            <div class="clearfix"></div>
-           <div class="span3"><bean:message key="sesiones.fit"/>: <bean:write name="sesiones" property="resFit" /></div>
-           <div class="span3"><bean:message key="sesiones.comfort"/>: <bean:write name="sesiones" property="resConfort" /></div>
-           <div class="clearfix"></div>
-           <div class="span3"><center><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=3"><bean:message key="sesiones.ficha"/></a></center></div>            
+           <div class="span3"><bean:message key="sesiones.fit"/>: <h3><bean:write name="sesiones" property="resFit" /></h3></div>
+           <div class="span3"><bean:message key="sesiones.comfort"/>: <h3><bean:write name="sesiones" property="resConfort" /></h3></div>
+           <div class="clearfix"></div>           
         </logic:present>
             
         <logic:notPresent name="sesiones">

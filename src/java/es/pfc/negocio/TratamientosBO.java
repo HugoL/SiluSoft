@@ -131,4 +131,15 @@ public class TratamientosBO {
         
     }
     
+    public static float damePrecioTratamiento(int idCentro, int idTratamiento){
+        TratamientosDAOImp preciotrat = new TratamientosDAOImp();
+        try {
+            return preciotrat.precioTratamiento(idCentro, idTratamiento);                            
+            
+        } catch (Exception ex) {
+            Logger.getLogger(TratamientosBO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+    
 }

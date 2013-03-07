@@ -9,6 +9,7 @@ import es.pfc.model.Usuario;
 import es.pfc.negocio.UsuariosBO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -36,8 +37,12 @@ public class ActualizarUsuarioAction extends org.apache.struts.action.Action{
     public ActionForward execute(ActionMapping mapping, ActionForm form,
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        
-       Usuario miusuario = new Usuario();                        
+        HttpSession session = request.getSession(false);
+        if(session==null){
+            System.out.println("La sesión ha caducado");
+            return mapping.findForward(FAILURE);
+        }
+        Usuario miusuario = new Usuario();                        
         ActualizarUsuarioForm UsuarioForm = (ActualizarUsuarioForm) form;
         
         miusuario.setIdUsuario(UsuarioForm.getIdUsuario());
@@ -48,9 +53,19 @@ public class ActualizarUsuarioAction extends org.apache.struts.action.Action{
         miusuario.setTelefono(UsuarioForm.getTelefono());
         miusuario.setEmail(UsuarioForm.getEmail());
         
-        if(UsuariosBO.actualizaUsuario(miusuario)) {                    
+        if(UsuariosBO.actualizaUsuario(miusuario)) {   
+            System.out.println("OKEY");            
+             Usuario usuario = (Usuario)session.getAttribute("usuario");
+             usuario.setDni(miusuario.getDni());
+             usuario.setNombre(miusuario.getNombre());
+             usuario.setApellidos(miusuario.getApellidos());
+             usuario.setDireccion(miusuario.getDireccion());
+             usuario.setTelefono(miusuario.getTelefono());
+             usuario.setEmail(miusuario.getEmail());
+             session.setAttribute("usuario", usuario);
             return mapping.findForward(SUCCESS);                                            
         }else {                    
+            System.out.println("ohhhhh");
             return mapping.findForward(FAILURE);                          
         }
     }
