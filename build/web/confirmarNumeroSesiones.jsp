@@ -40,30 +40,50 @@
      <tiles:insert page="plantillas/barranav.jsp" flush="true"/>
      <div class="container mifondo">
      
-     <tiles:insert page="plantillas/logo.jsp" flush="true"/>
-     <logic:present name="usuario">
-     <div class="containter">   
+    <tiles:insert page="plantillas/logo.jsp" flush="true"/>
+    <logic:present name="usuario">
+    <div class="containter">   
     <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
     <div class="mi-hero-unit">
     <logic:equal name="ManipulaClientes" property="activado" value="true">
-        <div class="row"> 
-            <div class="span11 cuerpoficha">
-    <logic:present name="cliente">
-        <div class="span10"><h4><bean:message key="sesiones.calculadas"/>: </h4></div>
-        <div class="span4"><bean:message key="sesiones.imc"/>: <span class="badge badge-important"><bean:write name="imc"/></span></div>
-        <div class="span10">        
+        <div class="row">
+    <div class="span11">
+    <ul class="nav nav-tabs">  
+        <li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=3">Datos</a></li> 
+	<li><a a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=1">Tratamiento</a></li>
+      	<li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=6">Observación</a></li>   
+	<li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=4">Test</a></li>
+        <li><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=5">Medidas</a></li>			    		
+        <li class="active"><a href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=9">Calcular Sesiones</a></li>
+    </ul>
+    </div> <!-- menu ficha -->    
+    <div class="clearfix"></div>   
+    <div class="span11 cuerpoficha">
+    <logic:present name="cliente">              
+        <legend><bean:message key="sesiones.calculadas"/> para <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></legend>
+        <center><div class="span10">        
             <html:form action="/InsertaSesiones" styleClass="form-inline">
-                <input type="text" name="fit" value="<bean:write name="sesiones" property="fit"/>" placeholder="<bean:message key="general.fit"/>"/>
-                <input type="text" name="comfort" value="<bean:write name="sesiones" property="confort" />" placeholder="<bean:message key="general.comfort"/>"/>                                           
-                <html:submit value="Enviar" styleClass="btn btn-danger"/>
-            </html:form>
-        </div>
-        <a href="contrato.jsp?fit=<bean:write name="sesiones" property="fit"/>&confort=<bean:write name="sesiones" property="confort"/>&total=<bean:write name="sesiones" property="total"/>" target="_blank" class="btn btn-warning btn-primary"><bean:message key="medidas.contrato"/></a>
-
+                <div class="control-group">
+                <label><bean:message key="general.fit"/>:</label>                
+                    <input type="text" name="fit" value="<bean:write name="sesiones" property="fit"/>" class="span1" />               
                 </div>
-        </logic:present>
-     </logic:equal>
-        </div>
+                <div class="control-group">
+                <label><bean:message key="general.comfort"/>:</label>                
+                    <input type="text" name="comfort" value="<bean:write name="sesiones" property="confort" />" class="span1" />                
+                </div>
+                <div class="control-group">
+                <label><bean:message key="sesiones.precio"/>:</label>                
+                    <input type="text" name="precio" value="<bean:write name="sesiones" property="confort" />" class="span1" />                
+                </div>
+                <div class="control-group">
+                    <html:submit value="Confirmar" styleClass="btn btn-danger"/>
+                </div>
+            </html:form>
+    </div></center>
+    </div>
+    </logic:present>
+    </logic:equal>
+    </div>
     </div>
     <logic:notEqual name="ManipulaClientes" property="activado" value="true">
         <center><tr class="tabla">   

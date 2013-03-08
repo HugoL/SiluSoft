@@ -24,6 +24,7 @@ public class InsertarSesionesClienteForm extends ValidatorForm {
     private int idCliente;
     private int fit;
     private int comfort;
+    private float precio;
     
     public int getIdCliente() {
         return idCliente;
@@ -50,6 +51,13 @@ public class InsertarSesionesClienteForm extends ValidatorForm {
         this.comfort=comfort;
     }
     
+    public float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(float precio) {
+        this.precio=precio;
+    }
     
     public InsertarSesionesClienteForm() {
         super();

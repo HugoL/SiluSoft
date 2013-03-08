@@ -185,9 +185,9 @@
              <forward name="correcto" path="/listarMedidasCliente.jsp" />
              <forward name="incorrecto" path="/incorrecto.jsp" />
         </action>
-        <action path="/CalculaSesiones" name="CalcularSesionesForm" type="es.pfc.actions.CalcularSesionesCliente" input="/incorrecto.jsp">
-            <forward name="correcto" path="/sesionesCalculadas.jsp" />
-            <forward name="incorrecto" path="/incorrecto.jsp" />
+        <action path="/CalculaSesiones" name="CalcularSesionesForm" type="es.pfc.actions.CalcularSesionesCliente" input="/pesoaperder.jsp">
+            <forward name="correcto" path="/confirmarNumeroSesiones.jsp" />
+            <forward name="incorrecto" path="/pesoaperder.jsp" />
         </action>
         <action name="InsertarObservacionForm" path="/InsertaObservacion" scope="session" type="es.pfc.actions.InsertarObservacionClienteAction" validate="true" input="/fichaObservacion.jsp">
             <forward name="correcto" path="/ListaObservacion.do" />
@@ -281,7 +281,7 @@
             <forward name="incorrecto" path="/incorrecto.jsp" />
         </action>
         <action input="/incorrecto.jsp" name="InsertarSesionesClienteForm" path="/InsertaSesiones" scope="session" type="es.pfc.actions.InsertarSesionesClienteAction">
-            <forward name="correcto" path="/correcto.jsp" />
+            <forward name="correcto" path="/sesionesCalculadas.jsp" />
             <forward name="incorrecto" path="/incorrecto.jsp" />
         </action>
         <action input="/incorrecto.jsp" name="InsertarUsuarioForm" path="/InsertaUsuarioAdmin" scope="session" type="es.pfc.actions.InsertarUsuarioAdminAction">

@@ -19,15 +19,12 @@ package es.pfc.negocio;
 
 import es.pfc.dao.ClienteDAOImp;
 import es.pfc.model.Cliente;
-import es.pfc.model.Medidas;
 import es.pfc.model.Observacion;
 import es.pfc.model.Sesiones;
-import es.pfc.model.TestCliente;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.apache.struts.action.ActionForm;
 
 /**
  *

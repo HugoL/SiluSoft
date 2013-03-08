@@ -71,8 +71,7 @@ public class InsertarImcClienteAction extends org.apache.struts.action.Action {
             System.out.println("no existe sobrepeso");
             sesiones.setFit(0);
             sesiones.setConfort(0);
-        }        
-        
+        }                       
         request.setAttribute("sesiones", sesiones);        
         return mapping.findForward(SUCCESS);
     }

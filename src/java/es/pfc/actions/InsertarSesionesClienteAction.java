@@ -57,10 +57,14 @@ public class InsertarSesionesClienteAction extends org.apache.struts.action.Acti
         Sesiones sesiones = new Sesiones();
         sesiones.setFit(insertarSesionesForm.getFit());
         sesiones.setConfort(insertarSesionesForm.getComfort());
+        sesiones.setTotal(sesiones.getFit()+sesiones.getConfort());
         //en sesiones restantes pongo las mismas porque todavía no ha consumido ninguna        
         sesiones.setIdCliente(cliente.getIdCliente());
+        sesiones.setPrecio(insertarSesionesForm.getPrecio());
+        float preciototal = insertarSesionesForm.getPrecio() * sesiones.getTotal();
         //comprobar si el cliente ya tenía sesiones calculadas para actualizar la BD
-        
+        request.setAttribute("sesiones", sesiones);
+        request.setAttribute("preciototal", preciototal);
         if(ClientesBO.verSesionesCliente(cliente.getIdCliente())!=null){
             //se le acumulan las sesiones restantes                        
             if(ClientesBO.actualizaSesionesCliente(sesiones)){
@@ -73,11 +77,13 @@ public class InsertarSesionesClienteAction extends org.apache.struts.action.Acti
         }else{  
             //como no tenía sesiones calculadas le restan las mismas que se han calculado (no ha consumido ninguna ni acumulado)
             sesiones.setResConfort(insertarSesionesForm.getComfort());
-            sesiones.setResFit(insertarSesionesForm.getFit());
-            if(ClientesBO.insertaSesiones(sesiones, cliente.getIdCliente()))        
+            sesiones.setResFit(insertarSesionesForm.getFit());            
+            if(ClientesBO.insertaSesiones(sesiones, cliente.getIdCliente())) {        
                 return mapping.findForward(SUCCESS);
-            else
+            }
+            else {
                 return mapping.findForward(FAILURE);
+            }
         }
     }
 }

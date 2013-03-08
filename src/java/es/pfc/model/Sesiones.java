@@ -32,6 +32,7 @@ public class Sesiones implements Serializable {
     private int resconfort;
     private int resfit;
     private int kilossobran;
+    private float precio;
     
     public Sesiones(){
         
@@ -91,5 +92,13 @@ public class Sesiones implements Serializable {
     
     public void setResConfort(int resconfort){
         this.resconfort=resconfort;
+    }
+    
+    public float getPrecio(){
+        return precio;
+    }
+    
+    public void setPrecio(float precio){
+        this.precio = precio;
     }
 }

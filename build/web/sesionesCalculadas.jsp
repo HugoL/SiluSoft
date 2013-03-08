@@ -71,7 +71,7 @@
              </div>
              <div class="clearfix"></div>
              <div class="span4"><a class="btn btn-danger btn-primary" target="_blank" href="CalculaPresupuesto.do"><em class="icon-shopping-cart icon-white"></em> Presupuesto</a></div>
-             <div class="span4"><a class="btn btn-danger btn-primary" target="_blank" href="contrato.jsp"><em class="icon-thumbs-up icon-white"></em> Contrato</a></div>
+             <div class="span4"><a class="btn btn-danger btn-primary" target="_blank" href="contrato.jsp?fit=<bean:write name="sesiones" property="fit"/>&confort=<bean:write name="sesiones" property="confort"/>&total=<bean:write name="sesiones" property="total"/>"><em class="icon-thumbs-up icon-white"></em> Contrato</a></div>
     </div>
              
        <div class="span11"><a class="btn btn-success" href="principal.jsp"><em class="icon-home icon-white"></em> Volver al menú</a>

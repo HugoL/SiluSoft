@@ -38,15 +38,22 @@ public class CalcularPresupuestoAction extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
          HttpSession sesion = request.getSession(false);
+         float preciototal = 0;
          if(sesion==null){
              System.out.println("sesión caducada");
              return mapping.findForward(FAILURE);
          }
          Usuario usuario = (Usuario)sesion.getAttribute("usuario");
          Sesiones sesiones = (Sesiones)request.getAttribute("sesiones");
-         
-         TratamientosBO.damePrecioTratamiento(usuario.getIdCentro(),sesiones.getIdTratamiento());
-         
+                          
+         //TratamientosBO.damePrecioTratamiento(usuario.getIdCentro(),sesiones.getIdTratamiento());
+         try{
+            preciototal = (Float)request.getAttribute("preciototal");
+         }catch(Exception e){
+             System.out.println("Error al convertir el precio");
+         }
+         request.setAttribute("sesiones",sesiones);
+         request.setAttribute("preciototal", preciototal);
         return mapping.findForward(SUCCESS);
     }
     

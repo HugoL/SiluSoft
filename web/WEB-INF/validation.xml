@@ -544,6 +544,23 @@
                     
             </field> 
         </form>
+        <form name="InsertarSesionesClienteForm">
+                <field
+                property="fit"
+                depends="required,integer">
+                    <arg key="formulario.fit"/>                                        
+                </field>
+                <field
+                property="comfort"
+                depends="required,integer">
+                    <arg key="formulario.comfort"/>                                        
+                </field>                
+                <field
+                property="precio"
+                depends="required,float">
+                    <arg key="formulario.precio"/>                                                           
+                </field>                
+        </form>
             
     </formset>
 </form-validation>

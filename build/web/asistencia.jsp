@@ -63,7 +63,7 @@
     <div class="clearfix"></div>  
     <div class="span11 cuerpoficha">
     <logic:present name="cliente">  
-        <div class="span11"><center><bean:message key="asistencia.de"/><strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong</center></div>
+        <legend><bean:message key="asistencia.de"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong></legend>
             <logic:equal name="tiene" value="false">
                 <div class="alert alert-warning"><bean:message key="general.cliente"/> <strong><bean:write name="cliente" property="nombre" /> <bean:write name="cliente" property="apellidos" /></strong> <bean:message key="asistencia.nosesiones"/></div>
                 <div class="span5"><a class="btn btn-success" href="DameDatosCliente.do?dni=<bean:write name="cliente" property="dni"/>&op=5"><em class="icon-heart icon-white"></em> <bean:message key="asistencia.calcular"/></a></div>                

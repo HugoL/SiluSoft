@@ -25,7 +25,8 @@
 
 <p>Sesiones para fit: <bean:write name="sesiones" property="fit" /></p>
 <p>Sesiones para comfort: <bean:write name="sesiones" property="confort" /> </p>
-<p>Precio: </p>
+<p>Precio por sesión: <bean:write name="sesiones" property="precio"/></p>
+<p>Precio total: <bean:write name="preciototal"/></p>
 </div>
 <div id="firmas" style="float:none">
 <div id="firmacliente" style="float:left"><p align="left">El cliente <br/><br/><br/><br/><br/><br/><br/></p></div><div id="firmacentro" style="float:right"><p align="right">El centro<br/><br/><br/><br/><br/><br/><br/></p></div>
