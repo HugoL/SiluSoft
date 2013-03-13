@@ -69,8 +69,8 @@
                  <div class="span4"><h4><bean:message key="general.fit"/>: <strong><b><bean:write name="sesiones" property="fit" /></b></strong> <bean:message key="sesiones.sesiones"/></h4> </div>
                  <div class="span4"><h4><bean:message key="general.comfort"/>: <strong><bean:write name="sesiones" property="confort" /></strong> <bean:message key="sesiones.sesiones"/></h4></div>
              </div>
-             <div class="clearfix"></div>
-             <div class="span4"><a class="btn btn-danger btn-primary" target="_blank" href="CalculaPresupuesto.do"><em class="icon-shopping-cart icon-white"></em> Presupuesto</a></div>
+             <div class="clearfix"></div>             
+             <div class="span4"><a class="btn btn-danger btn-primary" target="_blank" href="presupuesto.jsp?fit=<bean:write name="sesiones" property="fit"/>&com=<bean:write name="sesiones" property="confort"/>"><em class="icon-shopping-cart icon-white"></em> Presupuesto</a></div>
              <div class="span4"><a class="btn btn-danger btn-primary" target="_blank" href="contrato.jsp?fit=<bean:write name="sesiones" property="fit"/>&confort=<bean:write name="sesiones" property="confort"/>&total=<bean:write name="sesiones" property="total"/>"><em class="icon-thumbs-up icon-white"></em> Contrato</a></div>
     </div>
              

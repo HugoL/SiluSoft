@@ -60,11 +60,11 @@ public class InsertarSesionesClienteAction extends org.apache.struts.action.Acti
         sesiones.setTotal(sesiones.getFit()+sesiones.getConfort());
         //en sesiones restantes pongo las mismas porque todavía no ha consumido ninguna        
         sesiones.setIdCliente(cliente.getIdCliente());
-        sesiones.setPrecio(insertarSesionesForm.getPrecio());
-        float preciototal = insertarSesionesForm.getPrecio() * sesiones.getTotal();
+        //sesiones.setPrecio(insertarSesionesForm.getPrecio());
+        //float preciototal = insertarSesionesForm.getPrecio() * sesiones.getTotal();
         //comprobar si el cliente ya tenía sesiones calculadas para actualizar la BD
         request.setAttribute("sesiones", sesiones);
-        request.setAttribute("preciototal", preciototal);
+        //request.setAttribute("preciototal", preciototal);
         if(ClientesBO.verSesionesCliente(cliente.getIdCliente())!=null){
             //se le acumulan las sesiones restantes                        
             if(ClientesBO.actualizaSesionesCliente(sesiones)){

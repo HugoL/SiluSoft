@@ -44,11 +44,11 @@ public class CalcularPresupuestoAction extends org.apache.struts.action.Action {
              return mapping.findForward(FAILURE);
          }
          Usuario usuario = (Usuario)sesion.getAttribute("usuario");
-         Sesiones sesiones = (Sesiones)request.getAttribute("sesiones");
-                          
-         //TratamientosBO.damePrecioTratamiento(usuario.getIdCentro(),sesiones.getIdTratamiento());
+         Sesiones sesiones = (Sesiones)request.getAttribute("sesiones"); 
          try{
-            preciototal = (Float)request.getAttribute("preciototal");
+                       
+            //TratamientosBO.damePrecioTratamiento(usuario.getIdCentro(),sesiones.getIdTratamiento());         
+            //preciototal = (Float)request.getAttribute("preciototal");                         
          }catch(Exception e){
              System.out.println("Error al convertir el precio");
          }
