@@ -53,16 +53,21 @@ public class InsertarClientesAction extends org.apache.struts.action.Action{
         micliente.setDni(ClienteForm.getDni());
         micliente.setNombre(ClienteForm.getNombre());
         micliente.setApellidos(ClienteForm.getApellidos());     
-        micliente.setApellido2(ClienteForm.getApellido2());
-
-        //Generar url del cliente
-        String url = generarCadena();
-        
-        micliente.setUrl(url);
+        micliente.setApellido2(ClienteForm.getApellido2());       
         
         HttpSession session = request.getSession(false);
         Usuario usuario=(Usuario) session.getAttribute("usuario");
        
+        if(usuario!=null){
+        //Generar url del cliente
+        String url = generarCadena(usuario.getIdUsuario());
+        
+        micliente.setUrl(url);
+        }else{
+            System.out.println("Sesion usuario no encontrada");
+            micliente = null;
+            return mapping.findForward(FAILURE);
+        }
         //////CREACION DEL OBJETO CLIENTE CON LOS DATOS /////////
         try {
             micliente=ClientesBO.esInsertado(micliente,usuario.getIdCentro());
@@ -85,15 +90,17 @@ public class InsertarClientesAction extends org.apache.struts.action.Action{
 	}                                   
        }
     
-    String generarCadena(){
+    String generarCadena(int id){
         String url;
+        String ids = String.valueOf(id);
         for(int i=0;i<20;i++){
             int elemento = (int)(Math.random()*36);
             System.out.println(elemento);
             cadena[i]=(char)elementos[elemento];
         }
         
-        return url = new String (cadena);
+        url = new String (cadena);
+        return url+ids;
     }
     
 }

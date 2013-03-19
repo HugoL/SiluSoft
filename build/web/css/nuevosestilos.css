@@ -283,3 +283,19 @@ body{
 .sesiondiv{
     margin-top: 10px;
 }
+
+.blanco{
+    background-color: #fff !important;
+}
+
+.firmacentro{
+    float:left;
+    margin-left: 10px;
+    height: 150px;
+}
+.firmacliente{
+    float:right;
+    margin-right: 10px;
+    height: 150px;
+    text-align: right;
+}

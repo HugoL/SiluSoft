@@ -70,11 +70,7 @@
                 <div class="control-group">
                 <label><bean:message key="general.comfort"/>:</label>                
                     <input type="text" name="comfort" value="<bean:write name="sesiones" property="confort" />" class="span1" />                
-                </div>
-                <div class="control-group">
-                <label><bean:message key="sesiones.precio"/>:</label>                
-                    <input type="text" name="precio" value="<bean:write name="sesiones" property="confort" />" class="span1" />                
-                </div>
+                </div>                
                 <div class="control-group">
                     <html:submit value="Confirmar" styleClass="btn btn-danger"/>
                 </div>
