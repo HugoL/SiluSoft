@@ -37,7 +37,7 @@ public class InsertarClientesAction extends org.apache.struts.action.Action{
       private static final String FAILURE = "incorrecto";
       
       char[] elementos ={'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','s','t','u','v','w','x','y','z'};
-      char [] cadena = new char [20];
+      char[] cadena = new char [20];
       
          
     @Override

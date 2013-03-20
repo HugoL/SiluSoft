@@ -561,6 +561,12 @@
                     <arg key="formulario.precio"/>                                                           
                 </field>                
         </form>
-            
+        <form name="InsertarContratoClienteForm">
+                <field
+                property="valor"
+                depends="required">
+                    <arg key="formulario.contrato"/>                                       
+                </field>                
+        </form>
     </formset>
 </form-validation>

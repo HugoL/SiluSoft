@@ -53,4 +53,5 @@ public interface ClienteDAO {
     public Cliente login(String identificador, String password) throws Exception;
     public String insertarPassword(int id, String password) throws Exception;
     public String renovarPassword(int id, String password) throws Exception;
+    public boolean insertarContrato(int idCliente, String texto) throws Exception;
 }

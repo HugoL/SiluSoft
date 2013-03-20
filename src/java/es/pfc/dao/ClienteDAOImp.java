@@ -1287,4 +1287,40 @@ public class ClienteDAOImp implements ClienteDAO {
             return null;
         }
     }
+
+    @Override
+    public boolean insertarContrato(int idCliente, String texto) throws Exception {
+        Connection conn = Conexion.getConexion();    
+       
+        ResultSet result = null;  
+        PreparedStatement statement = null;       
+        String consulta= "INSERT INTO Contratos(IdCliente, Valor) VALUES (?,?);";      
+        System.out.println("consulta: "+consulta);
+        try{
+             statement = conn.prepareStatement(consulta);
+             statement.setInt(1, idCliente);
+             statement.setString(2, texto);
+             result = statement.executeQuery();
+             if(result.next()){                                 
+                return true;                         
+             }
+             logger.debug(result);           
+             return false;
+        } catch(SQLException sqle) {
+            logger.debug("Error en ClienteDAOImp.InsertarContrato: "+sqle);
+            throw new Exception("Excepcion ClienteDAOImp..."+sqle);
+        }
+        //cierro la conexion    
+        finally {
+            if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                try { statement.close(); } catch(SQLException ignored) { }
+            }
+			if(conn != null) {
+                try { conn.close(); } catch(SQLException ignored) { }
+            }
+	}
+    }
 }

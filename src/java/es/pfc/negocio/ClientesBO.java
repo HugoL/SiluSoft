@@ -346,4 +346,14 @@ public class ClientesBO {
          }
          return 0;
      }          
+     
+     public static boolean InsertaContratoCliente(int idCliente, String valor) throws Exception{
+         ClienteDAOImp clientedao = new ClienteDAOImp();
+         try{
+             return clientedao.insertarContrato(idCliente, valor);
+         }catch(Exception e){
+             Logger.getLogger(ClientesBO.class.getName()).log(Level.SEVERE, null, e);
+         }
+         return false;
+     }
 }
