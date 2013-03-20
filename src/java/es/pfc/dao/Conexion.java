@@ -14,8 +14,8 @@ import java.sql.SQLException;
  */
 public class Conexion {
     public static Connection getConexion(){
-        String usuario = "root";
-        String pass = "523360";
+        String usuario = "xxxxxxxxx";
+        String pass = "xxxxxx";
         Connection c = null;        
         
         try{
