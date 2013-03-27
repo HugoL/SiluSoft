@@ -1,4 +1,3 @@
 web/META-INF
 build
 src/java/es/pfc/dao/Conexion.java
-src/java/es/pfc/negocio/Variables.java
