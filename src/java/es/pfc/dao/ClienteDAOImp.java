@@ -60,10 +60,15 @@ public class ClienteDAOImp implements ClienteDAO {
         
         //Pido conexion       
         try {           
-                        String consulta= "INSERT INTO `SiluBd`.`Clientes` (`Dni`, `Nombre`, `Apellidos`,`Apellido2`,`Url`) VALUES ('"+cliente.getDni()+"', '"+cliente.getNombre()+"', '"+cliente.getApellidos()+"','"+cliente.getApellido2()+"', '"+cliente.getUrl()+"');";
+                        String consulta= "INSERT INTO `SiluBd`.`Clientes` (`Dni`, `Nombre`, `Apellidos`,`Apellido2`,`Url`) VALUES (?,?,?,?,?);";
 			statement = conn.prepareStatement(consulta);
+                                                
+                        statement.setString(1, cliente.getDni());
+                        statement.setString(2, cliente.getNombre());
+                        statement.setString(3, cliente.getApellidos());
+                        statement.setString(4, cliente.getApellido2());
+                        statement.setString(5, cliente.getUrl());                       
                         
-                        System.out.println(consulta);
                         insertado=statement.execute(consulta);
                         result=statement.getResultSet();
 			if(!insertado) {                           
@@ -167,9 +172,10 @@ public class ClienteDAOImp implements ClienteDAO {
         Cliente cliente = null;
         List list = new ArrayList();
         //Vector vector =new Vector();
-        String sql="SELECT DISTINCT `Clientes`.`IdCliente`,`Clientes`.`Dni`,`Clientes`.`Nombre`, `Clientes`.`Apellidos`, `Clientes`.`Apellido2` FROM `Clientes`, `Clientes-Centros`, `Usuarios`WHERE `Clientes-Centros`.`IdCliente`=`Clientes`.`IdCliente` AND `Clientes-Centros`.`IdCentro`="+IdCentro+" ORDER BY Apellidos;";
+        String sql="SELECT DISTINCT `Clientes`.`IdCliente`,`Clientes`.`Dni`,`Clientes`.`Nombre`, `Clientes`.`Apellidos`, `Clientes`.`Apellido2` FROM `Clientes`, `Clientes-Centros`, `Usuarios`WHERE `Clientes-Centros`.`IdCliente`=`Clientes`.`IdCliente` AND `Clientes-Centros`.`IdCentro`= ? ORDER BY Apellidos;";
         try {   
 			statement = conn.prepareStatement(sql); 
+                        statement.setInt(1, IdCentro);
                         result=statement.executeQuery();
                        
 			while(result.next()) {
@@ -283,9 +289,10 @@ public class ClienteDAOImp implements ClienteDAO {
         Cliente cliente = null;
         List list = new ArrayList();
         //Vector vector =new Vector();
-        String sql="SELECT DISTINCT `Clientes`.`IdCliente`,`Clientes`.`Dni`,`Clientes`.`Nombre`, `Clientes`.`Apellidos`, `Clientes`.`Apellido2` FROM `Clientes`, `Clientes-Centros`, `Usuarios`WHERE `Clientes-Centros`.`IdCliente`=`Clientes`.`IdCliente` AND `Clientes-Centros`.`IdCentro`="+idCentro+" AND `Clientes`.`Apellidos` LIKE '"+letra+"%'ORDER BY Apellidos;";
+        String sql="SELECT DISTINCT `Clientes`.`IdCliente`,`Clientes`.`Dni`,`Clientes`.`Nombre`, `Clientes`.`Apellidos`, `Clientes`.`Apellido2` FROM `Clientes`, `Clientes-Centros`, `Usuarios`WHERE `Clientes-Centros`.`IdCliente`=`Clientes`.`IdCliente` AND `Clientes-Centros`.`IdCentro`= ? AND `Clientes`.`Apellidos` LIKE '"+letra+"%'ORDER BY Apellidos;";
         try {   
 			statement = conn.prepareStatement(sql); 
+                        statement.setInt(1, idCentro);
                         result=statement.executeQuery();
                        
 			while(result.next()) {
@@ -320,7 +327,6 @@ public class ClienteDAOImp implements ClienteDAO {
     @Override
     public boolean delete(int id) throws Exception {
         boolean eliminado=false;
-        int i = 0;
        
        //variables para la conexion
         Connection conn = Conexion.getConexion(); 
@@ -328,10 +334,11 @@ public class ClienteDAOImp implements ClienteDAO {
         ResultSet result = null;
         PreparedStatement statement = null;
                            
-       try {    
-			statement = conn.prepareStatement("DELETE FROM `SiluBd`.`Clientes` WHERE IdCliente='"+id+"';"); //, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY
-                        String consulta= "DELETE FROM `SiluBd`.`Clientes` WHERE IdCliente='"+id+"';";                       
+       try {    			
+                        String consulta= "DELETE FROM `SiluBd`.`Clientes` WHERE IdCliente = ?;";                       
+                        statement = conn.prepareStatement("DELETE FROM `SiluBd`.`Clientes` WHERE IdCliente = ?;"); //, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY
                         //statement.setString(i++, Dni);
+                        statement.setInt(1, id);
                         eliminado=statement.execute(consulta);
                         result=statement.getResultSet();
 			if(eliminado==true) {                           

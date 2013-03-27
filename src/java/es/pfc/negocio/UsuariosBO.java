@@ -126,7 +126,8 @@ public class UsuariosBO {
             System.out.println("contacto vacío");
             return false;
         }
-        final String pass = "xxxxxxxxx";
+        final String pass = Variables.damePassMail(); // "xxxxxxxxx";
+        
         Properties props = new Properties();
         props.put("mail.smtp.host","mail.siludermis.com");
         props.put("mail.from", "admin@silusoft.com");
