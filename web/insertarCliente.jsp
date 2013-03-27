@@ -42,8 +42,7 @@
      <logic:present name="usuario">
      <div class="containter">   
     <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
-    <div class="mi-hero-unit">
-        <div class="span11 nombreusuario"><bean:message key="general.sesion"/><strong><bean:write scope="session" name="usuario" property="nombre" /></strong>&nbsp;</div>
+    <div class="mi-hero-unit">        
     <div class="row">
          <logic:equal name="ManipulaClientes" property="activado" value="true">	 	 	
          <div class="span11"><h3><bean:message key="insertacliente.titulo"/></h3></div>
@@ -61,7 +60,7 @@
              <div><label><bean:message key="formulario.apellido2"/>:</label>
              <html:text property="apellido2" /></div>   
              
-             <div><p><input type="submit" class="btn btn-warning" value="Insertar" /></p></div>
+             <div><p><input type="submit" class="btn btn-danger btn-primary" value="Insertar" /></p></div>
                           
              <div><html:errors/></div>              
              <div class="alert alert-info"><bean:message key="formulario.camposobligatorios"/></span></div>

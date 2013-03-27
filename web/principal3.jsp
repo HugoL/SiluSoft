@@ -48,7 +48,7 @@
 <div class="containter">   
     <tiles:insert page="plantillas/PestanasGenerales3.jsp" flush="true"/>
     <div class="mi-hero-unit">
-    <div class="row">        
+    <div class="row-fluid">        
         <div class="span3"><logic:equal name="Administracion" property="activado" value="true"><a href="listaRoles.do"><img src="imagenes/usuario.png" width="130" height="94" /></a></logic:equal></div>
 	<div class="span3"><logic:equal name="ManipulaCentro" property="activado" value="true"><a href="insertarSala.jsp"><img src="imagenes/sala.png" width="130" height="94" /></a></logic:equal></div>	
     </div>

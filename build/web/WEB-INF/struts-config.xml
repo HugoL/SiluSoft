@@ -144,7 +144,7 @@
         </action>
         <action path="/verFichaDatos" type="es.pfc.actions.FichaDatosClienteAction">
             <forward name="correcto" path="/fichaCliente.jsp" />
-            <forward name="incorrecto" path="/incorrecto.jsp" /> 
+            <forward name="incorrecto" path="/principal.jsp" /> 
         </action>        
         <action name="InsertarTratamientoF" path="/InsertarTratamiento" type="es.pfc.actions.InsertarTratamientoAction" input="/incorrecto.jsp" validate="true">
             <forward name="correcto" path="/correcto.jsp" />
@@ -176,7 +176,7 @@
             <forward name="asistencia" path="/asistencia.jsp" /> 
             <forward name="actualiza" path="/actualizarCliente.jsp" /> 
             <forward name="calculaimc" path="/imccliente.jsp" />   
-            <forward name="incorrecto" path="/incorrecto.jsp" /> 
+            <forward name="incorrecto" path="/principal.jsp" /> 
         </action>        
         <action input="/incorrecto.jsp" name="InsertarMedidasDinamicoForm" path="/insertaSesion" scope="session" type="es.pfc.actions.InsertaMedidasClienteDinamicoAction">
              <forward name="correcto" path="/medidasInsertadas.jsp" />

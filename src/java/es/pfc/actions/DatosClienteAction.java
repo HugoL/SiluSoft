@@ -57,23 +57,27 @@ public class DatosClienteAction extends org.apache.struts.action.Action {
             HttpServletRequest request, HttpServletResponse response)
             throws Exception {
         String destino = "";
+        int op = 3;
         String dni = request.getParameter("dni");        
         //idcliente = Integer.parseInt(request.getParameter("id"));
-        int op = Integer.parseInt(request.getParameter("op"));
+        if(request.getParameter("op")!=null){
+            op = Integer.parseInt(request.getParameter("op"));
+        }
         HttpSession session = request.getSession(true);
-        Cliente cliente = new Cliente();                 
-        
+        Cliente cliente = new Cliente();                         
        
         try {
             //miro si el atributo cliente está creado
-            if(session.getAttribute("cliente")!=null){  
-                System.out.println("Existe cliente en la sesión: "+cliente.getDni()+". Dni parametro: "+dni);
+            if(session.getAttribute("cliente")!=null){                                  
                 cliente = (Cliente)session.getAttribute("cliente");
+                System.out.println("Existe cliente en la sesión: "+cliente.getDni()+". Dni parametro: "+dni);
                 //si el el cliente de la sesion no es el mismo que el del dni del get, leo los datos del cliente con dni el del get
                 //para evitar que se haya quedado guardado en la sesión un cliente que habíamos vistado anteriormente
                 if(cliente.getDni() == null ? dni != null : !cliente.getDni().equals(dni)){ 
                     System.out.println("El cliente de la sesion no coincide con el del parametro dni: "+dni);          
-                    cliente=ClientesBO.leerDatos(dni);
+                    if(dni!=null){
+                        cliente=ClientesBO.leerDatos(dni);
+                    }
                 }
             }else{
                 cliente=ClientesBO.leerDatos(dni);
@@ -88,7 +92,7 @@ public class DatosClienteAction extends org.apache.struts.action.Action {
                    case 2: 
                        destino = "listaTratamientos"; //listar tratamientos
                        List lista = new ArrayList();                    
-                       cliente=ClientesBO.leerDatos(dni);
+                       //cliente=ClientesBO.leerDatos(dni);
                        //cliente=ClientesBO.leerDatosPorId(idcliente);
                        lista = TratamientosBO.esListado(cliente);
                        if(lista != null){   
@@ -168,8 +172,7 @@ public class DatosClienteAction extends org.apache.struts.action.Action {
            }else{
                System.out.println("Cliente no leido");
                return mapping.findForward(FAILURE);
-           }
-            //FactoriaDAO.getInstance().getClienteDao().create(cliente); //Aqui se hara la conexion a la bd
+           }            
         }catch (Exception e1) {
            throw new RuntimeException("Excepción en DatosClienteAction:"+e1);
 	}    

@@ -45,11 +45,11 @@
 <div class="containter">   
     <tiles:insert page="plantillas/PestanasGenerales.jsp" flush="true"/>
     <div class="mi-hero-unit">
-    <div class="row">        
-        <div class="span3"><logic:equal name="ConsultaClientes" property="activado" value="true"><html:link href="/SiluSoft/insertarCliente.jsp"><img src="imagenes/Pencil.png" /></html:link></logic:equal></div>
+    <div class="row-fluid">        
+        <div class="span3"><logic:equal name="ConsultaClientes" property="activado" value="true"><html:link href="./insertarCliente.jsp"><img src="imagenes/Pencil.png" /></html:link></logic:equal></div>
         <!-- <div class="span3"><a href="ListaClientes.do?pag=1" class="btn btn-success btn-primary">Listado clientes</a></p></div> -->
         <div class="span3"><html:link href="ListaClientes.do?pag=a"><img src="imagenes/User_female.png" /></html:link></p></div>
-	<div class="span3"><html:link href="/SiluSoft/buscarCliente.jsp"><img src="imagenes/Search.png" /></html:link></div>	
+	<div class="span3"><html:link href="./buscarCliente.jsp"><img src="imagenes/Search.png" /></html:link></div>	
     </div>
     </div>
     <tiles:insert page="plantillas/pie.jsp" flush="true"/>

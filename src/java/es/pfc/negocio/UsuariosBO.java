@@ -82,19 +82,19 @@ public class UsuariosBO {
     
     public static boolean insertaUsuario(Usuario usuario){
         UsuarioDAOImpl usuarioinsertado = new UsuarioDAOImpl();
-        boolean insertado=false;
+        boolean insertado = false;
         Usuario miusuario = new Usuario();
         try{
             insertado=usuarioinsertado.insertarUsuario(usuario);
             System.out.println("Usuario insertado: "+insertado);
             miusuario = usuarioinsertado.consultarUsuario(usuario.getNombre(), usuario.getPassword());
             usuario.setIdUsuario(miusuario.getIdUsuario());            
-            if(insertado)
+            if(insertado) {
                 return true;
+            }
         }catch(Exception ex){
              Logger.getLogger(UsuariosBO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        }        
         return false;
     }
     
@@ -126,6 +126,7 @@ public class UsuariosBO {
             System.out.println("contacto vacío");
             return false;
         }
+        final String pass = "xxxxxxxxx";
         Properties props = new Properties();
         props.put("mail.smtp.host","mail.siludermis.com");
         props.put("mail.from", "admin@silusoft.com");
@@ -135,13 +136,13 @@ public class UsuariosBO {
         props.put("mail.smtp.user", "angelines@siludermis.com");
         props.put("mail.smtp.starttls.enable","false"); 
         props.put("mail.transport.protocol", "smtp");
-        props.put("mail.smtp.pass", "michico");
+        props.put("mail.smtp.pass", pass);
         
         
         Session session = Session.getInstance( props , new javax.mail.Authenticator() {      
                 protected PasswordAuthentication getPasswordAuthentication() {
                     return new PasswordAuthentication(
-                            "angelines@siludermis.com", "michico");// Specify the Username and the PassWord
+                            "angelines@siludermis.com", pass);// Specify the Username and the PassWord
                 }
             });
         session.setDebug(true);
@@ -152,9 +153,9 @@ public class UsuariosBO {
                           email);
         msg.setSubject("Siludermis SiluSoft");
         msg.setSentDate(new Date());
-        msg.setText("Hola, le da la bienvenida el equipo de Siludermis!\n Nos agradece comuniarle que se le ha dado de alta como usuario en la aplicación.\nSus datos de acceso son:\nusuario: "+usuario+"\ncontraseña: "+password+".\n\nPuede acceder a la aplicación a través de esta dirección: www.silusoft.com/SiluSoft2\n\n<img src='http://www.silusoft.com/img/logo.png'/>");
+        msg.setText("Hola, le da la bienvenida el equipo de Siludermis!\n Nos agradece comunicarle que se le ha dado de alta como usuario en la aplicación.\nSus datos de acceso son:\nusuario: "+usuario+"\ncontraseña: "+password+".\n\nPuede acceder a la aplicación a través de esta dirección: www.silusoft.com/SiluSoft2\n\n<img src='http://www.silusoft.com/img/logo.png'/>");
         Transport t = session.getTransport("smtp");
-        t.connect("angelines@siludermis.com","michico");
+        t.connect("angelines@siludermis.com",pass);
         Transport.send(msg);        
         t.close();
         } catch (MessagingException mex) {

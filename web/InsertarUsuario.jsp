@@ -43,7 +43,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><bean:message key="usuario.titulo"/></title>     
         <script language="javascript">
-        function mostrar(selectobj,tam,i){    
+        function mostrar(selectobj,tam,i){  
+            document.getElementById(i-1).style.display='block';
             var id= selectobj.selectedIndex;            
             var j,z;
             //oculto todas
@@ -84,12 +85,12 @@
                 <div class="clearfix"></div>                 
                 <div class="span11">
                 <logic:iterate name="listaPermisos" id="permisodef" type="es.pfc.model.Permiso"  >                                                                            
-                                <div id="<%=i%>" style="display:block" class="permisos">   
+                                <div id="<%=i%>" style="display:none" class="permisos">   
                                     <html:hidden name="permisodef" property="idPermiso"/>&nbsp;
                                     <html:text name="permisodef" property="permiso" readonly="true"/>&nbsp;
                                     
                                     <html:checkbox name="permisodef" property="activado"/>&nbsp;
-                                    <html:text name="permisodef" property="activado"/>
+                                    <html:hidden name="permisodef" property="activado"/>
                                     <br/>                     
                                 </div> 
                                 <% i++; %>

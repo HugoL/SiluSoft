@@ -103,7 +103,7 @@ public class ClienteDAOImp implements ClienteDAO {
         PreparedStatement statement = null;
         String consulta = "";
         if(!"".equals(dni)){
-            consulta= "SELECT * FROM `SiluBd`.`Clientes` WHERE Dni='"+dni+"';";  
+            consulta= "SELECT * FROM `SiluBd`.`Clientes` WHERE Dni = ?;";              
         }else{
             System.out.println("dni vacío");
             return null;
@@ -112,23 +112,24 @@ public class ClienteDAOImp implements ClienteDAO {
         //Pido conexion       
        try {    
                         statement = conn.prepareStatement(consulta); 
+                        statement.setString(1, dni);
                         result=statement.executeQuery();
                        
 			if(result.next()) {
                             i=1;
                             cliente = new Cliente();
-                            cliente.setIdCliente(result.getInt(i++));                       
-                            cliente.setDni(result.getString(i++));
-                            cliente.setNombre(result.getString(i++));
-                            cliente.setApellidos(result.getString(i++));
-                            cliente.setApellido2(result.getString(i++));
-                            cliente.setEdad(result.getInt(i++));                       
-                            cliente.setDireccion(result.getString(i++));
-                            cliente.setTelefono(result.getString(i++));
-                            cliente.setEmail(result.getString(i++));
-                            cliente.setObservaciones(result.getString(i++));
-                            cliente.setAltura(result.getFloat(i++));                      
-                            cliente.setIndiceGrasa(result.getInt(i++));    
+                            cliente.setIdCliente(result.getInt("IdCliente"));                       
+                            cliente.setDni(result.getString("Dni"));
+                            cliente.setNombre(result.getString("Nombre"));
+                            cliente.setApellidos(result.getString("Apellidos"));
+                            cliente.setApellido2(result.getString("Apellido2"));
+                            cliente.setEdad(result.getInt("Edad"));                       
+                            cliente.setDireccion(result.getString("Direccion"));
+                            cliente.setTelefono(result.getString("Telefono"));
+                            cliente.setEmail(result.getString("Email"));
+                            cliente.setObservaciones(result.getString("Observaciones"));
+                            cliente.setAltura(result.getFloat("Altura"));                      
+                            //cliente.setIndiceGrasa(result.getInt(i++));    
                             cliente.setUrl(result.getString("Url"));
                             return cliente;
                             
