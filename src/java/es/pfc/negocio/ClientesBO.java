@@ -19,7 +19,9 @@ package es.pfc.negocio;
 
 import es.pfc.dao.ClienteDAOImp;
 import es.pfc.model.Cliente;
+import es.pfc.model.Contrato;
 import es.pfc.model.Observacion;
+import es.pfc.model.Presupuesto;
 import es.pfc.model.Sesiones;
 import java.util.ArrayList;
 import java.util.List;
@@ -347,13 +349,67 @@ public class ClientesBO {
          return 0;
      }          
      
-     public static boolean InsertaContratoCliente(int idCliente, String valor) throws Exception{
+     public static boolean InsertaContratoCliente(Contrato contrato) throws Exception{
          ClienteDAOImp clientedao = new ClienteDAOImp();
          try{
-             return clientedao.insertarContrato(idCliente, valor);
+             return clientedao.insertarContrato(contrato.getIdCliente(), contrato.getValor());
          }catch(Exception e){
              Logger.getLogger(ClientesBO.class.getName()).log(Level.SEVERE, null, e);
          }
          return false;
+     }
+     
+     public static List ListaContratosCliente(int idCliente) throws Exception{
+         ClienteDAOImp contratoop= new ClienteDAOImp(); 
+         List lista = new ArrayList();
+         try{
+             lista = contratoop.listarContratos(idCliente);
+         } catch (Exception ex) {
+            Logger.getLogger(ClientesBO.class.getName()).log(Level.SEVERE, null, ex);
+         }         
+         return lista;
+     }
+     
+     public static Contrato dameContrato(int idContrato) throws Exception{
+         ClienteDAOImp contratoop= new ClienteDAOImp(); 
+         Contrato contrato = new Contrato();
+         try{
+             contrato = contratoop.verContrato(idContrato);
+         } catch (Exception ex) {
+            Logger.getLogger(ClientesBO.class.getName()).log(Level.SEVERE, null, ex);
+         }         
+         return contrato;
+     }
+     
+     public static boolean InsertaPresupuestoCliente(Presupuesto presupuesto) throws Exception{
+         ClienteDAOImp clientedao = new ClienteDAOImp();
+         try{
+             return clientedao.insertarPresupuesto(presupuesto.getIdCliente(), presupuesto.getValor());
+         }catch(Exception e){
+             Logger.getLogger(ClientesBO.class.getName()).log(Level.SEVERE, null, e);
+         }
+         return false;
+     }
+     
+     public static List ListaPresupuestosCliente(int idCliente) throws Exception{
+         ClienteDAOImp contratoop= new ClienteDAOImp(); 
+         List lista = new ArrayList();
+         try{
+             lista = contratoop.listarPresupuestos(idCliente);
+         } catch (Exception ex) {
+            Logger.getLogger(ClientesBO.class.getName()).log(Level.SEVERE, null, ex);
+         }         
+         return lista;
+     }
+     
+     public static Presupuesto damePresupuesto(int idPresupuesto) throws Exception{
+         ClienteDAOImp contratoop= new ClienteDAOImp(); 
+         Presupuesto presupuesto = new Presupuesto();
+         try{
+             presupuesto = contratoop.verPresupuesto(idPresupuesto);
+         } catch (Exception ex) {
+            Logger.getLogger(ClientesBO.class.getName()).log(Level.SEVERE, null, ex);
+         }         
+         return presupuesto;
      }
 }

@@ -69,9 +69,9 @@
         <td><bean:write name="cliente" property="nombre" /></div>
                 <td><bean:write name="cliente" property="apellidos" /></td>                   
                 <td><bean:write name="cliente" property="apellido2" /></td>
-                <td><a href="DameDatosCliente.do?dni=<bean:write name='cliente' property='dni'/>&op=8" class="btn btn-warning">Editar</a></td>
-                <td><a href="DameDatosCliente.do?dni=<bean:write name='cliente' property='dni'/>&op=3" class="btn btn-inverse">Ficha</a></td>
-                <td><a href="EliminarCliente.do?Id=<bean:write name="cliente" property="idCliente" />" class="btn btn-danger">Eliminar</a></td>            
+                <td><a href="DameDatosCliente.do?dni=<bean:write name='cliente' property='dni'/>&op=3" class="btn btn-success"><em class="icon-user icon-white"></em> Ver Ficha</a></td>
+                <td><a href="DameDatosCliente.do?dni=<bean:write name='cliente' property='dni'/>&op=8" class="btn btn-warning"><em class="icon-edit icon-white"></em> Editar</a></td>                
+                <td><a class="btn btn-inverse btn-small" href="DameDatosCliente.do?dni=<bean:write name='cliente' property='dni'/>&op=7"><em class="icon-ok-sign icon-white"></em> Asistencia</td>         
         </logic:iterate>
             </tbody>
             </table>

@@ -94,12 +94,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         }
          //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}   
     
     }
@@ -214,12 +217,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
         }
           //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}
     }
 
@@ -231,8 +237,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
            return false;
        }
         
-       boolean insertado=false;
-       int i = 0;
+       boolean insertado=false;   
        
        //variables para la conexion
        Connection conn = Conexion.getConexion();
@@ -264,12 +269,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
                 }
                 //cierro la conexion    
                 finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
 		}    
     }
 
@@ -357,12 +365,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             throw new Exception("Excepción en UsuarioDAOImpl.listarUsuarios: "+sqle);
         }
         finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                try { result.close(); } catch(SQLException ignored) { }
+            }
+			if(statement != null) {
+                try { statement.close(); } catch(SQLException ignored) { }
+            }
+			if(conn != null) {
+                try { conn.close(); } catch(SQLException ignored) { }
+            }
 		}    
     }
 
@@ -394,12 +405,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             throw new Exception("Excepción en UsuarioDAOImpl.consultarRoles: "+sqle);
         }
         finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                try { result.close(); } catch(SQLException ignored) { }
+            }
+			if(statement != null) {
+                try { statement.close(); } catch(SQLException ignored) { }
+            }
+			if(conn != null) {
+                try { conn.close(); } catch(SQLException ignored) { }
+            }
 		}
     }
 
@@ -437,12 +451,15 @@ public class UsuarioDAOImpl implements UsuarioDAO {
             throw new Exception("Excepción en UsuarioDAOImpl.consultaPermisosNuevo: "+sqle);
         }
         finally {
-			if(result != null)
-				try { result.close(); } catch(SQLException ignored) { }
-			if(statement != null)
-				try { statement.close(); } catch(SQLException ignored) { }
-			if(conn != null)
-				try { conn.close(); } catch(SQLException ignored) { }
+			if(result != null) {
+                try { result.close(); } catch(SQLException ignored) { }
+            }
+			if(statement != null) {
+                try { statement.close(); } catch(SQLException ignored) { }
+            }
+			if(conn != null) {
+                try { conn.close(); } catch(SQLException ignored) { }
+            }
 		}    
     }
 

@@ -6,7 +6,7 @@ package es.pfc.actions;
 
 import es.pfc.forms.InsertarContratoClienteForm;
 import es.pfc.model.Cliente;
-import es.pfc.model.Contrato;
+import es.pfc.model.Presupuesto;
 import es.pfc.model.Usuario;
 import es.pfc.negocio.ClientesBO;
 import javax.servlet.http.HttpServletRequest;
@@ -15,12 +15,13 @@ import javax.servlet.http.HttpSession;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+
 /**
  *
  * @author ko
  */
-public class InsertarContratoClienteAction extends org.apache.struts.action.Action{
-        private static final String SUCCESS = "correcto";
+public class InsertarPresupuestoClienteAction extends org.apache.struts.action.Action{
+    private static final String SUCCESS = "correcto";
         private static final String FAILURE = "incorrecto";
         
         @Override
@@ -40,15 +41,15 @@ public class InsertarContratoClienteAction extends org.apache.struts.action.Acti
                 return mapping.findForward(FAILURE);
             }
             InsertarContratoClienteForm ContratoForm = (InsertarContratoClienteForm) form;
-            Contrato contrato = new Contrato();
+            Presupuesto presupuesto = new Presupuesto();
             try{
-                contrato.setIdCliente(micliente.getIdCliente());
-                contrato.setValor(ContratoForm.getValor());
-                if(ClientesBO.InsertaContratoCliente(contrato)){
+                presupuesto.setIdCliente(micliente.getIdCliente());
+                presupuesto.setValor(ContratoForm.getValor());
+                if(ClientesBO.InsertaPresupuestoCliente(presupuesto)){
                    return mapping.findForward(SUCCESS);
                 }
             }catch (Exception e1){
-                throw new RuntimeException("Excepción en InsertarContratoClienteAction:"+e1);
+                throw new RuntimeException("Excepción en InsertarPresupuestoClienteAction:"+e1);
             } 
             return mapping.findForward(FAILURE);
         }

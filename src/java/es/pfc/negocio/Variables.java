@@ -10,7 +10,7 @@ package es.pfc.negocio;
  */
 public class Variables {
     public static String damePassMail(){        
-        return "xxxxxxxx";
+        return "michico!";
     }
     
 }

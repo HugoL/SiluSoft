@@ -5,12 +5,11 @@
 package es.pfc.forms;
 
 import org.apache.struts.validator.ValidatorForm;
-
 /**
  *
  * @author HLanga
  */
-public class InsertarContratoClienteForm extends ValidatorForm {
+public class InsertarPresupuestoClienteForm extends ValidatorForm {
     
     private String valor;
     private int idCliente;
@@ -43,10 +42,7 @@ public class InsertarContratoClienteForm extends ValidatorForm {
         this.idCliente = idCliente;
     }
 
-    /**
-     *
-     */
-    public InsertarContratoClienteForm() {
+     public InsertarPresupuestoClienteForm() {
         super();
         // TODO Auto-generated constructor stub
     }  

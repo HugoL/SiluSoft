@@ -20,8 +20,10 @@ package es.pfc.dao;
 
 
 import es.pfc.model.Cliente;
+import es.pfc.model.Contrato;
 import es.pfc.model.Observacion;
 import es.pfc.model.Peso;
+import es.pfc.model.Presupuesto;
 import es.pfc.model.Sesiones;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -1297,7 +1299,7 @@ public class ClienteDAOImp implements ClienteDAO {
     }
 
     @Override
-    public boolean insertarContrato(int idCliente, String texto) throws Exception {
+    public boolean insertarContrato(int idCliente, String valor) throws Exception {
         Connection conn = Conexion.getConexion();    
        
         ResultSet result = null;  
@@ -1306,8 +1308,8 @@ public class ClienteDAOImp implements ClienteDAO {
         System.out.println("consulta: "+consulta);
         try{
              statement = conn.prepareStatement(consulta);
-             statement.setInt(1, idCliente);
-             statement.setString(2, texto);
+             statement.setInt(1, idCliente);             
+             statement.setString(2, valor);
              result = statement.executeQuery();
              if(result.next()){                                 
                 return true;                         
@@ -1330,5 +1332,207 @@ public class ClienteDAOImp implements ClienteDAO {
                 try { conn.close(); } catch(SQLException ignored) { }
             }
 	}
+    }
+
+    @Override
+    public List listarContratos(int idCliente) throws Exception {
+        //variables para la conexion
+        Connection conn = Conexion.getConexion();   
+       
+        ResultSet result = null;
+        PreparedStatement statement = null;
+        Contrato contrato;
+        String consulta= "SELECT IdContrato,IdCliente,Campo,Valor,Tipo,DATE(Fecha) FROM `SiluBd`.`Contratos` WHERE IdCliente = ?;";
+        List lista = new ArrayList();
+        try {    
+                        statement = conn.prepareStatement(consulta); 
+                        statement.setInt(1, idCliente);                        
+                        result=statement.executeQuery();
+                       
+			while(result.next()) {                           
+                            contrato = new Contrato();
+                            contrato.setIdContrato(result.getInt("IdContrato"));
+                            contrato.setIdCliente(result.getInt("IdCliente"));                            
+                            contrato.setValor(result.getString("Valor"));                         
+                            contrato.setFecha(result.getDate("Fecha"));
+                            lista.add(contrato);                            
+			}          
+                        return lista;
+		} catch(SQLException sqle) {
+			throw new Exception("Excepcion ClienteDAOImp..."+sqle);
+                }            
+                //cierro la conexion    
+                finally {
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
+		}           
+    }
+
+    @Override
+    public Contrato verContrato(int idContrato) throws Exception {
+        //variables para la conexion
+        Connection conn = Conexion.getConexion();   
+       
+        ResultSet result = null;
+        PreparedStatement statement = null;
+        Contrato contrato;
+        String consulta= "SELECT IdContrato,IdCliente,Campo,Valor,Tipo,DATE(Fecha) FROM `SiluBd`.`Contratos` WHERE IdContrato = ?;";
+        try {    
+                        statement = conn.prepareStatement(consulta); 
+                        statement.setInt(1, idContrato);                        
+                        result=statement.executeQuery();
+                       
+			if(result.next()) {                           
+                            contrato = new Contrato();
+                            contrato.setIdContrato(result.getInt("IdContrato"));
+                            contrato.setIdCliente(result.getInt("IdCliente"));                            
+                            contrato.setValor(result.getString("Valor"));                           
+                            contrato.setFecha(result.getDate("Fecha"));
+                            return contrato;                        
+			}else{
+                            System.out.println("No se encuentra el contrato con ese identificador: "+idContrato);
+                            return null;
+                        }                                  
+		} catch(SQLException sqle) {
+			throw new Exception("Excepcion ClienteDAOImp..."+sqle);
+                }            
+                //cierro la conexion    
+                finally {
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
+		}        
+    }
+
+    @Override
+    public boolean insertarPresupuesto(int idCliente, String valor) throws Exception {
+        Connection conn = Conexion.getConexion();    
+       
+        ResultSet result = null;  
+        PreparedStatement statement = null;       
+        String consulta= "INSERT INTO Presupuestos(IdCliente, Valor) VALUES (?,?);";      
+        System.out.println("consulta: "+consulta);
+        try{
+             statement = conn.prepareStatement(consulta);
+             statement.setInt(1, idCliente);             
+             statement.setString(2, valor);
+             result = statement.executeQuery();
+             if(result.next()){                                 
+                return true;                         
+             }
+             logger.debug(result);           
+             return false;
+        } catch(SQLException sqle) {
+            logger.debug("Error en ClienteDAOImp.InsertarPresupuesto: "+sqle);
+            throw new Exception("Excepcion ClienteDAOImp..."+sqle);
+        }
+        //cierro la conexion    
+        finally {
+            if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                try { statement.close(); } catch(SQLException ignored) { }
+            }
+			if(conn != null) {
+                try { conn.close(); } catch(SQLException ignored) { }
+            }
+	}
+    }
+
+    @Override
+    public List listarPresupuestos(int idCliente) throws Exception {
+        //variables para la conexion
+        Connection conn = Conexion.getConexion();   
+       
+        ResultSet result = null;
+        PreparedStatement statement = null;
+        Presupuesto presupuesto;
+        String consulta= "SELECT IdContrato,IdCliente,Campo,Valor,Tipo,DATE(Fecha) FROM `SiluBd`.`Presupuestos` WHERE IdCliente = ?;";
+        List lista = new ArrayList();
+        try {    
+                        statement = conn.prepareStatement(consulta); 
+                        statement.setInt(1, idCliente);                        
+                        result=statement.executeQuery();
+                       
+			while(result.next()) {                           
+                            presupuesto = new Presupuesto();
+                            presupuesto.setIdPresupuesto(result.getInt("IdPresupuesto"));
+                            presupuesto.setIdCliente(result.getInt("IdCliente"));                            
+                            presupuesto.setValor(result.getString("Valor"));                         
+                            presupuesto.setFecha(result.getDate("Fecha"));
+                            lista.add(presupuesto);                            
+			}          
+                        return lista;
+		} catch(SQLException sqle) {
+			throw new Exception("Excepcion ClienteDAOImp.listarPresupuestos..."+sqle);
+                }            
+                //cierro la conexion    
+                finally {
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
+		}
+    }
+
+    @Override
+    public Presupuesto verPresupuesto(int idPresupuesto) throws Exception {
+        //variables para la conexion
+        Connection conn = Conexion.getConexion();   
+       
+        ResultSet result = null;
+        PreparedStatement statement = null;
+        Presupuesto presupuesto;
+        String consulta= "SELECT IdContrato,IdCliente,Campo,Valor,Tipo,DATE(Fecha) FROM `SiluBd`.`Presupuestos` WHERE IdContrato = ?;";
+        try {    
+                        statement = conn.prepareStatement(consulta); 
+                        statement.setInt(1, idPresupuesto);                        
+                        result=statement.executeQuery();
+                       
+			if(result.next()) {                           
+                            presupuesto = new Presupuesto();
+                            presupuesto.setIdPresupuesto(result.getInt("IdPresupuesto"));
+                            presupuesto.setIdCliente(result.getInt("IdCliente"));                            
+                            presupuesto.setValor(result.getString("Valor"));                           
+                            presupuesto.setFecha(result.getDate("Fecha"));
+                            return presupuesto;                        
+			}else{
+                            System.out.println("No se encuentra el presupuesto con ese identificador: "+idPresupuesto);
+                            return null;
+                        }                                  
+		} catch(SQLException sqle) {
+			throw new Exception("Excepcion ClienteDAOImp..."+sqle);
+                }            
+                //cierro la conexion    
+                finally {
+			if(result != null) {
+                        try { result.close(); } catch(SQLException ignored) { }
+                    }
+			if(statement != null) {
+                        try { statement.close(); } catch(SQLException ignored) { }
+                    }
+			if(conn != null) {
+                        try { conn.close(); } catch(SQLException ignored) { }
+                    }
+		}
     }
 }

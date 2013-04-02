@@ -18,7 +18,9 @@
 package es.pfc.dao;
 
 import es.pfc.model.Cliente;
+import es.pfc.model.Contrato;
 import es.pfc.model.Observacion;
+import es.pfc.model.Presupuesto;
 import es.pfc.model.Sesiones;
 import java.util.List;
 
@@ -53,5 +55,10 @@ public interface ClienteDAO {
     public Cliente login(String identificador, String password) throws Exception;
     public String insertarPassword(int id, String password) throws Exception;
     public String renovarPassword(int id, String password) throws Exception;
-    public boolean insertarContrato(int idCliente, String texto) throws Exception;
+    public boolean insertarContrato(int idCliente, String valor) throws Exception;    
+    public List listarContratos(int idCliente) throws Exception;
+    public Contrato verContrato(int idContrato) throws Exception;
+    public boolean insertarPresupuesto(int idCliente, String valor) throws Exception;    
+    public List listarPresupuestos(int idCliente) throws Exception;
+    public Presupuesto verPresupuesto(int idPresupuesto) throws Exception;
 }

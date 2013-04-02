@@ -45,7 +45,7 @@
         <div class="row">            
             <div class="aler alert-success"><h5>Operación realizada con éxito</h5></div>        
         <html:errors/>            
-        <html:link href="/SiluSoft/principal.jsp" styleClass="btn btn-success">Volver</html:link>
+        <html:link href="./principal.jsp" styleClass="btn btn-success">Volver</html:link>
         </div>
     </div>
     </div>

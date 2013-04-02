@@ -65,7 +65,9 @@
             <form-property name="activadotxt" type="java.lang.String[]" />
             <form-property name="idCentro" type="java.lang.Integer" />
         </form-bean>
+         <form-bean name="InsertarPresupuestoClienteForm" type="es.pfc.forms.InsertarPresupuestoClienteForm"/>
          <form-bean name="InsertarContratoClienteForm" type="es.pfc.forms.InsertarContratoClienteForm"/>
+         <form-bean name="InsertarPresupuestoClienteForm" type="es.pfc.forms.InsertarPresupuestoClienteForm"/>
         <form-bean name="LoginClientesForm" type="es.pfc.forms.LoginClientesForm"/>
         <form-bean name="CalcularSesionesForm" type="es.pfc.forms.CalcularSesionesForm"/>
         <form-bean name="InsertarTratamientoCentroForm" type="es.pfc.forms.InsertarTratamientoCentroForm"/>        
@@ -295,6 +297,14 @@
         <action input="/sesionesCalculadas.jsp" path="/CalculaPresupuesto" scope="session" type="es.pfc.actions.CalcularPresupuestoAction">
             <forward name="correcto" path="/presupuesto.jsp" />
             <forward name="incorrecto" path="/sesionesCalculadas.jsp" />            
+        </action>
+        <action input="/sesionesCalculadas.jsp" path="/InsertarContrato" scope="session" type="es.pfc.actions.InsetarContratoClienteAction">
+            <forward name="correcto" path="/sesionesCalculadas.jsp" />
+            <forward name="incorrecto" path="/contrato.jsp" />            
+        </action>
+        <action input="/sesionesCalculadas.jsp" path="/InsertarPresupuesto" scope="session" type="es.pfc.actions.InsertarPresupuestoClienteAction">
+            <forward name="correcto" path="/sesionesCalculadas.jsp" />
+            <forward name="incorrecto" path="/presupuesto.jsp" />            
         </action>      
     </action-mappings>
    

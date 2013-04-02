@@ -44,8 +44,7 @@
      <logic:present name="usuario">
      <div class="containter">   
     <tiles:insert page="plantillas/PestanasGenerales2.jsp" flush="true"/>
-    <div class="mi-hero-unit">
-        <div class="span11 nombreusuario"><bean:message key="general.sesion"/><strong><bean:write scope="session" name="usuario" property="nombre" /></strong>&nbsp;</div>
+    <div class="mi-hero-unit">        
     <div class="row">  
 	 <logic:equal name="ConsultaCentro" property="activado" value="true">         
          <div><h3><bean:message key="fichacentro.titulo"/></h3></div>
