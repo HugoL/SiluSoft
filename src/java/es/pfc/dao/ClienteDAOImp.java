@@ -135,7 +135,7 @@ public class ClienteDAOImp implements ClienteDAO {
                             cliente.setTelefono(result.getString("Telefono"));
                             cliente.setEmail(result.getString("Email"));
                             cliente.setObservaciones(result.getString("Observaciones"));
-                            cliente.setAltura(result.getFloat("Altura"));                      
+                            cliente.setAltura(result.getInt("Altura"));                      
                             //cliente.setIndiceGrasa(result.getInt(i++));    
                             cliente.setUrl(result.getString("Url"));
                             return cliente;
@@ -496,7 +496,7 @@ public class ClienteDAOImp implements ClienteDAO {
                             cliente.setTelefono(result.getString(i++));
                             cliente.setEmail(result.getString(i++));
                             cliente.setObservaciones(result.getString(i++));
-                            cliente.setAltura(result.getFloat(i++));                    
+                            cliente.setAltura(result.getInt(i++));                    
                             list.add(cliente);
                             
 			}
@@ -1101,7 +1101,7 @@ public class ClienteDAOImp implements ClienteDAO {
 
     @Override
     public Cliente readPorId(int id) throws Exception {
-       Cliente cliente= null;      
+       Cliente cliente = null;      
        int i;
        
        //variables para la conexion
@@ -1135,7 +1135,7 @@ public class ClienteDAOImp implements ClienteDAO {
                             cliente.setTelefono(result.getString(i++));
                             cliente.setEmail(result.getString(i++));
                             cliente.setObservaciones(result.getString(i++));
-                            cliente.setAltura(result.getFloat(i++));                      
+                            cliente.setAltura(result.getInt(i++));                      
                             cliente.setIndiceGrasa(result.getInt(i++));    
                             cliente.setUrl(result.getString("Url"));
                             return cliente;
@@ -1191,7 +1191,7 @@ public class ClienteDAOImp implements ClienteDAO {
                             cliente.setTelefono(result.getString("Telefono"));
                             cliente.setEmail(result.getString("Email"));
                             cliente.setObservaciones(result.getString("Altura"));
-                            cliente.setAltura(result.getFloat("IMC")); 
+                            cliente.setAltura(result.getInt("IMC")); 
                             return cliente;                            
 			}else{
                             System.out.println("No se encuentra el cliente con ese identificador: "+identificador);
@@ -1238,12 +1238,12 @@ public class ClienteDAOImp implements ClienteDAO {
         }
         //cierro la conexion    
         finally {
-			if(statement != null) {
-                try { statement.close(); } catch(SQLException ignored) { }
-            }
-			if(conn != null) {
-                try { conn.close(); } catch(SQLException ignored) { }
-            }
+		if(statement != null) {
+                    try { statement.close(); } catch(SQLException ignored) { }
+                }
+		if(conn != null) {
+                    try { conn.close(); } catch(SQLException ignored) { }
+                }
 	}
     }        
 
@@ -1303,6 +1303,7 @@ public class ClienteDAOImp implements ClienteDAO {
         Connection conn = Conexion.getConexion();    
        
         ResultSet result = null;  
+        boolean resultado;
         PreparedStatement statement = null;       
         String consulta= "INSERT INTO Contratos(IdCliente, Valor) VALUES (?,?);";      
         System.out.println("consulta: "+consulta);
@@ -1310,8 +1311,9 @@ public class ClienteDAOImp implements ClienteDAO {
              statement = conn.prepareStatement(consulta);
              statement.setInt(1, idCliente);             
              statement.setString(2, valor);
-             result = statement.executeQuery();
-             if(result.next()){                                 
+             resultado = statement.execute();
+             result = statement.getResultSet();
+             if(resultado){                                 
                 return true;                         
              }
              logger.debug(result);           
@@ -1421,7 +1423,8 @@ public class ClienteDAOImp implements ClienteDAO {
     public boolean insertarPresupuesto(int idCliente, String valor) throws Exception {
         Connection conn = Conexion.getConexion();    
        
-        ResultSet result = null;  
+        ResultSet result = null; 
+        boolean resultado;
         PreparedStatement statement = null;       
         String consulta= "INSERT INTO Presupuestos(IdCliente, Valor) VALUES (?,?);";      
         System.out.println("consulta: "+consulta);
@@ -1429,8 +1432,9 @@ public class ClienteDAOImp implements ClienteDAO {
              statement = conn.prepareStatement(consulta);
              statement.setInt(1, idCliente);             
              statement.setString(2, valor);
-             result = statement.executeQuery();
-             if(result.next()){                                 
+             resultado = statement.execute();
+             result = statement.getResultSet();
+             if(resultado){                                 
                 return true;                         
              }
              logger.debug(result);           

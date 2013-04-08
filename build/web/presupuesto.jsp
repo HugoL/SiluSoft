@@ -35,10 +35,11 @@
 
 </script>
     </head>
-    <body class="blanco">
+    <body class="blanco">        
         <div id="logo" style="float:none"> <img src="imagenes/logoSilu.jpg"/></div>
     <div class="container">    
-            <div class="row-fluid span12">         
+            <div class="row-fluid span12">   
+                <logic:present name="usuario">
     <h3>OBJETIVOS PARA EL CLIENTE</h3>
     <p>Sr/Sra <bean:write name="cliente" property="nombre"/> <bean:write name="cliente" property="apellidos"/> <bean:write name="cliente" property="apellido2"/></p>
     <p>El check-up Siludermis  es una análisis de su morfología y un estudio energético.<br/>
@@ -73,9 +74,20 @@ PRECIO DEL PROGRAMA PERSONALIZADO.</p>
 <div class="span12">
     <div class="firmacentro span5">Directora Técnica</div><div class="firmacliente span5">Cliente Informado</div>
 </div>
+<div class="span12" align="center">
+    <html:form action="/InsertarPresupuesto">
+        <html:text property="valor"/>
+        <html:submit styleClass="btn btn-danger">Guardar</html:submit>
+    </html:form>
+    
+</div>
     <div id="imprimir" class="span12" align="center">
         <form name="imprimir" action=""><input class="btn btn-danger" type="button" name="imprimir" value="Imprimir" onclick="window.print();" /></form>
     </div>
+</logic:present>
+    <logic:notPresent name="usuario">
+    <div class="alert alert-error">La sesión ha caducado. Debe loguearse de nuevo</div>
+    </logic:notPresent>
 </div><!-- row -->      
     </div><!-- container -->
 

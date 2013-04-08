@@ -4,7 +4,7 @@
  */
 package es.pfc.actions;
 
-import es.pfc.forms.InsertarContratoClienteForm;
+import es.pfc.forms.InsertarPresupuestoClienteForm;
 import es.pfc.model.Cliente;
 import es.pfc.model.Presupuesto;
 import es.pfc.model.Usuario;
@@ -40,7 +40,7 @@ public class InsertarPresupuestoClienteAction extends org.apache.struts.action.A
                 System.out.println("Sesion cliente no encontrada");                
                 return mapping.findForward(FAILURE);
             }
-            InsertarContratoClienteForm ContratoForm = (InsertarContratoClienteForm) form;
+            InsertarPresupuestoClienteForm ContratoForm = (InsertarPresupuestoClienteForm) form;
             Presupuesto presupuesto = new Presupuesto();
             try{
                 presupuesto.setIdCliente(micliente.getIdCliente());

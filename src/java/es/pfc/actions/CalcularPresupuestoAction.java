@@ -6,7 +6,6 @@ package es.pfc.actions;
 
 import es.pfc.model.Sesiones;
 import es.pfc.model.Usuario;
-import es.pfc.negocio.TratamientosBO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -45,8 +44,7 @@ public class CalcularPresupuestoAction extends org.apache.struts.action.Action {
          }
          Usuario usuario = (Usuario)sesion.getAttribute("usuario");
          Sesiones sesiones = (Sesiones)request.getAttribute("sesiones"); 
-         try{
-                       
+         try{                     
             //TratamientosBO.damePrecioTratamiento(usuario.getIdCentro(),sesiones.getIdTratamiento());         
             //preciototal = (Float)request.getAttribute("preciototal");                         
          }catch(Exception e){

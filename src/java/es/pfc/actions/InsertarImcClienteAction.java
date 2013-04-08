@@ -52,11 +52,13 @@ public class InsertarImcClienteAction extends org.apache.struts.action.Action {
         Sesiones sesiones = new Sesiones();
         
         float peso = imcForm.getPeso();
-        float altura = imcForm.getAltura();
+        int altura = imcForm.getAltura();
         
-        altura=(float) Math.pow(altura, altura);    
-        //CALCULO IMC 
-        float imc = peso/(altura*altura);
+        //altura=(int)Math.pow(altura, altura);    
+        //CALCULO IMC (peso x peso) / altura
+        System.out.println("------------");
+        System.out.println("altura: "+altura+"peso: "+peso);
+        float imc = (peso*peso)/altura;
         System.out.println("IMC calculado: "+imc);
         request.setAttribute("imc", imc);
         request.setAttribute("peso",peso);

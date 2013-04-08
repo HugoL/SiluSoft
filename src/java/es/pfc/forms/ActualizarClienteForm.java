@@ -35,7 +35,7 @@ public class ActualizarClienteForm extends ValidatorForm {
     private Date fechanacimiento;
     private int edad;
     private float peso;
-    private float altura;
+    private int altura;
     private String direccion;
     private String telefono;
     private String email;
@@ -122,11 +122,11 @@ public class ActualizarClienteForm extends ValidatorForm {
         this.modificarpeso=modificarpeso;
     }
     
-    public float getAltura() {
+    public int getAltura() {
         return altura;
     }
 
-    public void setAltura(float altura) {
+    public void setAltura(int altura) {
         this.altura=altura;
     }
     

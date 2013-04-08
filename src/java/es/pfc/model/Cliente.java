@@ -37,7 +37,7 @@ public class Cliente implements Serializable {
     private String telefono;
     private String email;
     private String observaciones;
-    private float altura;
+    private int altura;
     private int grasa;
     private float IMC;
     private String fechapeso;
@@ -152,12 +152,12 @@ public class Cliente implements Serializable {
       public void setObservaciones(String observaciones) {
             this.observaciones = observaciones;
       }
-      public float getAltura() {
+      public int getAltura() {
             return altura;
       }
 
-      public void setAltura(float Altura) {
-            this.altura = Altura;
+      public void setAltura(int altura) {
+            this.altura = altura;
       }
       
        public int getIndiceGrasa() {

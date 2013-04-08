@@ -96,7 +96,7 @@
             <div class="span5"><bean:message key="formulario.email"/>: <div class="well well-small"><bean:write name="cliente" property="email" /></div></div>
 		
                   
-            <div class="span10"><bean:message key="ficha.observacion"/>: <div class="well well-small"><bean:write name="cliente" property="observaciones" /></div></div>
+            <div class="span10"><bean:message key="ficha.observaciones"/>: <div class="well well-small"><bean:write name="cliente" property="observaciones" /></div></div>
 
             <div class="span2"><bean:message key="ficha.altura"/>: <div class="well well-small"><bean:write name="cliente" property="altura" />m.</div></div>	
 			

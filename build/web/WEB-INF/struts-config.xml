@@ -38,7 +38,7 @@
         <form-bean name="loginForm" type="es.pfc.forms.LoginForm"/>
         <form-bean name="InsertarCliente" type="es.pfc.forms.InsertarClienteForm"/>  
         <form-bean name="BuscarC" type="es.pfc.forms.BuscarClientesForm"/>
-        <form-bean name="ModificarC" type="es.pfc.forms.ActualizarClienteForm" />   
+        <form-bean name="ModificarC" type="es.pfc.forms.ActualizarClienteForm" />           
         <form-bean name="InsertarMedidasDinamicoForm" type="org.apache.struts.validator.DynaValidatorActionForm">
             <form-property name="idCliente" type="java.lang.Integer" />
             <form-property name="campos" type="java.lang.Float[]" />
@@ -64,10 +64,9 @@
             <form-property name="rol" type="java.lang.Integer" />
             <form-property name="activadotxt" type="java.lang.String[]" />
             <form-property name="idCentro" type="java.lang.Integer" />
-        </form-bean>
-         <form-bean name="InsertarPresupuestoClienteForm" type="es.pfc.forms.InsertarPresupuestoClienteForm"/>
-         <form-bean name="InsertarContratoClienteForm" type="es.pfc.forms.InsertarContratoClienteForm"/>
-         <form-bean name="InsertarPresupuestoClienteForm" type="es.pfc.forms.InsertarPresupuestoClienteForm"/>
+        </form-bean>         
+        <form-bean name="InsertarContratoClienteForm" type="es.pfc.forms.InsertarContratoClienteForm"/>
+        <form-bean name="InsertarPresupuestoClienteForm" type="es.pfc.forms.InsertarPresupuestoClienteForm"/>
         <form-bean name="LoginClientesForm" type="es.pfc.forms.LoginClientesForm"/>
         <form-bean name="CalcularSesionesForm" type="es.pfc.forms.CalcularSesionesForm"/>
         <form-bean name="InsertarTratamientoCentroForm" type="es.pfc.forms.InsertarTratamientoCentroForm"/>        
@@ -302,7 +301,7 @@
             <forward name="correcto" path="/sesionesCalculadas.jsp" />
             <forward name="incorrecto" path="/contrato.jsp" />            
         </action>
-        <action input="/sesionesCalculadas.jsp" path="/InsertarPresupuesto" scope="session" type="es.pfc.actions.InsertarPresupuestoClienteAction">
+        <action name="InsertarPresupuestoClienteForm" input="/sesionesCalculadas.jsp" path="/InsertarPresupuesto" scope="session" type="es.pfc.actions.InsertarPresupuestoClienteAction">
             <forward name="correcto" path="/sesionesCalculadas.jsp" />
             <forward name="incorrecto" path="/presupuesto.jsp" />            
         </action>      

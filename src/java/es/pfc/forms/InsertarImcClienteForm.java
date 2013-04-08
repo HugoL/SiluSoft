@@ -27,7 +27,7 @@ public class InsertarImcClienteForm extends ValidatorForm {
         
     private int id;
     private float peso;
-    private float altura;
+    private int altura;
     /**
      * @return
      */
@@ -50,12 +50,12 @@ public class InsertarImcClienteForm extends ValidatorForm {
         this.peso=peso;
     }
     
-    public float getAltura() {
+    public int getAltura() {
         return altura;
     }
 
 
-    public void setAltura(float altura) {
+    public void setAltura(int altura) {
         this.altura=altura;
     }
 
